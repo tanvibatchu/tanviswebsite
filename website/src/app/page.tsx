@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { experience, projects, awards, interests } from '@/data'
 
-const names = ['Tanvi Batchu', 'తన్వి బచ్చు']
+const names = ['Tanvi Batchu', 'తన్వి బట్చు']
 const fonts = ["'Cormorant Garamond', serif", "'Noto Sans Telugu', serif"]
 const colors = ['var(--cream)', 'var(--gold-light)']
 
@@ -126,16 +126,17 @@ export default function Home() {
 
         <p className="text-[0.68rem] tracking-[0.22em] uppercase text-[var(--cream-dim)] mb-7 max-w-xl leading-loose"
           style={{ animation: 'fadeUp 1s 0.8s forwards', opacity: 0 }}>
-          CS &amp; Finance · University of Waterloo · Incoming AI &amp; Algorithms Engineer @ RBC Capital Markets
+          CS &amp; Finance · University of Waterloo · Incoming AI Engineer in Algorithmic Research @ RBC Capital Markets
         </p>
 
         <p className="font-serif italic text-[var(--body)] max-w-md leading-loose mb-12"
           style={{ fontSize: 'clamp(1rem, 2.2vw, 1.3rem)', animation: 'fadeUp 1s 0.95s forwards', opacity: 0 }}>
-          Building at the intersection of markets, code,<br />and a childhood spent inside a raga.
+          I build at the intersection of software, markets, and finance — from risk pipelines and portfolio analytics to data infrastructure and ai-powered tools.
+          But more than that, I strive to create solutions that are not only effective but also accessible and user-friendly.
         </p>
 
         <div className="flex gap-2 flex-wrap justify-center" style={{ animation: 'fadeUp 1s 1.1s forwards', opacity: 0 }}>
-          {['Telugu roots', 'Carnatic · 15 years', 'Bharatanatyam', 'CCO Bronze · EGOI qualifier', '800+ volunteer hours'].map(c => (
+          {['AI', 'Finance', 'Software Development'].map(c => (
             <span key={c} className="text-[0.6rem] tracking-[0.18em] uppercase px-3 py-1 border border-[var(--terra-mid)] text-[var(--cream-dim)]"
               style={{ background: 'rgba(122,48,16,0.12)', borderRadius: 2 }}>
               {c}
@@ -157,7 +158,7 @@ export default function Home() {
           Who I am
         </h2>
         <p className="text-[0.93rem] leading-loose text-[var(--body)] max-w-2xl mb-8">
-          I'm a Computer Science and Finance student at the University of Waterloo (CFM), incoming AI &amp; Algorithms Engineer at RBC Capital Markets. I build at the intersection of software, markets, and finance. I grew up Telugu in Markham, trained in Carnatic music for fifteen years, and learned early that discipline and improvisation are not opposites.
+          I'm a Computer Science and Finance student at the University of Waterloo (CFM), incoming AI Engineer in Algorithmic Research at RBC Capital Markets. I build at the intersection of software, markets, and finance. I grew up in the GTA, trained in Carnatic music (classical Indian music) for fifteen+ years, and learned early that discipline and improvisation are not opposites.
         </p>
         <div className="border-l-2 border-[var(--gold-dim)] pl-6 mb-10">
           <p className="font-serif italic text-[var(--cream-mid)] text-xl leading-relaxed">
@@ -167,10 +168,9 @@ export default function Home() {
         <div className="grid grid-cols-3 border-t border-l border-[var(--sand)]">
           {[
             ['Program', 'CS + Finance (CFM)\n@ Waterloo'],
-            ['Incoming', 'AI & Algorithms Engineer\nRBC Capital Markets'],
-            ['Status', 'Open to opportunities'],
-            ['Roots', 'Telugu · South Indian\nMarkham, Ontario'],
-            ['Music', 'Carnatic vocalist\n15+ years · Level 4'],
+            ['Incoming', 'AI Engineer in Algorithmic Research\nRBC Capital Markets'],
+            ['Status', 'Open to opportunities after Fall 2026'],
+            ['Music', 'Drums · Carnatic vocalist\n15+ years'],
             ['Also speaks', 'Telugu · Latin'],
           ].map(([label, val]) => (
             <div key={label} className="p-5 border-r border-b border-[var(--sand)]">
@@ -289,7 +289,7 @@ export default function Home() {
             Let's talk
           </h2>
           <p className="text-[0.93rem] leading-loose text-[var(--body)] mb-10">
-            Whether it's about quant finance, a Carnatic collab, a project, or something that doesn't fit neatly into either — I'm reachable.
+            Whether it's about problems, puzzles, cs, finance, music, a project, or something that doesn't fit neatly into either — I'd love to connect!.
           </p>
           <div>
             {[
@@ -313,7 +313,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="relative z-10 text-center py-10 border-t border-[var(--sand)]">
         <p className="font-serif italic text-[var(--gold-dim)] text-sm mb-1">Tanvi Batchu · CS & Finance · Waterloo · 2025</p>
-        <p className="text-[var(--terra-mid)]" style={{ fontFamily: "'Noto Sans Telugu', sans-serif" }}>తన్వి బచ్చు</p>
+        <p className="text-[var(--terra-mid)]" style={{ fontFamily: "'Noto Sans Telugu', sans-serif" }}>తన్వి బట్చు</p>
       </footer>
     </main>
   )

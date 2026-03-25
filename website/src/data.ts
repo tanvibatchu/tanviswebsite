@@ -101,22 +101,22 @@ export const projects = [
 ]
 
 export const awards = [
-  { name: "Winner — Google Seed Support · Hack Canada", org: "ArtiCue — AI speech therapy for children on 920-day waitlists", year: "Mar 2026" },
-  { name: "CCO Bronze Medallist + EGOI National Team Camp Qualifier", org: "Canadian Computing Olympiad · Top 10 women in Canada, CCC", year: "2025" },
-  { name: "Lieutenant Governor's Community Volunteer Award", org: "Government of Ontario · 800+ community service hours", year: "June 2025" },
+  { name: "Winner — Google Seed Support · Hack Canada", org: "ArtiCue — AI speech therapy for children on 920-day waitlists", year: "March 2026" },
+  { name: "EGOI National Team Camp Qualifier + CIW Bronze Medallist" , org: "Top 10 women in Canada in the CCC", year: "2025" },
+  { name: "Lieutenant Governor's Community Volunteer Award", org: "Government of Ontario · 1000+ community service hours", year: "June 2025" },
   { name: "Provincial Champion + Top 8% Internationally (ICDC) ×2", org: "DECA Ontario · Business Law & Ethics (2025), Project Management (2024)", year: "2024 & 2025" },
-  { name: "Best Stock Pitch & Presentation — Lululemon DCF/DDM analysis", org: "Wharton Global Youth Program, University of Pennsylvania", year: "Aug 2024" },
+  { name: "Best Stock Pitch & Presentation", org: "Wharton School of Business, University of Pennsylvania", year: "August 2024" },
   { name: "President's Entrance Scholarship of Distinction", org: "University of Waterloo · Research Experience Award, International Exchange Award", year: "2025" },
-  { name: "3rd Overall — TechNova Hackathon", org: "FakeSeek deepfake detection platform", year: "Sept 2025" },
+  { name: "3rd Overall — TechNova Hackathon", org: "FakeSeek deepfake detection platform", year: "September 2025" },
   { name: "Provincial Classics Champion (Certamen) — 6× first place", org: "National Junior Classical League · Roman History, Mythology, Latin", year: "2022–2025" },
   { name: "AP Scholar with Distinction", org: "College Board · Macro/Microeconomics, Calculus BC, English Literature", year: "2024" }
 ]
 
 export const interests = [
-  { glyph: "𝄞", name: "Carnatic Music", detail: "Vocalist for 15+ years. Level 4 distinction. Adi talam is home." },
-  { glyph: "◈", name: "Bharatanatyam", detail: "Classical South Indian dance — the grammar of the body, not unlike the grammar of a raga." },
-  { glyph: "◎", name: "Competitive Programming", detail: "CCO Bronze medallist. Top 10 women in Canada in the CCC. C++ and Python." },
   { glyph: "✦", name: "Classics & Latin", detail: "President of Classics Club. 6× provincial Certamen champion." },
+  { glyph: "𝄞", name: "Carnatic Music", detail: "Vocalist for 15+ years. Roopaka talam is still where it's at." },
+  { glyph: "•", name: "Cooking", detail: "Experimenting with new recipes, cuisines, and eating them after..." },
   { glyph: "⬡", name: "Financial History", detail: "Tracking correlations between bond prices, rates, and major historical events. Sparked at Wharton." },
+  { glyph: "◎", name: "Competitive Programming", detail: "CIW Bronze medallist. Top 10 women in Canada in the CCC. C++ and Python." },
   { glyph: "◐", name: "Telugu & Roots", detail: "Bilingual — English and Telugu. Growing up between two languages shapes how you think in both." }
 ]
