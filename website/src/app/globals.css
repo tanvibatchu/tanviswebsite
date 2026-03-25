@@ -60,3 +60,5 @@ body::before {
 .font-serif {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
 }
+
+h1 { white-space: nowrap; }
