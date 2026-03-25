@@ -75,7 +75,7 @@ export default function Home() {
     <main>
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-14 py-5"
-        style={{ background: 'linear-gradient(to bottom, rgba(21,9,0,0.97) 60%, transparent)' }}>
+        style={{ background: 'linear-gradient(to bottom, rgba(30,13,2,0.97) 60%, transparent)' }}>
         <span style={{ fontFamily: fonts[nameIdx], color: 'var(--gold-light)' }} className="tracking-wide text-sm transition-all duration-500">
           {names[nameIdx]}
         </span>
@@ -92,10 +92,10 @@ export default function Home() {
 
       {/* HERO */}
       <div className="relative z-10 min-h-screen flex flex-col justify-center px-14 pt-32 pb-20">
-        <div className="absolute w-[650px] h-[650px] top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(196,80,26,0.12) 0%, transparent 70%)' }} />
+        <div className="absolute w-[800px] h-[800px] top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, rgba(228,162,10,0.1) 0%, rgba(196,80,26,0.08) 40%, transparent 70%)' }} />
         <div className="absolute top-[70px] left-0 right-0 h-[2px]"
-          style={{ background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
+          style={{ background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold-light) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
         <div className="max-w-3xl">
           <p className="text-[0.62rem] tracking-[0.55em] uppercase text-[var(--gold-dim)] mb-6"
@@ -137,7 +137,7 @@ export default function Home() {
           <div className="flex gap-2 flex-wrap mt-10" style={{ animation: 'fadeUp 1s 1s forwards', opacity: 0 }}>
             {['telugu roots', 'carnatic · 15 years', 'waterloo cfm'].map(c => (
               <span key={c} className="text-[0.6rem] tracking-[0.15em] uppercase px-3 py-1 border border-[var(--terra-mid)] text-[var(--cream-dim)]"
-                style={{ background: 'rgba(122,48,16,0.12)', borderRadius: 2 }}>
+                style={{ background: 'rgba(154,64,24,0.15)', borderRadius: 2 }}>
                 {c}
               </span>
             ))}
@@ -245,7 +245,7 @@ export default function Home() {
               <div>
                 {p.badge && (
                   <span className="inline-block text-[0.58rem] tracking-wide uppercase px-2 py-0.5 mb-2 border border-[var(--gold-dim)] text-[var(--gold-dim)]"
-                    style={{ background: 'rgba(212,146,10,0.12)', borderRadius: 2 }}>
+                    style={{ background: 'rgba(228,162,10,0.12)', borderRadius: 2 }}>
                     {p.badge}
                   </span>
                 )}
@@ -294,7 +294,7 @@ export default function Home() {
         </h2>
         <div className="grid gap-px" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', background: 'var(--sand)' }}>
           {interests.map((item, i) => (
-            <div key={i} className="p-6 bg-[var(--bg)] hover:bg-[rgba(42,18,5,0.8)] transition-colors">
+            <div key={i} className="p-6 bg-[var(--bg)] hover:bg-[rgba(50,22,5,0.9)] transition-colors">
               <div className="font-serif text-2xl text-[var(--gold-dim)] mb-3">{item.glyph}</div>
               <p className="font-serif text-[var(--cream)] mb-2">{item.name}</p>
               <p className="text-[0.76rem] text-[var(--muted)] leading-relaxed">{item.detail}</p>
