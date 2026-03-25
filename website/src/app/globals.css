@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --bg: #150900;
-  --terra-mid: #7a3010;
+  --bg: #1a0b01;
+  --terra-mid: #8a3810;
   --terra-light: #e07040;
   --gold: #d4920a;
   --gold-light: #f0b832;
-  --gold-dim: #8a5e08;
+  --gold-dim: #9a6a10;
   --cream: #f5ead0;
-  --cream-dim: #b89a6a;
-  --sand: #3a1e08;
-  --body: #d4b888;
-  --muted: #8a6840;
+  --cream-dim: #c8a870;
+  --sand: #4a2810;
+  --body: #e0c090;
+  --muted: #9a7040;
 }
 
 html { scroll-behavior: smooth; }
@@ -22,15 +22,17 @@ body {
   background: var(--bg);
   color: var(--body);
   overflow-x: hidden;
+  font-family: var(--font-jost), 'Jost', sans-serif;
+  font-weight: 300;
 }
 
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(196,80,26,0.035) 40px, rgba(196,80,26,0.035) 41px),
-    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(196,80,26,0.035) 40px, rgba(196,80,26,0.035) 41px);
+  background:
+    radial-gradient(ellipse at 25% 25%, rgba(212,146,10,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 75%, rgba(196,80,26,0.09) 0%, transparent 55%);
   pointer-events: none;
   z-index: 0;
 }
@@ -50,11 +52,7 @@ body::before {
   transform: translateY(26px);
   transition: opacity 0.85s ease, transform 0.85s ease;
 }
-
 .reveal.in {
   opacity: 1;
   transform: translateY(0);
 }
-nav ul { gap: 2.5rem !important; }
-nav ul li a { font-size: 0.65rem !important; letter-spacing: 0.18em !important; }
-.interest-card-overflow { overflow: hidden; }
