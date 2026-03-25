@@ -1,6 +1,6 @@
 export const highlights = [
   "incoming ai & algorithms engineer @ rbc capital markets",
-  "cco bronze medallist — top 10 women in canada (ccc)",
+  "ciw bronze medallist — top 10 women in canada (ccc)",
   "built articue → winner, google seed support @ hack canada",
   "quant researcher @ marble investments",
   "founded busiaid — reached 500+ students across canada",
@@ -12,9 +12,7 @@ export const experience = [
     date: "May 2026 – Dec 2026",
     role: "AI & Algorithms Engineer — Capital Markets",
     company: "RBC Capital Markets · Toronto",
-    bullets: [
-      "Designing and implementing ML models on the Aiden platform to enhance alpha signal generation, optimize execution strategies, and improve liquidity access across multi-asset capital markets products."
-    ]
+    bullets: ["Designing and implementing ML models on the Aiden platform to enhance alpha signal generation, optimize execution strategies, and improve liquidity access across multi-asset capital markets products."]
   },
   {
     date: "Jan 2026 – Present",
@@ -122,17 +120,17 @@ export const awards = [
 ]
 
 export const skills = [
-  { category: "languages", items: ["Python", "C/C++", "TypeScript", "JavaScript", "SQL", "R", "Java"] },
-  { category: "ai / ml", items: ["CrewAI", "LangGraph", "OpenAI API", "Gemini API", "PyTorch", "Scikit-learn"] },
-  { category: "frontend", items: ["React", "Next.js", "TailwindCSS", "HTML/CSS"] },
-  { category: "backend", items: ["FastAPI", "Flask", "Node.js", "REST APIs", "Firebase"] },
-  { category: "data & finance", items: ["Pandas", "NumPy", "YFinance", "Matplotlib", "Jupyter", "Excel"] },
-  { category: "tools", items: ["Git", "AWS", "Azure", "MongoDB", "PostgreSQL", "Tableau"] },
+  { category: "languages", items: ["Python", "C++", "TypeScript", "JavaScript", "SQL", "R", "Java"] },
+  { category: "ai / ml", items: ["CrewAI", "LangGraph", "OpenAI", "Gemini", "PyTorch", "Scikit-learn"] },
+  { category: "frontend", items: ["React", "Next.js", "TailwindCSS"] },
+  { category: "backend", items: ["FastAPI", "Flask", "Node.js", "Firebase"] },
+  { category: "data & finance", items: ["Pandas", "NumPy", "Jupyter", "Tableau"] },
+  { category: "tools", items: ["Git", "AWS", "Azure", "MongoDB", "PostgreSQL"] }
 ]
 
 export const interests = [
   { glyph: "✦", name: "Classics & Latin", detail: "President of Classics Club. 6x provincial Certamen champion." },
-  { glyph: "𝄞", name: "Carnatic Music", detail: "Vocalist for 15+ years. Roopaka talam is still where it's at." },
+  { glyph: "𝄞", name: "Carnatic Music", detail: "Vocalist for 15+ years. Roopaka talam is still where its at." },
   { glyph: "•", name: "Cooking", detail: "Experimenting with new recipes, cuisines, and eating them after..." },
   { glyph: "⬡", name: "Financial History", detail: "Tracking correlations between bond prices, rates, and major historical events. Sparked at Wharton." },
   { glyph: "◎", name: "Competitive Programming", detail: "CIW Bronze medallist. Top 10 women in Canada in the CCC. C++ and Python." },
