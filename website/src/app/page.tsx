@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { experience, projects, awards, interests } from '@/data'
+import { highlights, experience, projects, awards, skills, interests } from '@/data'
 
-const names = ['Tanvi Batchu', 'తన్వి బట్చు']
+const names = ['Tanvi Batchu', 'తన్వి బచ్చు']
 const fonts = ["'Cormorant Garamond', serif", "'Noto Sans Telugu', serif"]
 const colors = ['var(--cream)', 'var(--gold-light)']
 
@@ -76,7 +76,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-14 py-5"
         style={{ background: 'linear-gradient(to bottom, rgba(21,9,0,0.97) 60%, transparent)' }}>
-        <span className="font-serif text-[var(--gold-light)] tracking-wide text-sm">
+        <span style={{ fontFamily: fonts[nameIdx], color: 'var(--gold-light)' }} className="tracking-wide text-sm transition-all duration-500">
           {names[nameIdx]}
         </span>
         <ul className="flex gap-9 list-none">
@@ -91,62 +91,63 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-8 pt-32 pb-20 overflow-hidden">
-        <div className="absolute w-[650px] h-[650px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(196,80,26,0.15) 0%, rgba(212,146,10,0.07) 45%, transparent 70%)' }} />
+      <div className="relative z-10 min-h-screen flex flex-col justify-center px-14 pt-32 pb-20">
+        <div className="absolute w-[650px] h-[650px] top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, rgba(196,80,26,0.12) 0%, transparent 70%)' }} />
         <div className="absolute top-[70px] left-0 right-0 h-[2px]"
           style={{ background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
-        <p className="text-[0.62rem] tracking-[0.55em] uppercase text-[var(--gold-dim)] mb-8"
-          style={{ animation: 'fadeUp 1s 0.3s forwards', opacity: 0 }}>
-          ✦ &nbsp; portfolio &nbsp; ✦
-        </p>
+        <div className="max-w-3xl">
+          <p className="text-[0.62rem] tracking-[0.55em] uppercase text-[var(--gold-dim)] mb-6"
+            style={{ animation: 'fadeUp 1s 0.2s forwards', opacity: 0 }}>
+            ✦ &nbsp; hey there,
+          </p>
 
-        <h1
-          className="font-serif font-light leading-none mb-7 transition-all duration-[420ms]"
-          style={{
-            fontSize: 'clamp(4rem, 12vw, 8.5rem)',
-            fontFamily: fonts[nameIdx],
-            color: colors[nameIdx],
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(10px)',
-            animation: 'fadeUp 1s 0.55s forwards',
-          }}
-        >
-          {names[nameIdx]}
-        </h1>
+          <h1
+            className="font-light leading-none mb-8 transition-all duration-[420ms]"
+            style={{
+              fontSize: 'clamp(3.5rem, 10vw, 7rem)',
+              fontFamily: fonts[nameIdx],
+              color: colors[nameIdx],
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(10px)',
+              animation: 'fadeUp 1s 0.4s forwards',
+            }}
+          >
+            i&apos;m {names[nameIdx]}.
+          </h1>
 
-        <div className="flex items-center gap-4 mb-6" style={{ animation: 'fadeUp 1s 0.75s forwards', opacity: 0 }}>
-          <div className="w-12 h-px bg-gradient-to-r from-transparent to-[var(--gold-dim)]" />
-          <div className="w-1 h-1 rounded-full bg-[var(--gold)]" />
-          <div className="w-1 h-1 rounded-full bg-[var(--terra-light)]" />
-          <div className="w-1 h-1 rounded-full bg-[var(--gold)]" />
-          <div className="w-12 h-px bg-gradient-to-l from-transparent to-[var(--gold-dim)]" />
+          <p className="text-[0.75rem] tracking-[0.2em] uppercase text-[var(--cream-dim)] mb-10"
+            style={{ animation: 'fadeUp 1s 0.6s forwards', opacity: 0 }}>
+            cs & finance @ waterloo &nbsp;·&nbsp; incoming ai engineer @ rbc capital markets
+          </p>
+
+          <div style={{ animation: 'fadeUp 1s 0.8s forwards', opacity: 0 }}>
+            <p className="text-[var(--gold-dim)] text-sm mb-4 tracking-wide">some things i&apos;ve done:</p>
+            <ul className="space-y-2">
+              {highlights.map((h, i) => (
+                <li key={i} className="flex items-start gap-3 text-[0.88rem] text-[var(--body)] leading-relaxed">
+                  <span className="text-[var(--gold-dim)] mt-1 shrink-0">→</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex gap-2 flex-wrap mt-10" style={{ animation: 'fadeUp 1s 1s forwards', opacity: 0 }}>
+            {['telugu roots', 'carnatic · 15 years', 'waterloo cfm'].map(c => (
+              <span key={c} className="text-[0.6rem] tracking-[0.15em] uppercase px-3 py-1 border border-[var(--terra-mid)] text-[var(--cream-dim)]"
+                style={{ background: 'rgba(122,48,16,0.12)', borderRadius: 2 }}>
+                {c}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <p className="text-[0.68rem] tracking-[0.22em] uppercase text-[var(--cream-dim)] mb-7 max-w-xl leading-loose"
-          style={{ animation: 'fadeUp 1s 0.8s forwards', opacity: 0 }}>
-          CS &amp; Finance · University of Waterloo · Incoming AI Engineer in Algorithmic Research @ RBC Capital Markets
-        </p>
-
-        <p className="font-serif italic text-[var(--body)] max-w-md leading-loose mb-12"
-          style={{ fontSize: 'clamp(1rem, 2.2vw, 1.3rem)', animation: 'fadeUp 1s 0.95s forwards', opacity: 0 }}>
-          I build at the intersection of software, markets, and finance — from risk pipelines and portfolio analytics to data infrastructure and ai-powered tools.
-          But more than that, I strive to create solutions that are not only effective but also accessible and user-friendly.
-        </p>
-
-        <div className="flex gap-2 flex-wrap justify-center" style={{ animation: 'fadeUp 1s 1.1s forwards', opacity: 0 }}>
-          {['AI', 'Finance', 'Software Development'].map(c => (
-            <span key={c} className="text-[0.6rem] tracking-[0.18em] uppercase px-3 py-1 border border-[var(--terra-mid)] text-[var(--cream-dim)]"
-              style={{ background: 'rgba(122,48,16,0.12)', borderRadius: 2 }}>
-              {c}
-            </span>
-          ))}
-        </div>
-
-        <div className="absolute bottom-10 flex flex-col items-center gap-2" style={{ animation: 'fadeUp 1s 1.5s forwards', opacity: 0 }}>
+        <div className="absolute bottom-10 left-14 flex flex-col gap-2"
+          style={{ animation: 'fadeUp 1s 1.3s forwards', opacity: 0 }}>
           <span className="text-[0.56rem] tracking-[0.35em] uppercase text-[var(--terra-mid)]">scroll</span>
-          <div className="w-px h-10 bg-gradient-to-b from-[var(--gold-dim)] to-transparent pulse-bar" />
+          <div className="w-px h-10" style={{ background: 'linear-gradient(to bottom, var(--gold-dim), transparent)' }} />
         </div>
       </div>
 
@@ -155,29 +156,28 @@ export default function Home() {
       {/* ABOUT */}
       <Section id="about" telugu="పరిచయం" english="about">
         <h2 className="font-serif font-light text-[var(--cream)] mb-7" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)' }}>
-          Who I am
+          who i am
         </h2>
-        <p className="text-[0.93rem] leading-loose text-[var(--body)] max-w-2xl mb-8">
-          I'm a Computer Science and Finance student at the University of Waterloo (CFM), incoming AI Engineer in Algorithmic Research at RBC Capital Markets. I build at the intersection of software, markets, and finance. I grew up in the GTA, trained in Carnatic music (classical Indian music) for fifteen+ years, and learned early that discipline and improvisation are not opposites.
+        <p className="text-[0.95rem] leading-loose text-[var(--body)] max-w-2xl mb-8">
+          i&apos;m a cs + finance student at waterloo (cfm), incoming ai & algorithms engineer at rbc capital markets. i build at the intersection of software, markets, and finance — from risk pipelines and portfolio analytics to ai-powered tools. i grew up telugu in the gta, trained in carnatic music for fifteen years, and learned early that discipline and improvisation aren&apos;t opposites.
         </p>
         <div className="border-l-2 border-[var(--gold-dim)] pl-6 mb-10">
           <p className="font-serif italic text-[var(--cream-mid)] text-xl leading-relaxed">
-            "I like projects that are practical, make an impact, are rigorous, and a little ambitious."
+            &ldquo;i like projects that are practical, make an impact, are rigorous, and a little ambitious.&rdquo;
           </p>
         </div>
         <div className="grid grid-cols-3 border-t border-l border-[var(--sand)]">
           {[
-            ['Program', 'CS + Finance (CFM)\n@ Waterloo'],
-            ['Incoming', 'AI Engineer in Algorithmic Research\nRBC Capital Markets'],
-            ['Status', 'Open to opportunities after Fall 2026'],
-            ['Music', 'Drums · Carnatic vocalist\n15+ years'],
-            ['Also speaks', 'Telugu · Latin'],
+            ['program', 'CS + Finance (CFM)\n@ Waterloo'],
+            ['incoming', 'AI & Algorithms Engineer\nRBC Capital Markets'],
+            ['open to', 'opportunities after Fall 2026'],
+            ['roots', 'Telugu · South Indian\nMarkham, Ontario'],
+            ['music', 'Carnatic vocalist\n15+ years · Level 4'],
+            ['also speaks', 'Telugu · Latin'],
           ].map(([label, val]) => (
             <div key={label} className="p-5 border-r border-b border-[var(--sand)]">
               <p className="text-[0.58rem] tracking-[0.25em] uppercase text-[var(--gold-dim)] mb-2">{label}</p>
-              <p className="font-serif text-[var(--cream)] leading-snug" style={{ whiteSpace: 'pre-line' }}>
-                {val}
-              </p>
+              <p className="font-serif text-[var(--cream)] leading-snug text-sm" style={{ whiteSpace: 'pre-line' }}>{val}</p>
             </div>
           ))}
         </div>
@@ -185,10 +185,33 @@ export default function Home() {
 
       <Divider ornament="✦" />
 
+      {/* SKILLS */}
+      <Section id="skills" telugu="నైపుణ్యాలు" english="skills">
+        <h2 className="font-serif font-light text-[var(--cream)] mb-8" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)' }}>
+          what i work with
+        </h2>
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
+          {skills.map((s, i) => (
+            <div key={i}>
+              <p className="text-[0.6rem] tracking-[0.3em] uppercase text-[var(--gold-dim)] mb-3">{s.category}</p>
+              <div className="flex flex-wrap gap-2">
+                {s.items.map(item => (
+                  <span key={item} className="text-[0.72rem] px-2 py-1 border border-[var(--sand)] text-[var(--muted)]" style={{ borderRadius: 2 }}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Divider />
+
       {/* EXPERIENCE */}
       <Section id="experience" telugu="అనుభవం" english="experience">
         <h2 className="font-serif font-light text-[var(--cream)] mb-8" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)' }}>
-          Where I've been
+          where i&apos;ve been
         </h2>
         <div>
           {experience.map((e, i) => (
@@ -206,12 +229,12 @@ export default function Home() {
         </div>
       </Section>
 
-      <Divider />
+      <Divider ornament="✦" />
 
       {/* PROJECTS */}
       <Section id="projects" telugu="పని" english="projects">
         <h2 className="font-serif font-light text-[var(--cream)] mb-8" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)' }}>
-          Selected work
+          selected work
         </h2>
         <div>
           {projects.map((p, i) => (
@@ -242,12 +265,12 @@ export default function Home() {
         </div>
       </Section>
 
-      <Divider ornament="✦" />
+      <Divider />
 
       {/* AWARDS */}
       <Section id="awards" telugu="పురస్కారాలు" english="awards">
         <h2 className="font-serif font-light text-[var(--cream)] mb-8" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)' }}>
-          Recognition
+          recognition
         </h2>
         <div>
           {awards.map((a, i) => (
@@ -262,12 +285,12 @@ export default function Home() {
         </div>
       </Section>
 
-      <Divider />
+      <Divider ornament="✦" />
 
       {/* INTERESTS */}
       <Section id="interests" telugu="ఆసక్తులు" english="interests">
         <h2 className="font-serif font-light text-[var(--cream)] mb-8" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)' }}>
-          Beyond the screen
+          beyond the screen
         </h2>
         <div className="grid gap-px" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', background: 'var(--sand)' }}>
           {interests.map((item, i) => (
@@ -280,22 +303,22 @@ export default function Home() {
         </div>
       </Section>
 
-      <Divider ornament="✦" />
+      <Divider />
 
       {/* CONTACT */}
       <Section id="contact" telugu="సంప్రదించండి" english="contact">
         <div className="max-w-lg">
           <h2 className="font-serif font-light text-[var(--cream)] mb-7" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)' }}>
-            Let's talk
+            let&apos;s talk
           </h2>
-          <p className="text-[0.93rem] leading-loose text-[var(--body)] mb-10">
-            Whether it's about problems, puzzles, cs, finance, music, a project, or something that doesn't fit neatly into either — I'd love to connect!.
+          <p className="text-[0.95rem] leading-loose text-[var(--body)] mb-10">
+            whether it&apos;s about quant finance, a carnatic collab, a project, or something that doesn&apos;t fit neatly into either — i&apos;d love to connect.
           </p>
           <div>
             {[
-              { name: 'Email', handle: 'tsabatch@uwaterloo.ca', href: 'mailto:tsabatch@uwaterloo.ca' },
-              { name: 'LinkedIn', handle: 'linkedin.com/in/tanvi-batchu', href: 'https://linkedin.com/in/tanvi-batchu' },
-              { name: 'GitHub', handle: 'github.com/tanvibatchu', href: 'https://github.com/tanvibatchu' },
+              { name: 'email', handle: 'tsabatch@uwaterloo.ca', href: 'mailto:tsabatch@uwaterloo.ca' },
+              { name: 'linkedin', handle: 'linkedin.com/in/tanvi-batchu', href: 'https://linkedin.com/in/tanvi-batchu' },
+              { name: 'github', handle: 'github.com/tanvibatchu', href: 'https://github.com/tanvibatchu' },
             ].map(link => (
               <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer"
                 className="group flex items-center justify-between py-5 border-b border-[var(--sand)] no-underline hover:pl-2 transition-all">
@@ -312,8 +335,8 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer className="relative z-10 text-center py-10 border-t border-[var(--sand)]">
-        <p className="font-serif italic text-[var(--gold-dim)] text-sm mb-1">Tanvi Batchu · CS & Finance · Waterloo · 2025</p>
-        <p className="text-[var(--terra-mid)]" style={{ fontFamily: "'Noto Sans Telugu', sans-serif" }}>తన్వి బట్చు</p>
+        <p className="font-serif italic text-[var(--gold-dim)] text-sm mb-1">tanvi batchu · cs & finance · waterloo · 2025</p>
+        <p className="text-[var(--terra-mid)] text-sm" style={{ fontFamily: "'Noto Sans Telugu', sans-serif" }}>తన్వి బచ్చు</p>
       </footer>
     </main>
   )
