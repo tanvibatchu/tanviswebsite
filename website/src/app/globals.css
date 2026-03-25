@@ -1,17 +1,19 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --bg: #150900;
-  --terra-mid: #7a3010;
+  --bg: #1a0b00;
+  --terra-mid: #8a3a12;
   --terra-light: #e07040;
   --gold: #d4920a;
   --gold-light: #f0b832;
-  --gold-dim: #8a5e08;
+  --gold-dim: #9a6e10;
   --cream: #f5ead0;
-  --cream-dim: #b89a6a;
-  --sand: #3a1e08;
-  --body: #d4b888;
-  --muted: #8a6840;
+  --cream-dim: #c8a87a;
+  --sand: #4a2810;
+  --body: #dcc090;
+  --muted: #9a7850;
 }
 
 html { scroll-behavior: smooth; }
@@ -26,9 +28,21 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(196,80,26,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(212,146,10,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(160,60,10,0.10) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
   background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(196,80,26,0.035) 40px, rgba(196,80,26,0.035) 41px),
-    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(196,80,26,0.035) 40px, rgba(196,80,26,0.035) 41px);
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(196,80,26,0.03) 40px, rgba(196,80,26,0.03) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(196,80,26,0.03) 40px, rgba(196,80,26,0.03) 41px);
   pointer-events: none;
   z-index: 0;
 }
