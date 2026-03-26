@@ -17,7 +17,7 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   title: 'Tanvi Batchu',
-  description: 'CS & Finance @ Waterloo · Incoming AI Engineer @ RBC Capital Markets',
+  description: 'CS & Finance @ Waterloo · Incoming AI Engineer in Algorithmic Research @ RBC Capital Markets',
 }
 
 export default function RootLayout({

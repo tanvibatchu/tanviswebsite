@@ -129,8 +129,8 @@ export const skills = [
 ]
 
 export const interests = [
-  { glyph: "✦", name: "Classics & Latin", detail: "President of Classics Club. 6x provincial Certamen champion." },
-  { glyph: "𝄞", name: "Carnatic Music", detail: "Vocalist for 15+ years. Roopaka talam is still where its at." },
+  { glyph: "✦", name: "Classics & Latin", detail: "President of Classics Club. 6x provincial Certamen champion."},
+  { glyph: "𝄞", name: "Carnatic Music", detail: "Vocalist for 15+ years. Eka talam is still where its at." },
   { glyph: "•", name: "Cooking", detail: "Experimenting with new recipes, cuisines, and eating them after..." },
   { glyph: "⬡", name: "Financial History", detail: "Tracking correlations between bond prices, rates, and major historical events. Sparked at Wharton." },
   { glyph: "◎", name: "Competitive Programming", detail: "CIW Bronze medallist. Top 10 women in Canada in the CCC. C++ and Python." },

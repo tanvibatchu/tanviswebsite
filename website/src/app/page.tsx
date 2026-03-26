@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { highlights, experience, projects, awards, skills, interests } from '@/data'
 
-const names = ['Tanvi Batchu', '\u0C24\u0C28\u0C4D\u0C35\u0C3F \u0C2C\u0C1F\u0C4D\u0C1A\u0C41']
+const names = ['Tanvi Batchu', 'తన్వి బచ్చు']
 const fonts = ["var(--font-cormorant),'Cormorant Garamond',serif", "'Noto Sans Telugu',sans-serif"]
 const colors = ['var(--cream)', 'var(--gold-light)']
 
@@ -73,7 +73,7 @@ function Section({ id, telugu, english, children }: {
   )
 }
 
-function Divider({ ornament = '\u2767' }: { ornament?: string }) {
+function Divider({ ornament = '❧' }: { ornament?: string }) {
   return (
     <div style={{ position: 'relative', zIndex: 10, display: 'flex', alignItems: 'center', gap: '12px', padding: '0 3rem' }}>
       <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--terra-mid) 40%, var(--gold-dim) 50%, var(--terra-mid) 60%, transparent)' }} />
@@ -173,7 +173,7 @@ export default function Home() {
       <Divider />
 
       {/* ABOUT */}
-      <Section id="about" telugu="\u0C2A\u0C30\u0C3F\u0C1A\u0C2F\u0C02" english="about">
+      <Section id="about" telugu="నా గురించి" english="about">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>who i am</h2>
         <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', maxWidth: '580px', marginBottom: '2rem' }}>
           i&apos;m a cs + finance student at waterloo (cfm), incoming ai & algorithms engineer at rbc capital markets. i build at the intersection of software, markets, and finance. i grew up telugu in the gta, trained in carnatic music for fifteen years, and learned early that discipline and improvisation aren&apos;t opposites.
@@ -186,11 +186,11 @@ export default function Home() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', borderTop: '0.5px solid var(--sand)', borderLeft: '0.5px solid var(--sand)' }}>
           {[
             ['program','CS + Finance (CFM)\n@ Waterloo'],
-            ['incoming','AI & Algorithms Engineer\nRBC Capital Markets'],
-            ['open to','opportunities after Fall 2026'],
-            ['roots','Telugu \u00b7 South Indian\nMarkham, Ontario'],
-            ['music','Carnatic vocalist\n15+ years \u00b7 Level 4'],
-            ['also speaks','Telugu \u00b7 Latin'],
+            ['incoming','AI Engineer in Algorithmic Research\nRBC Capital Markets'],
+            ['open to','Opportunities after Fall 2026'],
+            ['roots','Telugu · South Indian\nMarkham, Ontario'],
+            ['music','Carnatic vocalist\n15+ years'],
+            ['also speaks','Telugu · Latin (working proficiency)'],
           ].map(([l,v]) => (
             <div key={l} style={{ padding: '1.2rem', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)' }}>
               <p style={{ fontSize: '0.57rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '0.4rem' }}>{l}</p>
@@ -200,10 +200,10 @@ export default function Home() {
         </div>
       </Section>
 
-      <Divider ornament="\u2726" />
+      <Divider ornament="✦" />
 
       {/* SKILLS */}
-      <Section id="skills" telugu="\u0C28\u0C48\u0C2A\u0C41\u0C23\u0C4D\u0C2F\u0C3E\u0C32\u0C41" english="skills">
+      <Section id="skills" telugu="నైపుణ్యాలు" english="skills">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>what i work with</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.8rem 1.4rem' }}>
           {skills.flatMap(s => s.items).map(item => {
@@ -238,7 +238,7 @@ export default function Home() {
       <Divider />
 
       {/* EXPERIENCE */}
-      <Section id="experience" telugu="\u0C05\u0C28\u0C41\u0C2D\u0C35\u0C02" english="experience">
+      <Section id="experience" telugu="అనుభవం" english="experience">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
         {experience.map((e,i) => (
           <div key={i} style={{ display: 'grid', gridTemplateColumns: '155px 1fr', gap: '2rem', padding: '1.8rem 0', borderBottom: '0.5px solid var(--sand)' }}>
@@ -257,7 +257,7 @@ export default function Home() {
       <Divider ornament="\u2726" />
 
       {/* PROJECTS */}
-      <Section id="projects" telugu="\u0C2A\u0C28\u0C3F" english="projects">
+      <Section id="projects" telugu="పని" english="projects">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>selected work</h2>
         {projects.map((p,i) => (
           <a key={i} href={p.href} target="_blank" rel="noopener noreferrer"
@@ -281,7 +281,7 @@ export default function Home() {
       <Divider />
 
       {/* AWARDS */}
-      <Section id="awards" telugu="\u0C2A\u0C41\u0C30\u0C38\u0C4D\u0C15\u0C3E\u0C30\u0C3E\u0C32\u0C41" english="awards">
+      <Section id="awards" telugu="బహుమతులు" english="awards">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>recognition</h2>
         {awards.map((a,i) => (
           <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '2rem', padding: '1.2rem 0', borderBottom: '0.5px solid var(--sand)' }}>
@@ -294,10 +294,10 @@ export default function Home() {
         ))}
       </Section>
 
-      <Divider ornament="\u2726" />
+      <Divider ornament="✦" />
 
       {/* INTERESTS */}
-      <Section id="interests" telugu="\u0C06\u0C38\u0C15\u0C4D\u0C24\u0C41\u0C32\u0C41" english="interests">
+      <Section id="interests" telugu="నచ్చినవి" english="interests">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>beyond the screen</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--sand)' }}>
           {interests.map((item,i) => (
@@ -315,11 +315,11 @@ export default function Home() {
       <Divider />
 
       {/* CONTACT */}
-      <Section id="contact" telugu="\u0C38\u0C02\u0C2A\u0C4D\u0C30\u0C26\u0C3F\u0C02\u0C1A\u0C02\u0C21\u0C3F" english="contact">
+      <Section id="contact" telugu="కలుద్దాం" english="contact">
         <div style={{ maxWidth: '500px' }}>
           <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>let&apos;s talk</h2>
           <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', marginBottom: '2.5rem' }}>
-            whether it&apos;s about quant finance, a carnatic collab, a project, or something that doesn&apos;t fit neatly into either &mdash; i&apos;d love to connect.
+            whether it&apos;s about building, code, finance, music, or something that doesn&apos;t fit neatly into either &mdash; i&apos;d love to connect.
           </p>
           {[
             { name: 'email', handle: 'tsabatch@uwaterloo.ca', href: 'mailto:tsabatch@uwaterloo.ca' },
