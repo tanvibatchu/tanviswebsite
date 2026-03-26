@@ -259,23 +259,32 @@ export default function Home() {
       {/* PROJECTS */}
       <Section id="projects" telugu="పని" english="projects">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>selected work</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
         {projects.map((p,i) => (
           <a key={i} href={p.href} target="_blank" rel="noopener noreferrer"
-            style={{ display: 'grid', gridTemplateColumns: '46px 1fr 22px', gap: '1.5rem', padding: '1.8rem 0', borderBottom: '0.5px solid var(--sand)', textDecoration: 'none', color: 'inherit' }}
+            style={{ display: 'flex', flexDirection: 'column', border: '0.5px solid var(--sand)', borderRadius: '4px', overflow: 'hidden', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.3s' }}
             onMouseEnter={e => { (e.currentTarget.querySelector('.pn') as HTMLElement).style.color='var(--gold)'; (e.currentTarget.querySelector('.pt') as HTMLElement).style.color='var(--gold-light)'; (e.currentTarget.querySelector('.pa') as HTMLElement).style.color='var(--gold)' }}
             onMouseLeave={e => { (e.currentTarget.querySelector('.pn') as HTMLElement).style.color='var(--terra-mid)'; (e.currentTarget.querySelector('.pt') as HTMLElement).style.color='var(--cream)'; (e.currentTarget.querySelector('.pa') as HTMLElement).style.color='var(--sand)' }}>
             <span className="pn" style={{ fontFamily: serif, fontSize: '1.5rem', color: 'var(--terra-mid)', lineHeight: 1, paddingTop: '3px', transition: 'color 0.3s' }}>{p.num}</span>
             <div>
+              {(p as any).image && (
+                <div style={{ overflow: 'hidden' }}>
+                  <img src={(p as any).image} alt={p.title} style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block', opacity: 0.9, transition: 'opacity 0.3s' }} />
+                </div>
+              )}
+              <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               {p.badge && <span style={{ display: 'inline-block', fontSize: '0.58rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '2px 8px', marginBottom: '0.4rem', border: '0.5px solid var(--gold-dim)', color: 'var(--gold-dim)', background: 'rgba(212,146,10,0.1)', borderRadius: '2px' }}>{p.badge}</span>}
               <p className="pt" style={{ fontFamily: serif, fontSize: '1.25rem', color: 'var(--cream)', marginBottom: '0.4rem', transition: 'color 0.3s' }}>{p.title}</p>
               <p style={{ fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.7, marginBottom: '0.6rem' }}>{p.description}</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginTop: 'auto' }}>
                 {p.tags.map(t => <span key={t} style={{ fontSize: '0.58rem', letterSpacing: '0.1em', textTransform: 'uppercase', padding: '2px 8px', border: '0.5px solid var(--sand)', color: 'var(--muted)', borderRadius: '2px' }}>{t}</span>)}
               </div>
+              </div>
             </div>
-            <span className="pa" style={{ color: 'var(--sand)', paddingTop: '3px', transition: 'color 0.3s', fontSize: '1rem' }}>&nearr;</span>
+            <span className="pa" style={{ color: 'var(--sand)', paddingTop: '3px', transition: 'color 0.3s', fontSize: '1rem' }}>↗</span>
           </a>
         ))}
+        </div>
       </Section>
 
       <Divider />
@@ -334,7 +343,7 @@ export default function Home() {
                 <p className="cn" style={{ fontFamily: serif, fontSize: '1.2rem', color: 'var(--cream)', transition: 'color 0.3s' }}>{link.name}</p>
                 <p style={{ fontSize: '0.7rem', color: 'var(--muted)', marginTop: '2px' }}>{link.handle}</p>
               </div>
-              <span className="ca" style={{ color: 'var(--sand)', transition: 'color 0.3s' }}>&nearr;</span>
+              <span className="ca" style={{ color: 'var(--sand)', transition: 'color 0.3s' }}>↗</span>
             </a>
           ))}
         </div>
