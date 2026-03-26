@@ -76,16 +76,7 @@ export const projects = [
   },
   {
     num: "02",
-    badge: "UofT Hacks 2026",
-    title: "LandLock — Climate Risk Intelligence Platform",
-    image: "/landlock.png",
-    description: "Multi-agent system (CrewAI + LangGraph) orchestrating 3 specialized agents analyzing 20+ BC government datasets for wildfire, zoning, and climate risk. Interactive map frontend translating complex data into 0-100 actionable risk scores for homebuyers and insurers.",
-    tags: ["Python", "CrewAI", "LangGraph", "FastAPI", "React", "Mapbox", "TypeScript"],
-    href: "https://github.com/apun16/landlock"
-  },
-  {
-    num: "03",
-    badge: undefined,
+    badge: "Personal Project: Built for the everyday investor",
     title: "RiskSpeak — AI Portfolio Risk Explainer",
     image: "/riskspeak.png",
     description: "Full-stack platform integrating broker APIs (Wealthsimple, Questrade, IBKR) for automated portfolio imports and real-time risk assessment. Analytics engine computing 15+ financial metrics with automatic S&P 500/TSX 60 benchmark selection and NewsAPI sentiment risk alerts.",
@@ -93,13 +84,22 @@ export const projects = [
     href: "https://github.com/tanvibatchu/RiskSpeak"
   },
   {
-    num: "04",
-    badge: undefined,
+    num: "03",
+    badge: "Personal Project: Built for optimization",
     title: "MarketMeet — Quantitative Robo-Advisor",
     image: "/marketmeet.png",
     description: "Python-based portfolio construction platform. Multi-factor screening model against TSX/S&P 500 benchmarks, matched to 0.05% accuracy. Modified Markowitz mean-variance framework with full backtesting system measuring Sharpe ratio, drawdowns, and cumulative returns.",
     tags: ["Python", "SciPy", "Pandas", "NumPy", "YFinance", "Jupyter"],
     href: "https://github.com/tanvibatchu/MarketMeet"
+  },
+  {
+    num: "04",
+    badge: "UofT Hacks 2026",
+    title: "LandLock — Climate Risk Intelligence Platform",
+    image: "/landlock.png",
+    description: "Multi-agent system (CrewAI + LangGraph) orchestrating 3 specialized agents analyzing 20+ BC government datasets for wildfire, zoning, and climate risk. Interactive map frontend translating complex data into 0-100 actionable risk scores for homebuyers and insurers.",
+    tags: ["Python", "CrewAI", "LangGraph", "FastAPI", "React", "Mapbox", "TypeScript"],
+    href: "https://github.com/apun16/landlock"
   },
   {
     num: "05",
