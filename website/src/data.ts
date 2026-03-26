@@ -69,6 +69,7 @@ export const projects = [
     num: "01",
     badge: "Winner · Google Seed Support · Hack Canada",
     title: "ArtiCue — AI Speech Therapy Companion",
+    image: "/articue.png",
     description: "Built for Canadian children facing waitlists of up to 920 days for a government-funded speech-language pathologist. Kids practice daily with Nova, an animated coach voiced by ElevenLabs, while Gemini 2.5 Flash scores pronunciation using age-calibrated clinical rubrics in real time.",
     tags: ["Next.js 16", "TypeScript", "Gemini 2.5 Flash", "ElevenLabs", "Firebase", "Auth0"],
     href: "https://github.com/tanvibatchu/articue"
@@ -77,6 +78,7 @@ export const projects = [
     num: "02",
     badge: "UofT Hacks 2026",
     title: "LandLock — Climate Risk Intelligence Platform",
+    image: "/landlock.png",
     description: "Multi-agent system (CrewAI + LangGraph) orchestrating 3 specialized agents analyzing 20+ BC government datasets for wildfire, zoning, and climate risk. Interactive map frontend translating complex data into 0-100 actionable risk scores for homebuyers and insurers.",
     tags: ["Python", "CrewAI", "LangGraph", "FastAPI", "React", "Mapbox", "TypeScript"],
     href: "https://github.com/apun16/landlock"
@@ -85,6 +87,7 @@ export const projects = [
     num: "03",
     badge: undefined,
     title: "RiskSpeak — AI Portfolio Risk Explainer",
+    image: "/riskspeak.png",
     description: "Full-stack platform integrating broker APIs (Wealthsimple, Questrade, IBKR) for automated portfolio imports and real-time risk assessment. Analytics engine computing 15+ financial metrics with automatic S&P 500/TSX 60 benchmark selection and NewsAPI sentiment risk alerts.",
     tags: ["Python", "FastAPI", "React", "YFinance", "GeminiAPI", "TailwindCSS"],
     href: "https://github.com/tanvibatchu/RiskSpeak"
@@ -93,6 +96,7 @@ export const projects = [
     num: "04",
     badge: undefined,
     title: "MarketMeet — Quantitative Robo-Advisor",
+    image: "/marketmeet.png",
     description: "Python-based portfolio construction platform. Multi-factor screening model against TSX/S&P 500 benchmarks, matched to 0.05% accuracy. Modified Markowitz mean-variance framework with full backtesting system measuring Sharpe ratio, drawdowns, and cumulative returns.",
     tags: ["Python", "SciPy", "Pandas", "NumPy", "YFinance", "Jupyter"],
     href: "https://github.com/tanvibatchu/MarketMeet"
@@ -101,6 +105,7 @@ export const projects = [
     num: "05",
     badge: "3rd Overall · TechNova Hackathon 2025",
     title: "FakeSeek — Deepfake Detection Platform",
+    image: "/fakeseek.png",
     description: "Platform empowering users to protect their digital identity by scanning the web for manipulated media and impersonation risks. GeminiAPI deepfake analysis, BeautifulSoup detection pipelines, React + TypeScript frontend with Google OAuth.",
     tags: ["Python", "GeminiAPI", "React", "TypeScript", "MongoDB", "BeautifulSoup"],
     href: "https://github.com/apun16/FakeSeek."
