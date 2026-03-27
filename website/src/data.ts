@@ -1,6 +1,6 @@
 export const highlights = [
   "incoming ai & algorithms engineer @ rbc capital markets",
-  "ciw bronze medallist — top 10 women in canada (ccc)",
+  "ciw bronze medallist — top 10 female competitive programmers out of 4,000+ participants in the ccc",
   "built articue → winner, google seed support @ hack canada",
   "quant researcher @ marble investments",
   "founded busiaid — reached 500+ students across canada",
@@ -113,24 +113,32 @@ export const projects = [
 ]
 
 export const awards = [
-  { name: "Winner — Google Seed Support · Hack Canada", org: "ArtiCue — AI speech therapy for children on 920-day waitlists", year: "March 2026" },
-  { name: "EGOI National Team Camp Qualifier + CIW Bronze Medallist", org: "Top 10 women in Canada in the CCC", year: "2025" },
-  { name: "Lieutenant Governor's Community Volunteer Award", org: "Government of Ontario · 1000+ community service hours", year: "June 2025" },
-  { name: "Provincial Champion + Top 8% Internationally (ICDC) x2", org: "DECA Ontario · Business Law & Ethics (2025), Project Management (2024)", year: "2024 & 2025" },
-  { name: "Best Stock Pitch & Presentation", org: "Wharton School of Business, University of Pennsylvania", year: "August 2024" },
-  { name: "President's Entrance Scholarship of Distinction", org: "University of Waterloo · Research Experience Award, International Exchange Award", year: "2025" },
-  { name: "3rd Overall — TechNova Hackathon", org: "FakeSeek deepfake detection platform", year: "September 2025" },
-  { name: "Provincial Classics Champion (Certamen) — 6x first place", org: "National Junior Classical League · Roman History, Mythology, Latin", year: "2022-2025" },
-  { name: "AP Scholar with Distinction", org: "College Board · Macro/Microeconomics, Calculus BC, English Literature", year: "2024" }
+
+  { name: "Winner — Google Seed Support · Hack Canada", org: "ArtiCue — AI speech therapy for children on 920-day waitlists", year: "March 2026", link: "https://devpost.com/tanvibatchu10" },
+
+  { name: "EGOI National Team Camp Qualifier + CIW Bronze Medallist", org: "Top 10 female competitive programmers out of 4,000+ participants in the CCC", year: "2025", link: "https://cemc.uwaterloo.ca/sites/default/files/documents/2025/ciw_summary.pdf" },
+
+  { name: "Lieutenant Governor's Community Volunteer Award", org: "Government of Ontario · 1000+ community service hours", year: "June 2025", link: "https://lgontario.ca/en/learn/community-duties/honouring-ontarians/" },
+
+  { name: "Provincial Champion + Top 8% Internationally (ICDC) x2", org: "DECA Ontario · Business Law & Ethics (2025), Project Management (2024)", year: "2024 & 2025", link: "" },
+
+  { name: "Best Stock Pitch & Presentation", org: "Wharton School of Business, University of Pennsylvania", year: "August 2024", link: "https://www.linkedin.com/feed/update/urn:li:activity:7233536483201069056/?originTrackingId=48xG%2FddY8NHWBtXlAAChOg%3D%3D" },
+
+  { name: "President's Entrance Scholarship of Distinction", org: "University of Waterloo · Research Experience Award, International Exchange Award", year: "2025", link: "https://uwaterloo.ca/undergraduate-entrance-awards/awards/university-waterloo-presidents-scholarship" },
+
+  { name: "3rd Overall — TechNova Hackathon", org: "FakeSeek deepfake detection platform", year: "September 2025", link: "https://devpost.com/tanvibatchu10" },
+
+  { name: "Provincial Classics Champion (Certamen) — 6x first place", org: "National Junior Classical League · Roman History, Mythology, Latin", year: "2022-2025", link: "https://www.njcl.org/NJCL-Convention/Convention-Contests/Certamen" },
 ]
+
 
 export const skills = [
   { category: "languages", items: ["Python", "C++", "TypeScript", "JavaScript", "SQL", "R", "Java"] },
-  { category: "ai / ml", items: ["CrewAI", "LangGraph", "OpenAI", "Gemini", "PyTorch", "Scikit-learn"] },
+  { category: "ai / ml", items: ["CrewAI", "LangGraph", "Gemini", "PyTorch", "Scikit-learn"] },
   { category: "frontend", items: ["React", "Next.js", "TailwindCSS"] },
   { category: "backend", items: ["FastAPI", "Flask", "Node.js", "Firebase"] },
-  { category: "data & finance", items: ["Pandas", "NumPy", "Jupyter", "Tableau"] },
-  { category: "tools", items: ["Git", "AWS", "Azure", "MongoDB", "PostgreSQL"] }
+  { category: "data & finance", items: ["Pandas", "NumPy", "Jupyter", "Docker"] },
+  { category: "tools", items: ["Git", "MongoDB", "PostgreSQL", "Figma"] }
 ]
 
 export const interests = [
@@ -138,6 +146,6 @@ export const interests = [
   { glyph: "𝄞", name: "Carnatic Music", detail: "Vocalist for 15+ years. Eka talam is still where its at." },
   { glyph: "•", name: "Cooking", detail: "Experimenting with new recipes, cuisines, and eating them after..." },
   { glyph: "⬡", name: "Financial History", detail: "Tracking correlations between bond prices, rates, and major historical events. Sparked at Wharton." },
-  { glyph: "◎", name: "Competitive Programming", detail: "CIW Bronze medallist. Top 10 women in Canada in the CCC. C++ and Python." },
+  { glyph: "◎", name: "Competitive Programming", detail: "CIW Bronze medallist. Top 10 female competitive programmers out of 4,000+ participants in the CCC. C++ and Python." },
   { glyph: "◐", name: "Telugu & Roots", detail: "Bilingual — English and Telugu. Growing up between two languages shapes how you think in both." }
 ]

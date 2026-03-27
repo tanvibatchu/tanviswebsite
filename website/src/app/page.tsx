@@ -31,10 +31,9 @@ const skillIcons: Record<string, string> = {
   'Pandas': 'pandas',
   'NumPy': 'numpy',
   'Jupyter': 'jupyter',
-  'Tableau': 'tableau',
   'Git': 'git',
-  'AWS': 'amazonwebservices',
-  'Azure': 'microsoftazure',
+  'Docker': 'docker',
+  'Figma': 'figma',
   'MongoDB': 'mongodb',
   'PostgreSQL': 'postgresql',
 }
@@ -123,8 +122,8 @@ export default function Home() {
         <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold-light) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
         <div style={{ maxWidth: '680px' }}>
-          <p style={{ fontSize: '0.62rem', letterSpacing: '0.55em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '1.5rem', animation: 'fadeUp 1s 0.2s forwards', opacity: 0 }}>
-            \u2726 &nbsp; hey there,
+          <p style={{ fontSize: '1.5rem', letterSpacing: '0.55em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '1.5rem', animation: 'fadeUp 1s 0.2s forwards', opacity: 0 }}>
+            👋 hey there,
           </p>
 
           <h1 style={{
@@ -158,7 +157,7 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '2.5rem', animation: 'fadeUp 1s 1s forwards', opacity: 0 }}>
-            {['telugu roots', 'carnatic \u00b7 15 years', 'waterloo cfm'].map(c => (
+            {['learn more about me!'].map(c => (
               <span key={c} style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', padding: '5px 13px', border: '0.5px solid var(--terra-mid)', color: 'var(--cream-dim)', background: 'rgba(138,56,16,0.15)', borderRadius: '2px' }}>{c}</span>
             ))}
           </div>
@@ -176,7 +175,7 @@ export default function Home() {
       <Section id="about" telugu="నా గురించి" english="about">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>who i am</h2>
         <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', maxWidth: '580px', marginBottom: '2rem' }}>
-          i&apos;m a cs + finance student at waterloo (cfm), incoming ai & algorithms engineer at rbc capital markets. i build at the intersection of software, markets, and finance. i grew up telugu in the gta, trained in carnatic music for fifteen years, and learned early that discipline and improvisation aren&apos;t opposites.
+          i&apos;m a cs + finance student at waterloo (cfm), incoming ai & algorithms engineer at rbc capital markets. i build at the intersection of software, markets, and finance, but more importantly, i am extremely passionate about building with purpose. follow along on my journey!
         </p>
         <div style={{ borderLeft: '2px solid var(--gold-dim)', paddingLeft: '1.5rem', marginBottom: '2.5rem' }}>
           <p style={{ fontFamily: serif, fontStyle: 'italic', color: 'var(--cream-dim)', fontSize: '1.15rem', lineHeight: 1.7 }}>
@@ -240,21 +239,21 @@ export default function Home() {
       {/* EXPERIENCE */}
       <Section id="experience" telugu="అనుభవం" english="experience">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
-        {experience.map((e,i) => (
-          <div key={i} style={{ display: 'grid', gridTemplateColumns: '155px 1fr', gap: '2rem', padding: '1.8rem 0', borderBottom: '0.5px solid var(--sand)' }}>
-            <span style={{ fontSize: '0.63rem', letterSpacing: '0.08em', color: 'var(--gold-dim)', textTransform: 'uppercase', lineHeight: 1.7, paddingTop: '3px' }}>{e.date}</span>
-            <div>
-              <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.2rem', marginBottom: '0.2rem' }}>{e.role}</p>
-              <p style={{ fontSize: '0.68rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--terra-light)', marginBottom: '0.6rem' }}>{e.company}</p>
-              <ul style={{ fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
+          {experience.map((e,i) => (
+            <div key={i} style={{ padding: '1.5rem', border: '0.5px solid var(--sand)', borderRadius: '4px' }}>
+              <span style={{ fontSize: '0.6rem', letterSpacing: '0.08em', color: 'var(--gold-dim)', textTransform: 'uppercase', lineHeight: 1.7, display: 'block', marginBottom: '0.5rem' }}>{e.date}</span>
+              <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.1rem', marginBottom: '0.2rem' }}>{e.role}</p>
+              <p style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--terra-light)', marginBottom: '0.75rem' }}>{e.company}</p>
+              <ul style={{ fontSize: '0.78rem', color: 'var(--muted)', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                 {e.bullets.map((b,j) => <li key={j} style={{ marginLeft: '1rem', listStyleType: 'disc' }}>{b}</li>)}
               </ul>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </Section>
 
-      <Divider ornament="\u2726" />
+      <Divider ornament="❧" />
 
       {/* PROJECTS */}
       <Section id="projects" telugu="పని" english="projects">
@@ -292,15 +291,33 @@ export default function Home() {
       {/* AWARDS */}
       <Section id="awards" telugu="బహుమతులు" english="awards">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>recognition</h2>
-        {awards.map((a,i) => (
-          <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '2rem', padding: '1.2rem 0', borderBottom: '0.5px solid var(--sand)' }}>
-            <div>
-              <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.1rem', marginBottom: '0.2rem' }}>{a.name}</p>
-              <p style={{ fontSize: '0.72rem', color: 'var(--muted)' }}>{a.org}</p>
-            </div>
-            <span style={{ fontSize: '0.65rem', letterSpacing: '0.12em', color: 'var(--gold-dim)', textTransform: 'uppercase', whiteSpace: 'nowrap', paddingTop: '4px' }}>{a.year}</span>
-          </div>
-        ))}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
+          {awards.map((a,i) => {
+            const hasLink = !!(a as any).link
+            const inner = (
+              <>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: '0.65rem', letterSpacing: '0.12em', color: 'var(--gold-dim)', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>{a.year}</span>
+                  {hasLink && <span style={{ color: 'var(--gold-dim)', fontSize: '0.8rem' }}>↗</span>}
+                </div>
+                <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.05rem', marginBottom: '0.3rem', lineHeight: 1.3 }}>{a.name}</p>
+                <p style={{ fontSize: '0.72rem', color: 'var(--muted)', lineHeight: 1.5 }}>{a.org}</p>
+              </>
+            )
+            return hasLink ? (
+              <a key={i} href={(a as any).link} target="_blank" rel="noopener noreferrer"
+                style={{ padding: '1.5rem', border: '0.5px solid var(--sand)', borderRadius: '4px', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s' }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--gold-dim)')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--sand)')}>
+                {inner}
+              </a>
+            ) : (
+              <div key={i} style={{ padding: '1.5rem', border: '0.5px solid var(--sand)', borderRadius: '4px' }}>
+                {inner}
+              </div>
+            )
+          })}
+        </div>
       </Section>
 
       <Divider ornament="✦" />
