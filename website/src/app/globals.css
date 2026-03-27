@@ -56,3 +56,33 @@ body::before {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* card hover glow */
+.card-warm {
+  background: rgba(60, 25, 5, 0.4);
+  transition: background 0.3s, border-color 0.3s, transform 0.2s;
+}
+.card-warm:hover {
+  background: rgba(90, 38, 10, 0.55);
+  border-color: var(--gold-dim) !important;
+  transform: translateY(-2px);
+}
+
+/* gold left border accent */
+.card-accent {
+  border-left: 2px solid var(--gold-dim) !important;
+  border-top: 0.5px solid var(--sand) !important;
+  border-right: 0.5px solid var(--sand) !important;
+  border-bottom: 0.5px solid var(--sand) !important;
+}
+
+/* section heading size boost */
+.sec-big {
+  font-size: clamp(2.5rem, 6vw, 4rem) !important;
+  letter-spacing: -0.02em;
+}
+
+/* hero name glow */
+.hero-glow-text {
+  text-shadow: 0 0 80px rgba(212, 146, 10, 0.25);
+}

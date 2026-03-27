@@ -136,11 +136,12 @@ export default function Home() {
             transition: 'opacity 0.42s ease, transform 0.42s ease',
             animation: 'fadeUp 1s 0.4s forwards',
             whiteSpace: 'nowrap',
+            textShadow: '0 0 120px rgba(212,146,10,0.3)',
           }}>
             i&apos;m {names[nameIdx]}.
           </h1>
 
-          <p style={{ fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--cream-dim)', marginBottom: '2.5rem', lineHeight: 1.9, animation: 'fadeUp 1s 0.6s forwards', opacity: 0 }}>
+          <p style={{ fontSize: '0.78rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--cream-dim)', marginBottom: '2.5rem', lineHeight: 1.9, animation: 'fadeUp 1s 0.6s forwards', opacity: 0 }}>
             cs & finance @ waterloo &nbsp;&middot;&nbsp; incoming ai engineer @ rbc capital markets
           </p>
 
@@ -173,7 +174,7 @@ export default function Home() {
 
       {/* ABOUT */}
       <Section id="about" telugu="నా గురించి" english="about">
-        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>who i am</h2>
+        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>who i am</h2>
         <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', maxWidth: '580px', marginBottom: '2rem' }}>
           i&apos;m a cs + finance student at waterloo (cfm), incoming ai & algorithms engineer at rbc capital markets. i build at the intersection of software, markets, and finance, but more importantly, i am extremely passionate about building with purpose. follow along on my journey!
         </p>
@@ -191,7 +192,7 @@ export default function Home() {
             ['music','Carnatic vocalist\n15+ years'],
             ['also speaks','Telugu · Latin (working proficiency)'],
           ].map(([l,v]) => (
-            <div key={l} style={{ padding: '1.2rem', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)' }}>
+            <div key={l} style={{ padding: '1.2rem', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', background: 'rgba(45,18,3,0.4)', transition: 'background 0.3s' }} onMouseEnter={e => (e.currentTarget.style.background='rgba(80,32,8,0.5)')} onMouseLeave={e => (e.currentTarget.style.background='rgba(45,18,3,0.4)')}>
               <p style={{ fontSize: '0.57rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '0.4rem' }}>{l}</p>
               <p style={{ fontFamily: serif, color: 'var(--cream)', lineHeight: 1.4, fontSize: '0.92rem', whiteSpace: 'pre-line' }}>{v}</p>
             </div>
@@ -203,7 +204,7 @@ export default function Home() {
 
       {/* SKILLS */}
       <Section id="skills" telugu="నైపుణ్యాలు" english="skills">
-        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>what i work with</h2>
+        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>what i work with</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.8rem 1.4rem' }}>
           {skills.flatMap(s => s.items).map(item => {
             const slug = skillIcons[item] || item.toLowerCase().replace(/[^a-z0-9]/g, '')
@@ -238,10 +239,10 @@ export default function Home() {
 
       {/* EXPERIENCE */}
       <Section id="experience" telugu="అనుభవం" english="experience">
-        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
+        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
           {experience.map((e,i) => (
-            <div key={i} style={{ padding: '1.5rem', border: '0.5px solid var(--sand)', borderRadius: '4px' }}>
+            <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--gold-dim)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
               <span style={{ fontSize: '0.6rem', letterSpacing: '0.08em', color: 'var(--gold-dim)', textTransform: 'uppercase', lineHeight: 1.7, display: 'block', marginBottom: '0.5rem' }}>{e.date}</span>
               <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.1rem', marginBottom: '0.2rem' }}>{e.role}</p>
               <p style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--terra-light)', marginBottom: '0.75rem' }}>{e.company}</p>
@@ -257,7 +258,7 @@ export default function Home() {
 
       {/* PROJECTS */}
       <Section id="projects" telugu="పని" english="projects">
-        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>selected work</h2>
+        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>selected work</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
         {projects.map((p,i) => (
           <a key={i} href={p.href} target="_blank" rel="noopener noreferrer"
@@ -290,8 +291,8 @@ export default function Home() {
 
       {/* AWARDS */}
       <Section id="awards" telugu="బహుమతులు" english="awards">
-        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>recognition</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
+        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>recognition</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem', alignItems: 'start' }}>
           {awards.map((a,i) => {
             const hasLink = !!(a as any).link
             const inner = (
@@ -306,13 +307,13 @@ export default function Home() {
             )
             return hasLink ? (
               <a key={i} href={(a as any).link} target="_blank" rel="noopener noreferrer"
-                style={{ padding: '1.5rem', border: '0.5px solid var(--sand)', borderRadius: '4px', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s' }}
+                style={{ padding: '1.5rem', borderLeft: '2px solid var(--gold-dim)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s, background 0.3s, transform 0.25s' }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--gold-dim)')}
                 onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--sand)')}>
                 {inner}
               </a>
             ) : (
-              <div key={i} style={{ padding: '1.5rem', border: '0.5px solid var(--sand)', borderRadius: '4px' }}>
+              <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--gold-dim)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
                 {inner}
               </div>
             )
@@ -324,12 +325,12 @@ export default function Home() {
 
       {/* INTERESTS */}
       <Section id="interests" telugu="నచ్చినవి" english="interests">
-        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>beyond the screen</h2>
+        <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>beyond the screen</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--sand)' }}>
           {interests.map((item,i) => (
-            <div key={i} style={{ padding: '1.6rem 1.4rem', background: 'var(--bg)', transition: 'background 0.3s' }}
-              onMouseEnter={e => (e.currentTarget.style.background='rgba(50,20,2,0.95)')}
-              onMouseLeave={e => (e.currentTarget.style.background='var(--bg)')}>
+            <div key={i} style={{ padding: '1.6rem 1.4rem', background: 'rgba(50,20,2,0.5)', transition: 'background 0.3s, transform 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background='rgba(90,38,10,0.7)'; e.currentTarget.style.transform='translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.background='rgba(50,20,2,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
               <div style={{ fontFamily: serif, fontSize: '1.4rem', color: 'var(--gold-dim)', marginBottom: '0.7rem' }}>{item.glyph}</div>
               <p style={{ fontFamily: serif, color: 'var(--cream)', marginBottom: '0.3rem', fontSize: '1.05rem' }}>{item.name}</p>
               <p style={{ fontSize: '0.76rem', color: 'var(--muted)', lineHeight: 1.65 }}>{item.detail}</p>
@@ -343,7 +344,7 @@ export default function Home() {
       {/* CONTACT */}
       <Section id="contact" telugu="కలుద్దాం" english="contact">
         <div style={{ maxWidth: '500px' }}>
-          <h2 style={{ fontFamily: serif, fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>let&apos;s talk</h2>
+          <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>let&apos;s talk</h2>
           <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', marginBottom: '2.5rem' }}>
             whether it&apos;s about building, code, finance, music, or something that doesn&apos;t fit neatly into either &mdash; i&apos;d love to connect.
           </p>
@@ -368,7 +369,7 @@ export default function Home() {
 
       <footer style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '2.5rem 2rem', borderTop: '0.5px solid var(--sand)' }}>
         <p style={{ fontFamily: serif, fontStyle: 'italic', color: 'var(--gold-dim)', fontSize: '0.9rem', marginBottom: '0.4rem' }}>tanvi batchu &middot; cs & finance &middot; waterloo &middot; 2025</p>
-        <p style={{ fontFamily: "'Noto Sans Telugu',sans-serif", color: 'var(--terra-mid)', fontSize: '1rem' }}>\u0C24\u0C28\u0C4D\u0C35\u0C3F \u0C2C\u0C1F\u0C4D\u0C1A\u0C41</p>
+        <p style={{ fontFamily: "'Noto Sans Telugu',sans-serif", color: 'var(--terra-mid)', fontSize: '1rem' }}>తన్వి బచ్చు</p>
       </footer>
     </main>
   )
