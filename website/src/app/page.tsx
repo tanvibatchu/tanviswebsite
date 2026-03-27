@@ -123,9 +123,9 @@ export default function Home() {
 
         {/* KOLAM */}
 
-        <div style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', width: '320px', height: '320px', pointerEvents: 'none', zIndex: 1 }}>
+        <div style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', width: '520px', height: '520px', pointerEvents: 'none', zIndex: 1 }}>
 
-          <svg width="320" height="320" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
 
             <defs>
 
@@ -137,13 +137,7 @@ export default function Home() {
 
               </radialGradient>
 
-              <linearGradient id="lfade" x1="0" y1="0" x2="1" y2="0">
 
-                <stop offset="0%" stopColor="#1a0b01" stopOpacity="1"/>
-
-                <stop offset="100%" stopColor="#1a0b01" stopOpacity="0"/>
-
-              </linearGradient>
 
             </defs>
 
@@ -165,41 +159,41 @@ export default function Home() {
 
             <g fill="none" stroke="#d4920a" strokeWidth="0.8" opacity="0.4">
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(0,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.2s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(0,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.2s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(45,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.3s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(45,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.3s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(90,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.4s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(90,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.4s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(135,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.5s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(135,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.5s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(180,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.6s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(180,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.6s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(225,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.7s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(225,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.7s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(270,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.8s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(270,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.8s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(315,130,130)" strokeDasharray="200" strokeDashoffset="200" style={ animation: "draw 0.6s ease forwards 1.9s", opacity: 0 }/>
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(315,130,130)" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.6s ease forwards 1.9s", opacity: 0 }}/>
 
             </g>
 
             <g fill="none" stroke="#d4537e" strokeWidth="0.7" opacity="0.35">
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(22.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(22.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(67.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2.1s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(67.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2.1s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(112.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2.2s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(112.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2.2s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(157.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2.3s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(157.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2.3s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(202.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2.4s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(202.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2.4s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(247.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2.5s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(247.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2.5s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(292.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2.6s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(292.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2.6s", opacity: 0 }}/>
 
-              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(337.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={ animation: "draw 0.5s ease forwards 2.7s", opacity: 0 }/>
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(337.5,130,130)" strokeDasharray="160" strokeDashoffset="160" style={{ animation: "draw 0.5s ease forwards 2.7s", opacity: 0 }}/>
 
             </g>
 
@@ -249,9 +243,8 @@ export default function Home() {
 
             <circle cx="130" cy="130" r="1.5" fill="#d4537e" style={{ animation: "dot-appear 0.4s ease forwards 4s", opacity: 0 }}/>
 
-            <rect x="0" y="0" width="260" height="260" fill="url(#rfade)"/>
 
-            <rect x="0" y="0" width="80" height="260" fill="url(#lfade)"/>
+
 
           </svg>
 
