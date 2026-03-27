@@ -121,7 +121,143 @@ export default function Home() {
         <div style={{ position: 'absolute', width: '700px', height: '700px', top: '50%', left: '35%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(ellipse, rgba(212,146,10,0.1) 0%, rgba(196,80,26,0.07) 45%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold-light) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
-        <div style={{ maxWidth: '680px' }}>
+        {/* KOLAM */}
+
+        <div style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', width: '320px', height: '320px', pointerEvents: 'none', zIndex: 1 }}>
+
+          <svg width="320" height="320" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+              <radialGradient id="rfade" cx="50%" cy="50%" r="50%">
+
+                <stop offset="0%" stopColor="#1a0b01" stopOpacity="0"/>
+
+                <stop offset="100%" stopColor="#1a0b01" stopOpacity="0.75"/>
+
+              </radialGradient>
+
+              <linearGradient id="lfade" x1="0" y1="0" x2="1" y2="0">
+
+                <stop offset="0%" stopColor="#1a0b01" stopOpacity="1"/>
+
+                <stop offset="100%" stopColor="#1a0b01" stopOpacity="0"/>
+
+              </linearGradient>
+
+            </defs>
+
+            <g fill="#d4920a" opacity="0.45">
+
+              <circle cx="130" cy="20" r="2.5"/><circle cx="182" cy="33" r="2"/><circle cx="222" cy="68" r="2"/>
+
+              <circle cx="240" cy="120" r="2.5"/><circle cx="227" cy="175" r="2"/><circle cx="192" cy="215" r="2"/>
+
+              <circle cx="140" cy="238" r="2.5"/><circle cx="85" cy="232" r="2"/><circle cx="42" cy="205" r="2"/>
+
+              <circle cx="16" cy="162" r="2.5"/><circle cx="18" cy="108" r="2"/><circle cx="42" cy="62" r="2"/>
+
+              <circle cx="82" cy="28" r="2.5"/>
+
+            </g>
+
+            <circle cx="130" cy="130" r="105" fill="none" stroke="#5a3018" strokeWidth="0.5" strokeDasharray="3,6"/>
+
+            <g fill="none" stroke="#d4920a" strokeWidth="0.8" opacity="0.4">
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(0,130,130)"/>
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(45,130,130)"/>
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(90,130,130)"/>
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(135,130,130)"/>
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(180,130,130)"/>
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(225,130,130)"/>
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(270,130,130)"/>
+
+              <ellipse cx="130" cy="75" rx="12" ry="28" transform="rotate(315,130,130)"/>
+
+            </g>
+
+            <g fill="none" stroke="#d4537e" strokeWidth="0.7" opacity="0.35">
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(22.5,130,130)"/>
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(67.5,130,130)"/>
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(112.5,130,130)"/>
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(157.5,130,130)"/>
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(202.5,130,130)"/>
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(247.5,130,130)"/>
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(292.5,130,130)"/>
+
+              <ellipse cx="130" cy="98" rx="8" ry="18" transform="rotate(337.5,130,130)"/>
+
+            </g>
+
+            <g stroke="#5a3018" strokeWidth="0.5" opacity="0.5">
+
+              <line x1="130" y1="25" x2="130" y2="235"/>
+
+              <line x1="25" y1="130" x2="235" y2="130"/>
+
+              <line x1="56" y1="56" x2="204" y2="204"/>
+
+              <line x1="204" y1="56" x2="56" y2="204"/>
+
+            </g>
+
+            <circle cx="130" cy="130" r="68" fill="none" stroke="#d4537e" strokeWidth="0.6" opacity="0.25"/>
+
+            <circle cx="130" cy="130" r="45" fill="none" stroke="#d4920a" strokeWidth="0.5" opacity="0.3"/>
+
+            <g fill="#d4537e" opacity="0.6">
+
+              <circle cx="130" cy="62" r="2"/><circle cx="178" cy="82" r="2"/><circle cx="198" cy="130" r="2"/>
+
+              <circle cx="178" cy="178" r="2"/><circle cx="130" cy="198" r="2"/><circle cx="82" cy="178" r="2"/>
+
+              <circle cx="62" cy="130" r="2"/><circle cx="82" cy="82" r="2"/>
+
+            </g>
+
+            <g fill="#d4920a" opacity="0.7">
+
+              <circle cx="130" cy="85" r="1.5"/><circle cx="157" cy="103" r="1.5"/><circle cx="167" cy="133" r="1.5"/>
+
+              <circle cx="155" cy="160" r="1.5"/><circle cx="130" cy="172" r="1.5"/><circle cx="103" cy="160" r="1.5"/>
+
+              <circle cx="90" cy="133" r="1.5"/><circle cx="100" cy="103" r="1.5"/>
+
+            </g>
+
+            <circle cx="130" cy="130" r="22" fill="none" stroke="#d4537e" strokeWidth="0.8" opacity="0.7"/>
+
+            <circle cx="130" cy="130" r="14" fill="none" stroke="#d4920a" strokeWidth="0.7" opacity="0.7"/>
+
+            <circle cx="130" cy="130" r="7" fill="none" stroke="#d4537e" strokeWidth="0.6" opacity="0.7"/>
+
+            <circle cx="130" cy="130" r="3" fill="#d4920a" opacity="0.9"/>
+
+            <circle cx="130" cy="130" r="1.5" fill="#d4537e"/>
+
+            <rect x="0" y="0" width="260" height="260" fill="url(#rfade)"/>
+
+            <rect x="0" y="0" width="80" height="260" fill="url(#lfade)"/>
+
+          </svg>
+
+        </div>
+
+        <div style={{ maxWidth: '680px', position: 'relative', zIndex: 2 }}>
           <p style={{ fontSize: '1.5rem', letterSpacing: '0.55em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '1.5rem', animation: 'fadeUp 1s 0.2s forwards', opacity: 0 }}>
             👋 hey there,
           </p>
@@ -159,13 +295,13 @@ export default function Home() {
 
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '2.5rem', animation: 'fadeUp 1s 1s forwards', opacity: 0 }}>
             {['learn more about me!'].map(c => (
-              <span key={c} style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', padding: '5px 13px', border: '0.5px solid var(--terra-mid)', color: 'var(--cream-dim)', background: 'rgba(138,56,16,0.15)', borderRadius: '2px' }}>{c}</span>
+              <span key={c} style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', padding: '5px 13px', border: '0.5px solid var(--kumkum-dim)', color: 'var(--kumkum-light)', background: 'rgba(153,53,86,0.12)', borderRadius: '2px' }}>{c}</span>
             ))}
           </div>
         </div>
 
         <div style={{ position: 'absolute', bottom: '2.5rem', left: '3.5rem', display: 'flex', flexDirection: 'column', gap: '8px', animation: 'fadeUp 1s 1.3s forwards', opacity: 0 }}>
-          <span style={{ fontSize: '0.56rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--terra-mid)' }}>scroll</span>
+          <span style={{ fontSize: '0.56rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--kumkum-dim)' }}>scroll</span>
           <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, var(--gold-dim), transparent)' }} />
         </div>
       </div>
@@ -263,9 +399,9 @@ export default function Home() {
         {projects.map((p,i) => (
           <a key={i} href={p.href} target="_blank" rel="noopener noreferrer"
             style={{ display: 'flex', flexDirection: 'column', border: '0.5px solid var(--sand)', borderRadius: '4px', overflow: 'hidden', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.3s' }}
-            onMouseEnter={e => { (e.currentTarget.querySelector('.pn') as HTMLElement).style.color='var(--gold)'; (e.currentTarget.querySelector('.pt') as HTMLElement).style.color='var(--gold-light)'; (e.currentTarget.querySelector('.pa') as HTMLElement).style.color='var(--gold)' }}
-            onMouseLeave={e => { (e.currentTarget.querySelector('.pn') as HTMLElement).style.color='var(--terra-mid)'; (e.currentTarget.querySelector('.pt') as HTMLElement).style.color='var(--cream)'; (e.currentTarget.querySelector('.pa') as HTMLElement).style.color='var(--sand)' }}>
-            <span className="pn" style={{ fontFamily: serif, fontSize: '1.5rem', color: 'var(--terra-mid)', lineHeight: 1, paddingTop: '3px', transition: 'color 0.3s' }}>{p.num}</span>
+            onMouseEnter={e => { (e.currentTarget.querySelector('.pn') as HTMLElement).style.color='var(--kumkum)'; (e.currentTarget.querySelector('.pt') as HTMLElement).style.color='var(--gold-light)'; (e.currentTarget.querySelector('.pa') as HTMLElement).style.color='var(--kumkum)' }}
+            onMouseLeave={e => { (e.currentTarget.querySelector('.pn') as HTMLElement).style.color='var(--kumkum-dim)'; (e.currentTarget.querySelector('.pt') as HTMLElement).style.color='var(--cream)'; (e.currentTarget.querySelector('.pa') as HTMLElement).style.color='var(--sand)' }}>
+            <span className="pn" style={{ fontFamily: serif, fontSize: '1.5rem', color: 'var(--kumkum-dim)', lineHeight: 1, paddingTop: '3px', transition: 'color 0.3s' }}>{p.num}</span>
             <div>
               {(p as any).image && (
                 <div style={{ overflow: 'hidden' }}>
@@ -273,7 +409,7 @@ export default function Home() {
                 </div>
               )}
               <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              {p.badge && <span style={{ display: 'inline-block', fontSize: '0.58rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '2px 8px', marginBottom: '0.4rem', border: '0.5px solid var(--gold-dim)', color: 'var(--gold-dim)', background: 'rgba(212,146,10,0.1)', borderRadius: '2px' }}>{p.badge}</span>}
+              {p.badge && <span style={{ display: 'inline-block', fontSize: '0.58rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '2px 8px', marginBottom: '0.4rem', border: '0.5px solid var(--kumkum)', color: 'var(--kumkum-light)', background: 'rgba(212,83,126,0.1)', borderRadius: '2px' }}>{p.badge}</span>}
               <p className="pt" style={{ fontFamily: serif, fontSize: '1.25rem', color: 'var(--cream)', marginBottom: '0.4rem', transition: 'color 0.3s' }}>{p.title}</p>
               <p style={{ fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.7, marginBottom: '0.6rem' }}>{p.description}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginTop: 'auto' }}>
