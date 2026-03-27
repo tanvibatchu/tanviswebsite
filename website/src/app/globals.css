@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 :root {
+  --kumkum: #d4537e;
+  --kumkum-light: #ed93b1;
+  --kumkum-dim: #993556;
   --bg: #2b1304;
   --terra-mid: #8a3810;
   --terra-light: #e07040;

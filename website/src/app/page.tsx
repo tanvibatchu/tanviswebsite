@@ -75,7 +75,7 @@ function Section({ id, telugu, english, children }: {
 function Divider({ ornament = '❧' }: { ornament?: string }) {
   return (
     <div style={{ position: 'relative', zIndex: 10, display: 'flex', alignItems: 'center', gap: '12px', padding: '0 3rem' }}>
-      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--terra-mid) 40%, var(--gold-dim) 50%, var(--terra-mid) 60%, transparent)' }} />
+      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--kumkum-dim) 40%, var(--kumkum) 50%, var(--kumkum-dim) 60%, transparent)' }} />
       <span style={{ color: 'var(--gold-dim)', fontFamily: "var(--font-cormorant),'Cormorant Garamond',serif" }}>{ornament}</span>
       <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, transparent, var(--terra-mid) 40%, var(--gold-dim) 50%, var(--terra-mid) 60%, transparent)' }} />
     </div>
@@ -178,7 +178,7 @@ export default function Home() {
         <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', maxWidth: '580px', marginBottom: '2rem' }}>
           i&apos;m a cs + finance student at waterloo (cfm), incoming ai & algorithms engineer at rbc capital markets. i build at the intersection of software, markets, and finance, but more importantly, i am extremely passionate about building with purpose. follow along on my journey!
         </p>
-        <div style={{ borderLeft: '2px solid var(--gold-dim)', paddingLeft: '1.5rem', marginBottom: '2.5rem' }}>
+        <div style={{ borderLeft: '2px solid var(--kumkum)', paddingLeft: '1.5rem', marginBottom: '2.5rem' }}>
           <p style={{ fontFamily: serif, fontStyle: 'italic', color: 'var(--cream-dim)', fontSize: '1.15rem', lineHeight: 1.7 }}>
             &ldquo;i like projects that are practical, make an impact, are rigorous, and a little ambitious.&rdquo;
           </p>
@@ -242,8 +242,8 @@ export default function Home() {
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
           {experience.map((e,i) => (
-            <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--gold-dim)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
-              <span style={{ fontSize: '0.6rem', letterSpacing: '0.08em', color: 'var(--gold-dim)', textTransform: 'uppercase', lineHeight: 1.7, display: 'block', marginBottom: '0.5rem' }}>{e.date}</span>
+            <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+              <span style={{ fontSize: '0.6rem', letterSpacing: '0.08em', color: 'var(--kumkum)', textTransform: 'uppercase', lineHeight: 1.7, display: 'block', marginBottom: '0.5rem' }}>{e.date}</span>
               <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.1rem', marginBottom: '0.2rem' }}>{e.role}</p>
               <p style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--terra-light)', marginBottom: '0.75rem' }}>{e.company}</p>
               <ul style={{ fontSize: '0.78rem', color: 'var(--muted)', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
@@ -307,13 +307,13 @@ export default function Home() {
             )
             return hasLink ? (
               <a key={i} href={(a as any).link} target="_blank" rel="noopener noreferrer"
-                style={{ padding: '1.5rem', borderLeft: '2px solid var(--gold-dim)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s, background 0.3s, transform 0.25s' }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--gold-dim)')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--sand)')}>
+                style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s, background 0.3s, transform 0.25s' }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(95,40,10,0.65)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(60,25,5,0.5)')}>
                 {inner}
               </a>
             ) : (
-              <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--gold-dim)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+              <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
                 {inner}
               </div>
             )
