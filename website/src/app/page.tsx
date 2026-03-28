@@ -317,7 +317,6 @@ export default function Home() {
             ['program','CS + Finance (CFM)\n@ Waterloo'],
             ['incoming','AI Engineer in Algorithmic Research\nRBC Capital Markets'],
             ['open to','Opportunities after Fall 2026'],
-            ['roots','Telugu · South Indian\nMarkham, Ontario'],
             ['music','Carnatic vocalist\n15+ years'],
             ['also speaks','Telugu · Latin (working proficiency)'],
           ].map(([l,v]) => (
