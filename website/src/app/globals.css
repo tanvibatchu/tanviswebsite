@@ -119,16 +119,19 @@ body::before {
   border: 0.5px solid var(--sand);
   color: var(--muted);
   cursor: pointer;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  transition: border-color 0.3s, color 0.3s, background 0.3s;
+  padding: 4px 13px;
+  border-radius: 2px;
+  font-family: var(--font-jost), 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: border-color 0.3s, color 0.3s;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 .theme-toggle:hover {
   border-color: var(--gold);
-  color: var(--gold);
+  color: var(--gold-dim);
 }

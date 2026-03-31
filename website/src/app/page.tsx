@@ -205,7 +205,7 @@ export default function Home() {
           ))}
           <li>
             <button className="theme-toggle" onClick={() => setDarkMode(d => !d)} aria-label="Toggle theme">
-              {darkMode ? '☀ light' : '☽ dark'}
+              {darkMode ? '· light' : '· dark'}
             </button>
           </li>
         </ul>
@@ -410,7 +410,7 @@ export default function Home() {
           {[
             { src: '/photo-kid.png',        label: 'age 3 · already shipping' },
             { src: '/photo-whiteboard.png', label: 'locked in · planning mode' },
-            { src: '/photo-headshot.png',   label: 'now · rbc capital markets' },
+            { src: '/photo-headshot.png',   label: 'now' },
           ].map(({ src, label }) => (
             <div key={src} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <div style={{ overflow: 'hidden', borderRadius: '4px', border: '0.5px solid var(--sand)' }}>
