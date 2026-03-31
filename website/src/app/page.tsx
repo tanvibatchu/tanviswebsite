@@ -87,8 +87,50 @@ export default function Home() {
   const [loadingFade, setLoadingFade] = useState(false)
   const [kolamsVisible, setKolamsVisible] = useState(false)
   const [kolamsSettled, setKolamsSettled] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
   const [nameIdx, setNameIdx] = useState(0)
   const [nameVis, setNameVis] = useState(true)
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.setAttribute('data-theme', darkMode ? 'dark' : 'light')
+    const vars = darkMode
+      ? {
+          '--bg': '#2b1304',
+          '--body': '#e0c090',
+          '--cream': '#f5ead0',
+          '--cream-dim': '#c8a870',
+          '--sand': '#4a2810',
+          '--gold': '#d4920a',
+          '--gold-light': '#f0b832',
+          '--gold-dim': '#9a6a10',
+          '--kumkum': '#d4537e',
+          '--kumkum-light': '#ed93b1',
+          '--kumkum-dim': '#993556',
+          '--terra-mid': '#8a3810',
+          '--terra-light': '#e07040',
+          '--muted': '#9a7040',
+          '--saffron-strong': '#f0b832',
+        }
+      : {
+          '--bg': '#f0e6d0',
+          '--body': '#3d2510',
+          '--cream': '#1e0e04',
+          '--cream-dim': '#5a3010',
+          '--sand': '#cdb896',
+          '--gold': '#c97b00',
+          '--gold-light': '#e8950a',
+          '--gold-dim': '#9a5e00',
+          '--kumkum': '#c43f5e',
+          '--kumkum-light': '#e07090',
+          '--kumkum-dim': '#8f2a42',
+          '--terra-mid': '#b85020',
+          '--terra-light': '#d97840',
+          '--muted': '#8a6242',
+          '--saffron-strong': '#c97b00',
+        }
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v))
+  }, [darkMode])
 
   useEffect(() => {
     const fadeTimer   = setTimeout(() => setLoadingFade(true),  2600)
@@ -107,6 +149,16 @@ export default function Home() {
   }, [])
 
   const serif = "var(--font-cormorant),'Cormorant Garamond',serif"
+
+  const cardBg       = darkMode ? 'rgba(60,25,5,0.5)'    : 'rgba(232,218,196,0.5)'
+  const cardHover    = darkMode ? 'rgba(95,40,10,0.6)'   : 'rgba(218,200,170,0.75)'
+  const infoBg       = darkMode ? 'rgba(45,18,3,0.4)'    : 'rgba(232,218,196,0.45)'
+  const infoHover    = darkMode ? 'rgba(80,32,8,0.5)'    : 'rgba(218,200,170,0.7)'
+  const navBg        = darkMode ? 'rgba(26,11,1,0.97)'   : 'rgba(240,230,208,0.97)'
+  const kolamStop    = darkMode ? '#1a0b01'               : '#f0e6d0'
+  const heroBlobBg   = darkMode
+    ? 'radial-gradient(ellipse, rgba(212,146,10,0.1) 0%, rgba(196,80,26,0.07) 45%, transparent 70%)'
+    : 'radial-gradient(ellipse, rgba(201,123,0,0.18) 0%, rgba(184,80,32,0.08) 45%, transparent 70%)'
 
   return (
     <main>
@@ -137,11 +189,11 @@ export default function Home() {
       )}
 
       {/* NAV */}
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.2rem 3.5rem', background: 'linear-gradient(to bottom, rgba(240,230,208,0.97) 60%, transparent)' }}>
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.2rem 3.5rem', background: `linear-gradient(to bottom, ${navBg} 60%, transparent)` }}>
         <span style={{ fontFamily: fonts[nameIdx], color: 'var(--gold-light)', letterSpacing: '0.06em', fontSize: '1rem', transition: 'all 0.5s' }}>
           {names[nameIdx]}
         </span>
-        <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none' }}>
+        <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none', alignItems: 'center' }}>
           {['about','experience','projects','awards','interests','contact'].map(s => (
             <li key={s}>
               <a href={`#${s}`} style={{ fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--cream-dim)', textDecoration: 'none' }}
@@ -151,12 +203,17 @@ export default function Home() {
               </a>
             </li>
           ))}
+          <li>
+            <button className="theme-toggle" onClick={() => setDarkMode(d => !d)} aria-label="Toggle theme">
+              {darkMode ? '☀ light' : '☽ dark'}
+            </button>
+          </li>
         </ul>
       </nav>
 
       {/* HERO */}
       <div style={{ position: 'relative', zIndex: 10, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 3.5rem 5rem' }}>
-        <div style={{ position: 'absolute', width: '720px', height: '720px', top: '50%', left: '35%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(ellipse, rgba(201,123,0,0.18) 0%, rgba(184,80,32,0.08) 45%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', width: '720px', height: '720px', top: '50%', left: '35%', transform: 'translate(-50%,-50%)', background: heroBlobBg, pointerEvents: 'none', transition: 'background 0.45s ease' }} />
         <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold-light) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
         {/* KOLAM */}
@@ -174,9 +231,9 @@ export default function Home() {
 
               <radialGradient id="rfade" cx="50%" cy="50%" r="50%">
 
-                <stop offset="0%" stopColor="#f0e6d0" stopOpacity="0"/>
+                <stop offset="0%" stopColor={kolamStop} stopOpacity="0"/>
 
-                <stop offset="100%" stopColor="#f0e6d0" stopOpacity="0.75"/>
+                <stop offset="100%" stopColor={kolamStop} stopOpacity="0.75"/>
 
               </radialGradient>
 
@@ -386,7 +443,7 @@ export default function Home() {
             ['music','Carnatic vocalist\n15+ years'],
             ['also speaks','Telugu · Latin (working proficiency)'],
           ].map(([l,v]) => (
-            <div key={l} style={{ padding: '1.2rem', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', background: 'rgba(232,218,196,0.45)', transition: 'background 0.3s' }} onMouseEnter={e => (e.currentTarget.style.background='rgba(218,200,170,0.7)')} onMouseLeave={e => (e.currentTarget.style.background='rgba(232,218,196,0.45)')}>
+            <div key={l} style={{ padding: '1.2rem', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', background: infoBg, transition: 'background 0.3s' }} onMouseEnter={e => (e.currentTarget.style.background=infoHover)} onMouseLeave={e => (e.currentTarget.style.background=infoBg)}>
               <p style={{ fontSize: '0.57rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '0.4rem' }}>{l}</p>
               <p style={{ fontFamily: serif, color: 'var(--cream)', lineHeight: 1.4, fontSize: '0.92rem', whiteSpace: 'pre-line' }}>{v}</p>
             </div>
@@ -436,7 +493,7 @@ export default function Home() {
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
           {experience.map((e,i) => (
-            <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(232,218,196,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(218,200,170,0.75)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(232,218,196,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+            <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: cardBg, transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background=cardHover; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background=cardBg; e.currentTarget.style.transform='translateY(0)' }}>
               <span style={{ fontSize: '0.6rem', letterSpacing: '0.08em', color: 'var(--kumkum)', textTransform: 'uppercase', lineHeight: 1.7, display: 'block', marginBottom: '0.5rem' }}>{e.date}</span>
               <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.1rem', marginBottom: '0.2rem' }}>{e.role}</p>
               <p style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--terra-light)', marginBottom: '0.75rem' }}>{e.company}</p>
@@ -501,13 +558,13 @@ export default function Home() {
             )
             return hasLink ? (
               <a key={i} href={(a as any).link} target="_blank" rel="noopener noreferrer"
-                style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(232,218,196,0.5)', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s, background 0.3s, transform 0.25s' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(218,200,170,0.75)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(232,218,196,0.5)')}>
+                style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: cardBg, textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s, background 0.3s, transform 0.25s' }}
+                onMouseEnter={e => (e.currentTarget.style.background = cardHover)}
+                onMouseLeave={e => (e.currentTarget.style.background = cardBg)}>
                 {inner}
               </a>
             ) : (
-              <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(232,218,196,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(218,200,170,0.75)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(232,218,196,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+              <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: cardBg, transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background=cardHover; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background=cardBg; e.currentTarget.style.transform='translateY(0)' }}>
                 {inner}
               </div>
             )
@@ -522,9 +579,9 @@ export default function Home() {
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>beyond the screen</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--sand)' }}>
           {interests.map((item,i) => (
-            <div key={i} style={{ padding: '1.6rem 1.4rem', background: 'rgba(232,218,196,0.5)', transition: 'background 0.3s, transform 0.2s' }}
-              onMouseEnter={e => { e.currentTarget.style.background='rgba(218,200,170,0.75)'; e.currentTarget.style.transform='translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.background='rgba(232,218,196,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+            <div key={i} style={{ padding: '1.6rem 1.4rem', background: cardBg, transition: 'background 0.3s, transform 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background=cardHover; e.currentTarget.style.transform='translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.background=cardBg; e.currentTarget.style.transform='translateY(0)' }}>
               <div style={{ fontFamily: serif, fontSize: '1.4rem', color: 'var(--gold-dim)', marginBottom: '0.7rem' }}>{item.glyph}</div>
               <p style={{ fontFamily: serif, color: 'var(--cream)', marginBottom: '0.3rem', fontSize: '1.05rem' }}>{item.name}</p>
               <p style={{ fontSize: '0.76rem', color: 'var(--muted)', lineHeight: 1.65 }}>{item.detail}</p>

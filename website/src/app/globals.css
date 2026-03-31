@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── LIGHT (parchment) ─────────────────────────────────────── */
 :root {
   --kumkum: #c43f5e;
   --kumkum-light: #e07090;
@@ -20,6 +21,25 @@
   --saffron-strong: #c97b00;
 }
 
+/* ── DARK (original deep terracotta night) ─────────────────── */
+[data-theme="dark"] {
+  --kumkum: #d4537e;
+  --kumkum-light: #ed93b1;
+  --kumkum-dim: #993556;
+  --bg: #2b1304;
+  --terra-mid: #8a3810;
+  --terra-light: #e07040;
+  --gold: #d4920a;
+  --gold-light: #f0b832;
+  --gold-dim: #9a6a10;
+  --cream: #f5ead0;
+  --cream-dim: #c8a870;
+  --sand: #4a2810;
+  --body: #e0c090;
+  --muted: #9a7040;
+  --saffron-strong: #f0b832;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -28,6 +48,7 @@ body {
   overflow-x: hidden;
   font-family: var(--font-jost), 'Jost', sans-serif;
   font-weight: 300;
+  transition: background 0.45s ease, color 0.45s ease;
 }
 
 body::before {
@@ -39,6 +60,13 @@ body::before {
     radial-gradient(ellipse at 85% 80%, rgba(196, 63, 94, 0.08) 0%, transparent 55%);
   pointer-events: none;
   z-index: 0;
+  transition: background 0.45s ease;
+}
+
+[data-theme="dark"] body::before {
+  background:
+    radial-gradient(ellipse at 25% 25%, rgba(212, 146, 10, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 75%, rgba(196, 80, 26, 0.09) 0%, transparent 55%);
 }
 
 @keyframes fadeUp {
@@ -61,25 +89,6 @@ body::before {
   transform: translateY(0);
 }
 
-/* card hover */
-.card-warm {
-  background: rgba(240, 226, 200, 0.6);
-  transition: background 0.3s, border-color 0.3s, transform 0.2s;
-}
-.card-warm:hover {
-  background: rgba(228, 210, 178, 0.85);
-  border-color: var(--gold-dim) !important;
-  transform: translateY(-2px);
-}
-
-/* gold left border accent */
-.card-accent {
-  border-left: 2px solid var(--gold-dim) !important;
-  border-top: 0.5px solid var(--sand) !important;
-  border-right: 0.5px solid var(--sand) !important;
-  border-bottom: 0.5px solid var(--sand) !important;
-}
-
 /* section heading size boost */
 .sec-big {
   font-size: clamp(2.5rem, 6vw, 4rem) !important;
@@ -91,6 +100,10 @@ body::before {
   text-shadow: 0 0 80px rgba(201, 123, 0, 0.3);
 }
 
+[data-theme="dark"] .hero-glow-text {
+  text-shadow: 0 0 120px rgba(212, 146, 10, 0.3);
+}
+
 @keyframes draw {
   from { stroke-dashoffset: 1000; opacity: 0; }
   to { stroke-dashoffset: 0; opacity: 1; }
@@ -98,4 +111,24 @@ body::before {
 @keyframes dot-appear {
   from { opacity: 0; transform: scale(0); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* theme toggle button */
+.theme-toggle {
+  background: none;
+  border: 0.5px solid var(--sand);
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.theme-toggle:hover {
+  border-color: var(--gold);
+  color: var(--gold);
 }
