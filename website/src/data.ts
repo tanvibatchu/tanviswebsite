@@ -94,6 +94,15 @@ export const projects = [
   },
   {
     num: "04",
+    badge: "Winner · 1st Overall · ClaudeHacks @ UWaterloo",
+    title: "CityScapes - Visualise your impact",
+    image: "/cityscapes.png",
+    description: "Built in a 5 hour sprint. AI-assisted urban planning platform that helps cities visualize, analyze, and act on greenspace opportunities",
+    tags: ["Next.js", "React", "TypeScript", "Mapbox", "Tailwind CSS" ],
+    href: "https://github.com/tanvibatchu/cityscapes"
+  },
+  {
+    num: "05",
     badge: "UofT Hacks 2026",
     title: "LandLock — Climate Risk Intelligence Platform",
     image: "/landlock.png",
@@ -102,7 +111,7 @@ export const projects = [
     href: "https://github.com/apun16/landlock"
   },
   {
-    num: "05",
+    num: "06",
     badge: "3rd Overall · TechNova Hackathon 2025",
     title: "FakeSeek — Deepfake Detection Platform",
     image: "/fakeseek.png",
