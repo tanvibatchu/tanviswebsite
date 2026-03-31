@@ -3,20 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --kumkum: #d4537e;
-  --kumkum-light: #ed93b1;
-  --kumkum-dim: #993556;
-  --bg: #2b1304;
-  --terra-mid: #8a3810;
-  --terra-light: #e07040;
-  --gold: #d4920a;
-  --gold-light: #f0b832;
-  --gold-dim: #9a6a10;
-  --cream: #f5ead0;
-  --cream-dim: #c8a870;
-  --sand: #4a2810;
-  --body: #e0c090;
-  --muted: #9a7040;
+  --kumkum: #c43f5e;
+  --kumkum-light: #e07090;
+  --kumkum-dim: #8f2a42;
+  --bg: #f0e6d0;
+  --terra-mid: #b85020;
+  --terra-light: #d97840;
+  --gold: #c97b00;
+  --gold-light: #e8950a;
+  --gold-dim: #9a5e00;
+  --cream: #1e0e04;
+  --cream-dim: #5a3010;
+  --sand: #cdb896;
+  --body: #3d2510;
+  --muted: #8a6242;
+  --saffron-strong: #c97b00;
 }
 
 html { scroll-behavior: smooth; }
@@ -34,8 +35,8 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 25% 25%, rgba(212,146,10,0.09) 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 75%, rgba(196,80,26,0.09) 0%, transparent 55%);
+    radial-gradient(ellipse at 15% 20%, rgba(201, 123, 0, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 80%, rgba(196, 63, 94, 0.08) 0%, transparent 55%);
   pointer-events: none;
   z-index: 0;
 }
@@ -60,13 +61,13 @@ body::before {
   transform: translateY(0);
 }
 
-/* card hover glow */
+/* card hover */
 .card-warm {
-  background: rgba(60, 25, 5, 0.4);
+  background: rgba(240, 226, 200, 0.6);
   transition: background 0.3s, border-color 0.3s, transform 0.2s;
 }
 .card-warm:hover {
-  background: rgba(90, 38, 10, 0.55);
+  background: rgba(228, 210, 178, 0.85);
   border-color: var(--gold-dim) !important;
   transform: translateY(-2px);
 }
@@ -87,7 +88,7 @@ body::before {
 
 /* hero name glow */
 .hero-glow-text {
-  text-shadow: 0 0 80px rgba(212, 146, 10, 0.25);
+  text-shadow: 0 0 80px rgba(201, 123, 0, 0.3);
 }
 
 @keyframes draw {
