@@ -5,7 +5,7 @@ import { highlights, experience, projects, awards, skills, interests } from '@/d
 
 const names = ['Tanvi Batchu', 'తన్వి బచ్చు']
 const fonts = ["var(--font-cormorant),'Cormorant Garamond',serif", "'Noto Sans Telugu',sans-serif"]
-const colors = ['var(--cream)', 'var(--gold-light)']
+const colors = ['var(--saffron-strong)', 'var(--kumkum)']
 
 const skillIcons: Record<string, string> = {
   'Python': 'python',
@@ -83,8 +83,20 @@ function Divider({ ornament = '❧' }: { ornament?: string }) {
 }
 
 export default function Home() {
+  const [loading, setLoading] = useState(true)
+  const [loadingFade, setLoadingFade] = useState(false)
+  const [kolamsVisible, setKolamsVisible] = useState(false)
+  const [kolamsSettled, setKolamsSettled] = useState(false)
   const [nameIdx, setNameIdx] = useState(0)
   const [nameVis, setNameVis] = useState(true)
+
+  useEffect(() => {
+    const fadeTimer   = setTimeout(() => setLoadingFade(true),  2600)
+    const kolamsTimer = setTimeout(() => setKolamsVisible(true), 2600)
+    const settleTimer = setTimeout(() => setKolamsSettled(true), 2750)
+    const hideTimer   = setTimeout(() => setLoading(false),      3200)
+    return () => { clearTimeout(fadeTimer); clearTimeout(kolamsTimer); clearTimeout(settleTimer); clearTimeout(hideTimer) }
+  }, [])
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -98,8 +110,34 @@ export default function Home() {
 
   return (
     <main>
+      {/* LOADING SCREEN */}
+      {loading && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 999,
+          background: 'var(--bg)',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          padding: '2rem',
+          opacity: loadingFade ? 0 : 1,
+          transition: 'opacity 0.6s ease',
+          pointerEvents: loadingFade ? 'none' : 'all',
+        }}>
+          <p style={{
+            fontFamily: serif, fontStyle: 'italic',
+            fontSize: 'clamp(1.1rem, 3vw, 1.6rem)',
+            color: 'var(--cream)', fontWeight: 300,
+            textAlign: 'center', maxWidth: '600px', lineHeight: 1.8,
+            marginBottom: '1.5rem',
+          }}>
+            &ldquo;You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.&rdquo;
+          </p>
+          <p style={{ fontSize: '0.6rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--muted)' }}>
+            Bhagavad Gita · 2.47
+          </p>
+        </div>
+      )}
+
       {/* NAV */}
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.2rem 3.5rem', background: 'linear-gradient(to bottom, rgba(26,11,1,0.97) 60%, transparent)' }}>
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.2rem 3.5rem', background: 'linear-gradient(to bottom, rgba(240,230,208,0.97) 60%, transparent)' }}>
         <span style={{ fontFamily: fonts[nameIdx], color: 'var(--gold-light)', letterSpacing: '0.06em', fontSize: '1rem', transition: 'all 0.5s' }}>
           {names[nameIdx]}
         </span>
@@ -118,12 +156,17 @@ export default function Home() {
 
       {/* HERO */}
       <div style={{ position: 'relative', zIndex: 10, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 3.5rem 5rem' }}>
-        <div style={{ position: 'absolute', width: '700px', height: '700px', top: '50%', left: '35%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(ellipse, rgba(212,146,10,0.1) 0%, rgba(196,80,26,0.07) 45%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', width: '720px', height: '720px', top: '50%', left: '35%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(ellipse, rgba(201,123,0,0.18) 0%, rgba(184,80,32,0.08) 45%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold-light) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
         {/* KOLAM */}
 
-        <div style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', width: '520px', height: '520px', pointerEvents: 'none', zIndex: 1 }}>
+        {kolamsVisible && <div style={{
+          position: 'absolute', right: 0, top: '50%',
+          transform: kolamsSettled ? 'translateY(-50%)' : 'translateX(-460px) translateY(-50%)',
+          transition: kolamsSettled ? 'transform 2s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+          width: '520px', height: '520px', pointerEvents: 'none', zIndex: 1,
+        }}>
 
           <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
 
@@ -131,9 +174,9 @@ export default function Home() {
 
               <radialGradient id="rfade" cx="50%" cy="50%" r="50%">
 
-                <stop offset="0%" stopColor="#1a0b01" stopOpacity="0"/>
+                <stop offset="0%" stopColor="#f0e6d0" stopOpacity="0"/>
 
-                <stop offset="100%" stopColor="#1a0b01" stopOpacity="0.75"/>
+                <stop offset="100%" stopColor="#f0e6d0" stopOpacity="0.75"/>
 
               </radialGradient>
 
@@ -155,7 +198,7 @@ export default function Home() {
 
             </g>
 
-            <circle cx="130" cy="130" r="105" fill="none" stroke="#5a3018" strokeWidth="0.5" strokeDasharray="660" strokeDashoffset="660" style={{ animation: "draw 2s ease forwards 0.5s", opacity: 0 }}/>
+            <circle cx="130" cy="130" r="105" fill="none" stroke="#c97b36" strokeWidth="0.5" strokeDasharray="660" strokeDashoffset="660" style={{ animation: "draw 2s ease forwards 0.5s", opacity: 0 }}/>
 
             <g fill="none" stroke="#d4920a" strokeWidth="0.8" opacity="0.4">
 
@@ -197,7 +240,7 @@ export default function Home() {
 
             </g>
 
-            <g stroke="#5a3018" strokeWidth="0.5" opacity="0.5">
+            <g stroke="#c97b36" strokeWidth="0.5" opacity="0.5">
 
               <line x1="130" y1="25" x2="130" y2="235" strokeDasharray="210" strokeDashoffset="210" style={{ animation: "draw 1s ease forwards 0.8s", opacity: 0 }}/>
 
@@ -248,7 +291,7 @@ export default function Home() {
 
           </svg>
 
-        </div>
+        </div>}
 
         <div style={{ maxWidth: '680px', position: 'relative', zIndex: 2 }}>
           <p style={{ fontSize: '1.5rem', letterSpacing: '0.55em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '1.5rem', animation: 'fadeUp 1s 0.2s forwards', opacity: 0 }}>
@@ -288,7 +331,7 @@ export default function Home() {
 
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '2.5rem', animation: 'fadeUp 1s 1s forwards', opacity: 0 }}>
             {['learn more about me!'].map(c => (
-              <span key={c} style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', padding: '5px 13px', border: '0.5px solid var(--kumkum-dim)', color: 'var(--kumkum-light)', background: 'rgba(153,53,86,0.12)', borderRadius: '2px' }}>{c}</span>
+              <span key={c} style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', padding: '5px 13px', border: '0.5px solid var(--kumkum-dim)', color: 'var(--kumkum)', background: 'rgba(212,83,126,0.08)', borderRadius: '2px' }}>{c}</span>
             ))}
           </div>
         </div>
@@ -304,6 +347,29 @@ export default function Home() {
       {/* ABOUT */}
       <Section id="about" telugu="నా గురించి" english="about">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>who i am</h2>
+
+        {/* PHOTO STRIP */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2.5rem' }}>
+          {[
+            { src: '/photo-kid.png',        label: 'age 3 · already shipping' },
+            { src: '/photo-whiteboard.png', label: 'locked in · planning mode' },
+            { src: '/photo-headshot.png',   label: 'now · rbc capital markets' },
+          ].map(({ src, label }) => (
+            <div key={src} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <div style={{ overflow: 'hidden', borderRadius: '4px', border: '0.5px solid var(--sand)' }}>
+                <img
+                  src={src}
+                  alt={label}
+                  style={{ width: '100%', height: '220px', objectFit: 'cover', objectPosition: 'top', display: 'block', transition: 'transform 0.4s ease' }}
+                  onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
+                  onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                />
+              </div>
+              <p style={{ fontSize: '0.62rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted)', textAlign: 'center' }}>{label}</p>
+            </div>
+          ))}
+        </div>
+
         <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', maxWidth: '580px', marginBottom: '2rem' }}>
           i&apos;m a cs + finance student at waterloo (cfm), incoming ai & algorithms engineer at rbc capital markets. i build at the intersection of software, markets, and finance, but more importantly, i am extremely passionate about building with purpose. follow along on my journey!
         </p>
@@ -320,7 +386,7 @@ export default function Home() {
             ['music','Carnatic vocalist\n15+ years'],
             ['also speaks','Telugu · Latin (working proficiency)'],
           ].map(([l,v]) => (
-            <div key={l} style={{ padding: '1.2rem', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', background: 'rgba(45,18,3,0.4)', transition: 'background 0.3s' }} onMouseEnter={e => (e.currentTarget.style.background='rgba(80,32,8,0.5)')} onMouseLeave={e => (e.currentTarget.style.background='rgba(45,18,3,0.4)')}>
+            <div key={l} style={{ padding: '1.2rem', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', background: 'rgba(232,218,196,0.45)', transition: 'background 0.3s' }} onMouseEnter={e => (e.currentTarget.style.background='rgba(218,200,170,0.7)')} onMouseLeave={e => (e.currentTarget.style.background='rgba(232,218,196,0.45)')}>
               <p style={{ fontSize: '0.57rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '0.4rem' }}>{l}</p>
               <p style={{ fontFamily: serif, color: 'var(--cream)', lineHeight: 1.4, fontSize: '0.92rem', whiteSpace: 'pre-line' }}>{v}</p>
             </div>
@@ -370,7 +436,7 @@ export default function Home() {
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
           {experience.map((e,i) => (
-            <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+            <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(232,218,196,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(218,200,170,0.75)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(232,218,196,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
               <span style={{ fontSize: '0.6rem', letterSpacing: '0.08em', color: 'var(--kumkum)', textTransform: 'uppercase', lineHeight: 1.7, display: 'block', marginBottom: '0.5rem' }}>{e.date}</span>
               <p style={{ fontFamily: serif, color: 'var(--cream)', fontSize: '1.1rem', marginBottom: '0.2rem' }}>{e.role}</p>
               <p style={{ fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--terra-light)', marginBottom: '0.75rem' }}>{e.company}</p>
@@ -401,7 +467,7 @@ export default function Home() {
                 </div>
               )}
               <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              {p.badge && <span style={{ display: 'inline-block', fontSize: '0.58rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '2px 8px', marginBottom: '0.4rem', border: '0.5px solid var(--kumkum)', color: 'var(--kumkum-light)', background: 'rgba(212,83,126,0.1)', borderRadius: '2px' }}>{p.badge}</span>}
+              {p.badge && <span style={{ display: 'inline-block', fontSize: '0.58rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '2px 8px', marginBottom: '0.4rem', border: '0.5px solid var(--kumkum)', color: 'var(--kumkum)', background: 'rgba(212,83,126,0.08)', borderRadius: '2px' }}>{p.badge}</span>}
               <p className="pt" style={{ fontFamily: serif, fontSize: '1.25rem', color: 'var(--cream)', marginBottom: '0.4rem', transition: 'color 0.3s' }}>{p.title}</p>
               <p style={{ fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.7, marginBottom: '0.6rem' }}>{p.description}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginTop: 'auto' }}>
@@ -435,13 +501,13 @@ export default function Home() {
             )
             return hasLink ? (
               <a key={i} href={(a as any).link} target="_blank" rel="noopener noreferrer"
-                style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s, background 0.3s, transform 0.25s' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(95,40,10,0.65)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(60,25,5,0.5)')}>
+                style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(232,218,196,0.5)', textDecoration: 'none', color: 'inherit', display: 'block', transition: 'border-color 0.3s, background 0.3s, transform 0.25s' }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(218,200,170,0.75)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(232,218,196,0.5)')}>
                 {inner}
               </a>
             ) : (
-              <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(60,25,5,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(95,40,10,0.6)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(60,25,5,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+              <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: 'rgba(232,218,196,0.5)', transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(218,200,170,0.75)'; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background='rgba(232,218,196,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
                 {inner}
               </div>
             )
@@ -456,9 +522,9 @@ export default function Home() {
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>beyond the screen</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--sand)' }}>
           {interests.map((item,i) => (
-            <div key={i} style={{ padding: '1.6rem 1.4rem', background: 'rgba(50,20,2,0.5)', transition: 'background 0.3s, transform 0.2s' }}
-              onMouseEnter={e => { e.currentTarget.style.background='rgba(90,38,10,0.7)'; e.currentTarget.style.transform='translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.background='rgba(50,20,2,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
+            <div key={i} style={{ padding: '1.6rem 1.4rem', background: 'rgba(232,218,196,0.5)', transition: 'background 0.3s, transform 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background='rgba(218,200,170,0.75)'; e.currentTarget.style.transform='translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.background='rgba(232,218,196,0.5)'; e.currentTarget.style.transform='translateY(0)' }}>
               <div style={{ fontFamily: serif, fontSize: '1.4rem', color: 'var(--gold-dim)', marginBottom: '0.7rem' }}>{item.glyph}</div>
               <p style={{ fontFamily: serif, color: 'var(--cream)', marginBottom: '0.3rem', fontSize: '1.05rem' }}>{item.name}</p>
               <p style={{ fontSize: '0.76rem', color: 'var(--muted)', lineHeight: 1.65 }}>{item.detail}</p>
