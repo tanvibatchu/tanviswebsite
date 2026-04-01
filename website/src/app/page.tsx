@@ -593,7 +593,7 @@ export default function Home() {
       <Divider />
 
       {/* CONTACT */}
-      <Section id="contact" telugu="కలుద్దాం" english="contact">
+      <Section id="contact" telugu="కలుద్దాం" english="let's connect">
         <div style={{ maxWidth: '500px' }}>
           <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>let&apos;s talk</h2>
           <p style={{ fontSize: '0.93rem', lineHeight: 1.9, color: 'var(--body)', marginBottom: '2.5rem' }}>
