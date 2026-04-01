@@ -58,8 +58,8 @@ function Section({ id, telugu, english, children }: {
   const { ref, visible } = useReveal()
   return (
     <section id={id} ref={ref}
-      className={`reveal ${visible ? 'in' : ''}`}
-      style={{ position: 'relative', zIndex: 10, maxWidth: '900px', margin: '0 auto', padding: '5rem 2.5rem' }}>
+      className={`reveal section-pad ${visible ? 'in' : ''}`}
+      style={{ position: 'relative', zIndex: 10, maxWidth: '900px', margin: '0 auto' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '2.5rem' }}>
         <div style={{ flex: 1, height: '0.5px', background: 'var(--sand)' }} />
         <span style={{ fontSize: '0.6rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'var(--gold-dim)', whiteSpace: 'nowrap' }}>
@@ -88,6 +88,7 @@ export default function Home() {
   const [kolamsVisible, setKolamsVisible] = useState(false)
   const [kolamsSettled, setKolamsSettled] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [nameIdx, setNameIdx] = useState(0)
   const [nameVis, setNameVis] = useState(true)
 
@@ -189,11 +190,12 @@ export default function Home() {
       )}
 
       {/* NAV */}
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.2rem 3.5rem', background: `linear-gradient(to bottom, ${navBg} 60%, transparent)` }}>
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.2rem 2rem', background: `linear-gradient(to bottom, ${navBg} 60%, transparent)` }}>
         <span style={{ fontFamily: fonts[nameIdx], color: 'var(--gold-light)', letterSpacing: '0.06em', fontSize: '1rem', transition: 'all 0.5s' }}>
           {names[nameIdx]}
         </span>
-        <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none', alignItems: 'center' }}>
+        {/* desktop links */}
+        <ul className="nav-links-desktop">
           {['about','experience','projects','awards','interests','contact'].map(s => (
             <li key={s}>
               <a href={`#${s}`} style={{ fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--cream-dim)', textDecoration: 'none' }}
@@ -209,17 +211,32 @@ export default function Home() {
             </button>
           </li>
         </ul>
+        {/* mobile hamburger */}
+        <button className="hamburger-btn" onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
+          {menuOpen ? '✕' : '☰'}
+        </button>
       </nav>
 
+      {/* MOBILE MENU */}
+      {menuOpen && (
+        <div className="mobile-menu">
+          {['about','experience','projects','awards','interests','contact'].map(s => (
+            <a key={s} href={`#${s}`} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{s}</a>
+          ))}
+          <button className="theme-toggle" style={{ marginTop: '0.5rem' }} onClick={() => { setDarkMode(d => !d); setMenuOpen(false) }}>
+            {darkMode ? '· light' : '· dark'}
+          </button>
+        </div>
+      )}
+
       {/* HERO */}
-      <div style={{ position: 'relative', zIndex: 10, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '8rem 3.5rem 5rem' }}>
+      <div className="hero-pad" style={{ position: 'relative', zIndex: 10, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <div style={{ position: 'absolute', width: '720px', height: '720px', top: '50%', left: '35%', transform: 'translate(-50%,-50%)', background: heroBlobBg, pointerEvents: 'none', transition: 'background 0.45s ease' }} />
         <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold-light) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
         {/* KOLAM */}
 
-        {kolamsVisible && <div style={{
-          position: 'absolute', right: 0, top: '50%',
+        {kolamsVisible && <div className="kolam-wrapper" style={{
           transform: kolamsSettled ? 'translateY(-50%)' : 'translateX(-460px) translateY(-50%)',
           transition: kolamsSettled ? 'transform 2s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
           width: '520px', height: '520px', pointerEvents: 'none', zIndex: 1,
@@ -406,7 +423,7 @@ export default function Home() {
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '1.5rem' }}>who i am</h2>
 
         {/* PHOTO STRIP */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2.5rem' }}>
+        <div className="photo-grid">
           {[
             { src: '/photo-kid.png',        label: 'age 3 · already shipping' },
             { src: '/photo-whiteboard.png', label: 'locked in · planning mode' },
@@ -435,7 +452,7 @@ export default function Home() {
             &ldquo;i like projects that are practical, make an impact, are rigorous, and a little ambitious.&rdquo;
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', borderTop: '0.5px solid var(--sand)', borderLeft: '0.5px solid var(--sand)' }}>
+        <div className="info-grid" style={{ borderTop: '0.5px solid var(--sand)', borderLeft: '0.5px solid var(--sand)' }}>
           {[
             ['program','CS + Finance (CFM)\n@ Waterloo'],
             ['incoming','AI Engineer in Algorithmic Research\nRBC Capital Markets'],
@@ -491,7 +508,7 @@ export default function Home() {
       {/* EXPERIENCE */}
       <Section id="experience" telugu="అనుభవం" english="experience">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>where i&apos;ve been</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem' }}>
+        <div className="two-col-grid">
           {experience.map((e,i) => (
             <div key={i} style={{ padding: '1.5rem', borderLeft: '2px solid var(--kumkum)', borderTop: '0.5px solid var(--sand)', borderRight: '0.5px solid var(--sand)', borderBottom: '0.5px solid var(--sand)', borderRadius: '4px', background: cardBg, transition: 'background 0.3s, transform 0.25s' }} onMouseEnter={e => { e.currentTarget.style.background=cardHover; e.currentTarget.style.transform='translateY(-2px)' }} onMouseLeave={e => { e.currentTarget.style.background=cardBg; e.currentTarget.style.transform='translateY(0)' }}>
               <span style={{ fontSize: '0.6rem', letterSpacing: '0.08em', color: 'var(--kumkum)', textTransform: 'uppercase', lineHeight: 1.7, display: 'block', marginBottom: '0.5rem' }}>{e.date}</span>
@@ -508,9 +525,9 @@ export default function Home() {
       <Divider ornament="❧" />
 
       {/* PROJECTS */}
-      <Section id="projects" telugu="పని" english="projects">
+      <Section id="projects" telugu="పనులు" english="projects">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>selected work</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
+        <div className="two-col-grid">
         {projects.map((p,i) => (
           <a key={i} href={p.href} target="_blank" rel="noopener noreferrer"
             style={{ display: 'flex', flexDirection: 'column', border: '0.5px solid var(--sand)', borderRadius: '4px', overflow: 'hidden', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.3s' }}
@@ -543,7 +560,7 @@ export default function Home() {
       {/* AWARDS */}
       <Section id="awards" telugu="బహుమతులు" english="awards">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>recognition</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '1.5rem', alignItems: 'start' }}>
+        <div className="two-col-grid-start">
           {awards.map((a,i) => {
             const hasLink = !!(a as any).link
             const inner = (
@@ -577,7 +594,7 @@ export default function Home() {
       {/* INTERESTS */}
       <Section id="interests" telugu="నచ్చినవి" english="interests">
         <h2 style={{ fontFamily: serif, fontSize: 'clamp(2.4rem,5vw,3.5rem)', fontWeight: 300, color: 'var(--cream)', marginBottom: '2rem' }}>beyond the screen</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--sand)' }}>
+        <div className="three-col-grid" style={{ background: 'var(--sand)' }}>
           {interests.map((item,i) => (
             <div key={i} style={{ padding: '1.6rem 1.4rem', background: cardBg, transition: 'background 0.3s, transform 0.2s' }}
               onMouseEnter={e => { e.currentTarget.style.background=cardHover; e.currentTarget.style.transform='translateY(-2px)' }}
