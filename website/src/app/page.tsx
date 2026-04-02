@@ -184,7 +184,6 @@ export default function Home() {
             &ldquo;You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.&rdquo;
           </p>
           <p style={{ fontSize: '0.6rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--muted)' }}>
-            Bhagavad Gita · 2.47
           </p>
         </div>
       )}
@@ -425,8 +424,8 @@ export default function Home() {
         {/* PHOTO STRIP */}
         <div className="photo-grid">
           {[
-            { src: '/photo-kid.png',        label: 'age 3 · already shipping' },
-            { src: '/photo-whiteboard.png', label: 'locked in · planning mode' },
+            { src: '/photo-kid.png',        label: 'locked in' },
+            { src: '/photo-whiteboard.png', label: ':D' },
             { src: '/photo-headshot.png',   label: 'now' },
           ].map(({ src, label }) => (
             <div key={src} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
