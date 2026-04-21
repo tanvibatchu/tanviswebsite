@@ -509,15 +509,7 @@ export default function Home() {
 
   const serif = "var(--font-cormorant),'Cormorant Garamond',serif"
 
-  const cardBg       = darkMode ? 'rgba(60,25,5,0.5)'    : 'rgba(232,218,196,0.5)'
-  const cardHover    = darkMode ? 'rgba(95,40,10,0.6)'   : 'rgba(218,200,170,0.75)'
-  const infoBg       = darkMode ? 'rgba(45,18,3,0.4)'    : 'rgba(232,218,196,0.45)'
-  const infoHover    = darkMode ? 'rgba(80,32,8,0.5)'    : 'rgba(218,200,170,0.7)'
-  const navBg        = darkMode ? 'rgba(26,11,1,0.97)'   : 'rgba(240,230,208,0.97)'
-  const kolamStop    = darkMode ? '#1a0b01'               : '#f0e6d0'
-  const heroBlobBg   = darkMode
-    ? 'radial-gradient(ellipse, rgba(212,146,10,0.1) 0%, rgba(196,80,26,0.07) 45%, transparent 70%)'
-    : 'radial-gradient(ellipse, rgba(201,123,0,0.18) 0%, rgba(184,80,32,0.08) 45%, transparent 70%)'
+  const { cardBg, cardHover, infoBg, infoHover, navBg, heroBlobBg } = cityColors[city]
 
   return (
     <main>
@@ -542,6 +534,7 @@ export default function Home() {
             &ldquo;You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.&rdquo;
           </p>
           <p style={{ fontSize: '0.6rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--muted)' }}>
+            
           </p>
         </div>
       )}
@@ -562,10 +555,15 @@ export default function Home() {
               </a>
             </li>
           ))}
-          <li>
-            <button className="theme-toggle" onClick={() => setDarkMode(d => !d)} aria-label="Toggle theme">
-              {darkMode ? '· light' : '· dark'}
-            </button>
+          <li style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            {(['hyd', 'nyc', 'sfo'] as City[]).map((c, i) => (
+              <span key={c} style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+                {i > 0 && <span className="city-sep">·</span>}
+                <button className={`city-btn${city === c ? ' active' : ''}`} onClick={() => setCity(c)}>
+                  {cityLabels[c]}
+                </button>
+              </span>
+            ))}
           </li>
         </ul>
         {/* mobile hamburger */}
@@ -574,15 +572,30 @@ export default function Home() {
         </button>
       </nav>
 
+      {/* HYD NAV GARLAND */}
+      {city === 'hyd' && (
+        <div className="nav-garland">
+          <NavGarland />
+        </div>
+      )}
+
       {/* MOBILE MENU */}
       {menuOpen && (
         <div className="mobile-menu">
           {['about','experience','projects','awards','interests','contact'].map(s => (
             <a key={s} href={`#${s}`} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>{s}</a>
           ))}
-          <button className="theme-toggle" style={{ marginTop: '0.5rem' }} onClick={() => { setDarkMode(d => !d); setMenuOpen(false) }}>
-            {darkMode ? '· light' : '· dark'}
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '0.5rem' }}>
+            {(['hyd', 'nyc', 'sfo'] as City[]).map((c, i) => (
+              <span key={c} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                {i > 0 && <span className="city-sep">·</span>}
+                <button className={`city-btn${city === c ? ' active' : ''}`}
+                  onClick={() => { setCity(c); setMenuOpen(false) }}>
+                  {cityLabels[c]}
+                </button>
+              </span>
+            ))}
+          </div>
         </div>
       )}
 
@@ -598,36 +611,12 @@ export default function Home() {
           transition: kolamsSettled ? 'transform 2s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
           width: '520px', height: '520px', pointerEvents: 'none', zIndex: 1,
         }}>
+          {city === 'hyd' && <HydOrnament />}
+          {city === 'nyc' && <NycOrnament />}
+          {city === 'sfo' && <SfoOrnament />}
+        </div>}
 
-          <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-
-            <defs>
-
-              <radialGradient id="rfade" cx="50%" cy="50%" r="50%">
-
-                <stop offset="0%" stopColor={kolamStop} stopOpacity="0"/>
-
-                <stop offset="100%" stopColor={kolamStop} stopOpacity="0.75"/>
-
-              </radialGradient>
-
-
-
-            </defs>
-
-            <g fill="#d4920a" opacity="0.45">
-
-              <circle cx="130" cy="20" r="2.5"/><circle cx="182" cy="33" r="2"/><circle cx="222" cy="68" r="2"/>
-
-              <circle cx="240" cy="120" r="2.5"/><circle cx="227" cy="175" r="2"/><circle cx="192" cy="215" r="2"/>
-
-              <circle cx="140" cy="238" r="2.5"/><circle cx="85" cy="232" r="2"/><circle cx="42" cy="205" r="2"/>
-
-              <circle cx="16" cy="162" r="2.5"/><circle cx="18" cy="108" r="2"/><circle cx="42" cy="62" r="2"/>
-
-              <circle cx="82" cy="28" r="2.5"/>
-
-            </g>
+          {false && <div style={{display:'none'}}>
 
             <circle cx="130" cy="130" r="105" fill="none" stroke="#c97b36" strokeWidth="0.5" strokeDasharray="660" strokeDashoffset="660" style={{ animation: "draw 2s ease forwards 0.5s", opacity: 0 }}/>
 
@@ -720,9 +709,7 @@ export default function Home() {
 
 
 
-          </svg>
-
-        </div>}
+          </div>}
 
         <div style={{ maxWidth: '680px', position: 'relative', zIndex: 2 }}>
           <p style={{ fontSize: '1.5rem', letterSpacing: '0.55em', textTransform: 'uppercase', color: 'var(--gold-dim)', marginBottom: '1.5rem', animation: 'fadeUp 1s 0.2s forwards', opacity: 0 }}>
@@ -760,11 +747,6 @@ export default function Home() {
             </ul>
           </div>
 
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '2.5rem', animation: 'fadeUp 1s 1s forwards', opacity: 0 }}>
-            {['learn more about me!'].map(c => (
-              <span key={c} style={{ fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', padding: '5px 13px', border: '0.5px solid var(--kumkum-dim)', color: 'var(--kumkum)', background: 'rgba(212,83,126,0.08)', borderRadius: '2px' }}>{c}</span>
-            ))}
-          </div>
         </div>
 
         <div style={{ position: 'absolute', bottom: '2.5rem', left: '3.5rem', display: 'flex', flexDirection: 'column', gap: '8px', animation: 'fadeUp 1s 1.3s forwards', opacity: 0 }}>
