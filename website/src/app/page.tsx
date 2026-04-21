@@ -59,11 +59,11 @@ const cityVars: Record<City, Record<string, string>> = {
     '--terra-light': '#4a6888','--muted': '#3a5068',      '--saffron-strong': '#f5c860',
   },
   sfo: {
-    '--bg': '#fdf4e8', '--body': '#2a3020', '--cream': '#181e10',
-    '--cream-dim': '#4a5838', '--sand': '#e4d0b4', '--gold': '#f5a623',
-    '--gold-light': '#ffc844', '--gold-dim': '#c07820', '--kumkum': '#e05c2a',
-    '--kumkum-light': '#f09060', '--kumkum-dim': '#a83a10', '--terra-mid': '#5ba8d0',
-    '--terra-light': '#80c4e8', '--muted': '#7a9060', '--saffron-strong': '#f5a623',
+    '--bg': '#fdf2e4',         '--body': '#282015',       '--cream': '#181008',
+    '--cream-dim': '#503820',  '--sand': '#e8d8b8',       '--gold': '#e8881a',
+    '--gold-light': '#f5a830', '--gold-dim': '#b86010',   '--kumkum': '#5a9fd4',
+    '--kumkum-light': '#80bfe8','--kumkum-dim': '#3878a8','--terra-mid': '#5a8030',
+    '--terra-light': '#78a848','--muted': '#907050',      '--saffron-strong': '#f5a830',
   },
 }
 
@@ -84,10 +84,10 @@ const cityColors: Record<City, {
     heroBlobBg: 'radial-gradient(ellipse, rgba(74,158,255,0.12) 0%, rgba(232,168,64,0.09) 45%, transparent 70%)',
   },
   sfo: {
-    cardBg: 'rgba(255,255,255,0.82)',  cardHover: 'rgba(255,246,228,1)',
-    infoBg: 'rgba(255,255,255,0.75)', infoHover: 'rgba(255,244,220,1)',
-    navBg:  'rgba(253,244,232,0.97)',
-    heroBlobBg: 'radial-gradient(ellipse, rgba(245,166,35,0.2) 0%, rgba(91,168,208,0.1) 45%, transparent 70%)',
+    cardBg: 'rgba(255,248,232,0.82)',  cardHover: 'rgba(248,235,210,0.95)',
+    infoBg: 'rgba(255,248,232,0.72)', infoHover: 'rgba(245,228,198,0.90)',
+    navBg:  'rgba(253,242,228,0.97)',
+    heroBlobBg: 'radial-gradient(ellipse, rgba(232,136,26,0.18) 0%, rgba(90,159,212,0.10) 45%, transparent 70%)',
   },
 }
 
@@ -485,50 +485,168 @@ function NycOrnament() {
   )
 }
 
-// ── SFO ORNAMENT · Golden Hour Sunburst ────────────────────
+// ── SFO ORNAMENT · Golden Gate Bridge at Golden Hour ─────────
 function SfoOrnament() {
-  const cx = 130, cy = 130
-  const longR = 100, shortR = 62
-  const longRays  = Array.from({ length: 12 }, (_, i) => {
-    const a = (i * 30 - 90) * Math.PI / 180
-    return { x2: cx + longR  * Math.cos(a), y2: cy + longR  * Math.sin(a) }
-  })
-  const shortRays = Array.from({ length: 12 }, (_, i) => {
-    const a = (i * 30 + 15 - 90) * Math.PI / 180
-    return { x2: cx + shortR * Math.cos(a), y2: cy + shortR * Math.sin(a) }
-  })
+  const deck        = 158   // roadway y
+  const ltx         = 78    // left tower center x
+  const rtx         = 182   // right tower center x
+  const ttop        = 62    // tower top y
+  const tw          = 7     // tower width
+  const cableCtrlY  = 128   // main cable sag control point
+
+  // Quadratic bezier cable y between towers
+  const cableY = (x: number) => {
+    const t = (x - ltx) / (rtx - ltx)
+    return (1 - t) * (1 - t) * ttop + 2 * t * (1 - t) * cableCtrlY + t * t * ttop
+  }
+
+  const suspX   = [90, 102, 114, 126, 130, 145, 158, 170]
+  const braceYs = [76, 94, 112, 130, 146]
+
+  // Colorful Victorian houses on hills
+  const leftHouses  = [
+    { cx: 14, cy: 150, c: '#e8b830' }, { cx: 24, cy: 147, c: '#e08050' },
+    { cx: 34, cy: 144, c: '#f0d8a8' }, { cx: 44, cy: 148, c: '#a8c878' },
+    { cx: 54, cy: 145, c: '#e87858' },
+  ]
+  const rightHouses = [
+    { cx: 208, cy: 145, c: '#e8b830' }, { cx: 218, cy: 142, c: '#e08050' },
+    { cx: 228, cy: 145, c: '#f0d8a8' }, { cx: 238, cy: 148, c: '#a8c878' },
+    { cx: 248, cy: 143, c: '#e87858' },
+  ]
+
   return (
     <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-      {/* Short rays */}
-      {shortRays.map((r, i) => (
-        <line key={`s${i}`} x1={cx} y1={cy} x2={r.x2} y2={r.y2}
-          stroke="#f5a623" strokeWidth="0.6" opacity="0.38"
-          strokeDasharray="62" strokeDashoffset="62"
-          style={{ animation: `draw 0.35s ease forwards ${0.4 + i * 0.04}s`, opacity: 0 }}/>
+
+      {/* Sun at golden hour — upper right */}
+      <circle cx="218" cy="22" r="20" fill="#f5a030" opacity="0.16"
+        style={{ animation: 'dot-appear 0.8s ease forwards 0.1s', opacity: 0 }}/>
+      <circle cx="218" cy="22" r="12" fill="#f5a030" opacity="0.28"
+        style={{ animation: 'dot-appear 0.6s ease forwards 0.2s', opacity: 0 }}/>
+      <circle cx="218" cy="22" r="6"  fill="#f8c050" opacity="0.55"
+        style={{ animation: 'dot-appear 0.4s ease forwards 0.3s', opacity: 0 }}/>
+
+      {/* Atmosphere haze bands */}
+      {[38, 52, 68].map((y, i) => (
+        <line key={`hz${i}`} x1="0" y1={y} x2="260" y2={y}
+          stroke="#f5a030" strokeWidth="0.3" opacity={0.10 - i * 0.03}
+          strokeDasharray="260" strokeDashoffset="260"
+          style={{ animation: `draw 1.8s ease forwards ${0.4 + i * 0.1}s`, opacity: 0 }}/>
       ))}
-      {/* Long rays */}
-      {longRays.map((r, i) => (
-        <line key={`l${i}`} x1={cx} y1={cy} x2={r.x2} y2={r.y2}
-          stroke="#f5a623" strokeWidth="0.85" opacity="0.7"
-          strokeDasharray="100" strokeDashoffset="100"
-          style={{ animation: `draw 0.5s ease forwards ${0.5 + i * 0.05}s`, opacity: 0 }}/>
+
+      {/* Bay water fill */}
+      <rect x="0" y={deck} width="260" height="60" fill="#5a88a8" opacity="0.12"
+        style={{ animation: 'dot-appear 0.5s ease forwards 0.2s', opacity: 0 }}/>
+
+      {/* Water ripples */}
+      {[6, 13, 22, 33].map((dy, i) => (
+        <path key={`wp${i}`}
+          d={`M 15 ${deck + dy} Q 80 ${deck + dy - 2} 130 ${deck + dy} Q 190 ${deck + dy + 2} 245 ${deck + dy}`}
+          fill="none" stroke="#5a88a8" strokeWidth="0.5" opacity={0.22 - i * 0.05}
+          strokeDasharray="240" strokeDashoffset="240"
+          style={{ animation: `draw 1.3s ease forwards ${0.85 + i * 0.12}s`, opacity: 0 }}/>
       ))}
-      {/* Concentric circles */}
-      <circle cx={cx} cy={cy} r="28"  fill="none" stroke="#e05c2a" strokeWidth="0.85" opacity="0.5"
-        strokeDasharray="176" strokeDashoffset="176" style={{ animation: "draw 0.8s ease forwards 1.4s", opacity: 0 }}/>
-      <circle cx={cx} cy={cy} r="62"  fill="none" stroke="#e05c2a" strokeWidth="0.6"  opacity="0.32"
-        strokeDasharray="390" strokeDashoffset="390" style={{ animation: "draw 1.0s ease forwards 1.7s", opacity: 0 }}/>
-      <circle cx={cx} cy={cy} r="100" fill="none" stroke="#f5a623" strokeWidth="0.45" opacity="0.2"
-        strokeDasharray="628" strokeDashoffset="628" style={{ animation: "draw 1.2s ease forwards 2.0s", opacity: 0 }}/>
-      {/* Dot accents at long ray tips */}
-      {longRays.map((r, i) => (
-        <circle key={`d${i}`} cx={r.x2} cy={r.y2} r="2.2"
-          fill="#e05c2a" opacity="0.75"
-          style={{ animation: `dot-appear 0.3s ease forwards ${2.2 + i * 0.05}s`, opacity: 0 }}/>
+
+      {/* Left rolling hill */}
+      <path d={`M 0 ${deck} Q 40 122 ${ltx - 2} ${deck} Z`}
+        fill="#5a8030" opacity="0.52"
+        style={{ animation: 'dot-appear 0.5s ease forwards 0.3s', opacity: 0 }}/>
+      <path d={`M 0 ${deck} Q 40 122 ${ltx - 2} ${deck}`}
+        fill="none" stroke="#4a6a25" strokeWidth="0.6" opacity="0.65"
+        strokeDasharray="130" strokeDashoffset="130"
+        style={{ animation: 'draw 0.7s ease forwards 0.4s', opacity: 0 }}/>
+
+      {/* Right rolling hill */}
+      <path d={`M ${rtx + 2} ${deck} Q 220 118 260 ${deck} Z`}
+        fill="#5a8030" opacity="0.52"
+        style={{ animation: 'dot-appear 0.5s ease forwards 0.32s', opacity: 0 }}/>
+      <path d={`M ${rtx + 2} ${deck} Q 220 118 260 ${deck}`}
+        fill="none" stroke="#4a6a25" strokeWidth="0.6" opacity="0.65"
+        strokeDasharray="135" strokeDashoffset="135"
+        style={{ animation: 'draw 0.7s ease forwards 0.42s', opacity: 0 }}/>
+
+      {/* Colorful Victorian houses — left hill */}
+      {leftHouses.map((h, i) => (
+        <g key={`lh${i}`} style={{ animation: `dot-appear 0.3s ease forwards ${1.6 + i * 0.07}s`, opacity: 0 }}>
+          <rect x={h.cx - 3} y={h.cy - 5} width={7} height={8} fill={h.c} opacity="0.82" rx="0.5"/>
+          <polygon points={`${h.cx - 4},${h.cy - 5} ${h.cx + 4},${h.cy - 5} ${h.cx},${h.cy - 9}`}
+            fill={h.c} opacity="0.65"/>
+        </g>
       ))}
-      {/* Centre */}
-      <circle cx={cx} cy={cy} r="5"   fill="#f5a623" opacity="0.9"  style={{ animation: "dot-appear 0.4s ease forwards 2.9s", opacity: 0 }}/>
-      <circle cx={cx} cy={cy} r="2.5" fill="#e05c2a"                style={{ animation: "dot-appear 0.3s ease forwards 3.1s", opacity: 0 }}/>
+
+      {/* Colorful Victorian houses — right hill */}
+      {rightHouses.map((h, i) => (
+        <g key={`rh${i}`} style={{ animation: `dot-appear 0.3s ease forwards ${1.65 + i * 0.07}s`, opacity: 0 }}>
+          <rect x={h.cx - 3} y={h.cy - 5} width={7} height={8} fill={h.c} opacity="0.82" rx="0.5"/>
+          <polygon points={`${h.cx - 4},${h.cy - 5} ${h.cx + 4},${h.cy - 5} ${h.cx},${h.cy - 9}`}
+            fill={h.c} opacity="0.65"/>
+        </g>
+      ))}
+
+      {/* Road deck */}
+      <line x1="0" y1={deck} x2="260" y2={deck}
+        stroke="#c85830" strokeWidth="1.3" opacity="0.72"
+        strokeDasharray="260" strokeDashoffset="260"
+        style={{ animation: 'draw 1.5s ease forwards 0.5s', opacity: 0 }}/>
+
+      {/* Left tower */}
+      <rect x={ltx - tw / 2} y={ttop} width={tw} height={deck - ttop}
+        fill="rgba(185,65,25,0.88)" stroke="#c85830" strokeWidth="0.55" opacity="0.9"
+        style={{ animation: 'dot-appear 0.45s ease forwards 0.62s', opacity: 0 }}/>
+
+      {/* Right tower */}
+      <rect x={rtx - tw / 2} y={ttop} width={tw} height={deck - ttop}
+        fill="rgba(185,65,25,0.88)" stroke="#c85830" strokeWidth="0.55" opacity="0.9"
+        style={{ animation: 'dot-appear 0.45s ease forwards 0.66s', opacity: 0 }}/>
+
+      {/* Tower cross-braces */}
+      {braceYs.flatMap((y, i) => [
+        <line key={`lb${i}`} x1={ltx - tw / 2 - 2} y1={y} x2={ltx + tw / 2 + 2} y2={y}
+          stroke="#c85830" strokeWidth="0.8" opacity="0.82"
+          strokeDasharray="12" strokeDashoffset="12"
+          style={{ animation: `draw 0.28s ease forwards ${0.82 + i * 0.06}s`, opacity: 0 }}/>,
+        <line key={`rb${i}`} x1={rtx - tw / 2 - 2} y1={y} x2={rtx + tw / 2 + 2} y2={y}
+          stroke="#c85830" strokeWidth="0.8" opacity="0.82"
+          strokeDasharray="12" strokeDashoffset="12"
+          style={{ animation: `draw 0.28s ease forwards ${0.84 + i * 0.06}s`, opacity: 0 }}/>,
+      ])}
+
+      {/* Tower top caps */}
+      <rect x={ltx - tw / 2 - 1} y={ttop - 6} width={tw + 2} height={6}
+        fill="#c85830" opacity="0.9"
+        style={{ animation: 'dot-appear 0.3s ease forwards 1.4s', opacity: 0 }}/>
+      <rect x={rtx - tw / 2 - 1} y={ttop - 6} width={tw + 2} height={6}
+        fill="#c85830" opacity="0.9"
+        style={{ animation: 'dot-appear 0.3s ease forwards 1.42s', opacity: 0 }}/>
+
+      {/* Left backstay cable */}
+      <path d={`M 0 ${deck + 8} Q 28 ${ttop + 12} ${ltx} ${ttop}`}
+        fill="none" stroke="#c85830" strokeWidth="1.05" opacity="0.78"
+        strokeDasharray="145" strokeDashoffset="145"
+        style={{ animation: 'draw 0.85s ease forwards 0.7s', opacity: 0 }}/>
+
+      {/* Right backstay cable */}
+      <path d={`M 260 ${deck + 8} Q 232 ${ttop + 12} ${rtx} ${ttop}`}
+        fill="none" stroke="#c85830" strokeWidth="1.05" opacity="0.78"
+        strokeDasharray="145" strokeDashoffset="145"
+        style={{ animation: 'draw 0.85s ease forwards 0.72s', opacity: 0 }}/>
+
+      {/* Main span cable — catenary sag */}
+      <path d={`M ${ltx} ${ttop} Q 130 ${cableCtrlY} ${rtx} ${ttop}`}
+        fill="none" stroke="#c85830" strokeWidth="1.15" opacity="0.85"
+        strokeDasharray="185" strokeDashoffset="185"
+        style={{ animation: 'draw 1.0s ease forwards 0.78s', opacity: 0 }}/>
+
+      {/* Vertical suspenders */}
+      {suspX.map((x, i) => {
+        const cy = cableY(x)
+        return (
+          <line key={`sp${i}`} x1={x} y1={cy} x2={x} y2={deck}
+            stroke="#c85830" strokeWidth="0.45" opacity="0.58"
+            strokeDasharray={deck - cy} strokeDashoffset={deck - cy}
+            style={{ animation: `draw 0.4s ease forwards ${1.05 + i * 0.07}s`, opacity: 0 }}/>
+        )
+      })}
     </svg>
   )
 }
