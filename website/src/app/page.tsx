@@ -52,11 +52,11 @@ const cityVars: Record<City, Record<string, string>> = {
     '--terra-light': '#c05828','--muted': '#7a5030',    '--saffron-strong': '#d49818',
   },
   nyc: {
-    '--bg': '#08101a', '--body': '#b8c4d0', '--cream': '#dde4ee',
-    '--cream-dim': '#7a8fa0', '--sand': '#1e2e42', '--gold': '#e8b840',
-    '--gold-light': '#ffe066', '--gold-dim': '#b08830', '--kumkum': '#4a9eff',
-    '--kumkum-light': '#80c4ff', '--kumkum-dim': '#2060cc', '--terra-mid': '#5588aa',
-    '--terra-light': '#88aacc', '--muted': '#5a7088', '--saffron-strong': '#ffe066',
+    '--bg': '#060a12',         '--body': '#a8b8c8',       '--cream': '#d0dce8',
+    '--cream-dim': '#607888',  '--sand': '#182638',       '--gold': '#e8a840',
+    '--gold-light': '#f5c860', '--gold-dim': '#a87830',   '--kumkum': '#4a9eff',
+    '--kumkum-light': '#7ab8ff','--kumkum-dim': '#2858c0','--terra-mid': '#2a4060',
+    '--terra-light': '#4a6888','--muted': '#3a5068',      '--saffron-strong': '#f5c860',
   },
   sfo: {
     '--bg': '#fdf4e8', '--body': '#2a3020', '--cream': '#181e10',
@@ -78,10 +78,10 @@ const cityColors: Record<City, {
     heroBlobBg: 'radial-gradient(ellipse, rgba(184,120,8,0.18) 0%, rgba(184,56,32,0.07) 45%, transparent 70%)',
   },
   nyc: {
-    cardBg: 'rgba(15,22,38,0.72)',  cardHover: 'rgba(25,38,60,0.9)',
-    infoBg: 'rgba(10,16,28,0.6)',   infoHover: 'rgba(20,32,52,0.8)',
-    navBg:  'rgba(8,16,26,0.97)',
-    heroBlobBg: 'radial-gradient(ellipse, rgba(74,158,255,0.13) 0%, rgba(232,184,64,0.07) 45%, transparent 70%)',
+    cardBg: 'rgba(10,18,32,0.78)',  cardHover: 'rgba(18,30,50,0.92)',
+    infoBg: 'rgba(8,14,26,0.65)',   infoHover: 'rgba(16,26,44,0.85)',
+    navBg:  'rgba(6,10,18,0.98)',
+    heroBlobBg: 'radial-gradient(ellipse, rgba(74,158,255,0.12) 0%, rgba(232,168,64,0.09) 45%, transparent 70%)',
   },
   sfo: {
     cardBg: 'rgba(255,255,255,0.82)',  cardHover: 'rgba(255,246,228,1)',
@@ -366,63 +366,121 @@ function HydOrnament() {
   )
 }
 
-// ── NYC ORNAMENT · Art Deco Chevron Crown ──────────────────
+// ── NYC ORNAMENT · Manhattan Skyline ─────────────────────────
 function NycOrnament() {
+  const gnd = 195  // ground / waterline y
+
+  // Buildings: { x=left edge, top=roof y, w=width }
+  const blds = [
+    { x: 2,   top: 182, w: 12 },
+    { x: 16,  top: 172, w: 13 },
+    { x: 31,  top: 162, w: 13 },
+    { x: 46,  top: 150, w: 16 },
+    { x: 64,  top: 128, w: 17 },  // Chrysler area
+    { x: 88,  top: 84,  w: 22 },  // Empire State
+    { x: 113, top: 150, w: 14 },
+    { x: 130, top: 98,  w: 22 },  // One WTC
+    { x: 155, top: 145, w: 14 },
+    { x: 172, top: 160, w: 14 },
+    { x: 189, top: 168, w: 14 },
+    { x: 206, top: 174, w: 15 },
+    { x: 224, top: 179, w: 15 },
+    { x: 242, top: 184, w: 16 },
+  ]
+
+  const SP = 4  // window grid spacing
+
+  // Window dots for every building
+  const dots = blds.flatMap((b, bi) => {
+    const h = gnd - b.top
+    const res: { cx: number; cy: number; bi: number }[] = []
+    for (let dx = 2; dx < b.w - 1; dx += SP)
+      for (let dy = 3; dy < h - 2; dy += SP)
+        res.push({ cx: b.x + dx, cy: b.top + dy, bi })
+    return res
+  })
+
+  const stars = [
+    { cx: 12, cy: 16 }, { cx: 38, cy: 28 }, { cx: 72, cy: 10 },
+    { cx: 112, cy: 22 }, { cx: 154, cy: 13 }, { cx: 190, cy: 26 },
+    { cx: 226, cy: 8  }, { cx: 250, cy: 34 },
+  ]
+
   return (
     <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-      {/* Central vertical axis */}
-      <line x1="130" y1="10" x2="130" y2="252" stroke="#e8b840" strokeWidth="0.7" opacity="0.5"
-        strokeDasharray="242" strokeDashoffset="242" style={{ animation: "draw 1.6s ease forwards 0.3s", opacity: 0 }}/>
-      {/* Subtle column lines */}
-      <g stroke="#e8b840" strokeWidth="0.35" opacity="0.25">
-        <line x1="115" y1="32" x2="115" y2="252" strokeDasharray="220" strokeDashoffset="220" style={{ animation: "draw 1.2s ease forwards 0.5s", opacity: 0 }}/>
-        <line x1="145" y1="32" x2="145" y2="252" strokeDasharray="220" strokeDashoffset="220" style={{ animation: "draw 1.2s ease forwards 0.6s", opacity: 0 }}/>
-        <line x1="95"  y1="55" x2="95"  y2="252" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 1.1s ease forwards 0.7s", opacity: 0 }}/>
-        <line x1="165" y1="55" x2="165" y2="252" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 1.1s ease forwards 0.8s", opacity: 0 }}/>
-        <line x1="70"  y1="90" x2="70"  y2="252" strokeDasharray="165" strokeDashoffset="165" style={{ animation: "draw 1.0s ease forwards 0.9s", opacity: 0 }}/>
-        <line x1="190" y1="90" x2="190" y2="252" strokeDasharray="165" strokeDashoffset="165" style={{ animation: "draw 1.0s ease forwards 1.0s", opacity: 0 }}/>
-        <line x1="42"  y1="132" x2="42"  y2="252" strokeDasharray="120" strokeDashoffset="120" style={{ animation: "draw 0.9s ease forwards 1.1s", opacity: 0 }}/>
-        <line x1="218" y1="132" x2="218" y2="252" strokeDasharray="120" strokeDashoffset="120" style={{ animation: "draw 0.9s ease forwards 1.2s", opacity: 0 }}/>
-      </g>
-      {/* Chevrons — nested upward-pointing crown */}
-      <polyline points="100,88 130,32 160,88" fill="none" stroke="#e8b840" strokeWidth="1.0" opacity="0.9"
-        strokeDasharray="120" strokeDashoffset="120" style={{ animation: "draw 0.6s ease forwards 0.9s", opacity: 0 }}/>
-      <polyline points="75,118 130,48 185,118" fill="none" stroke="#e8b840" strokeWidth="0.85" opacity="0.78"
-        strokeDasharray="172" strokeDashoffset="172" style={{ animation: "draw 0.7s ease forwards 1.1s", opacity: 0 }}/>
-      <polyline points="48,152 130,65 212,152" fill="none" stroke="#e8b840" strokeWidth="0.7" opacity="0.65"
-        strokeDasharray="236" strokeDashoffset="236" style={{ animation: "draw 0.8s ease forwards 1.3s", opacity: 0 }}/>
-      <polyline points="18,188 130,82 242,188" fill="none" stroke="#e8b840" strokeWidth="0.55" opacity="0.5"
-        strokeDasharray="305" strokeDashoffset="305" style={{ animation: "draw 0.9s ease forwards 1.6s", opacity: 0 }}/>
-      {/* Horizontal accent bars in electric blue */}
-      <line x1="100" y1="88"  x2="160" y2="88"  stroke="#4a9eff" strokeWidth="0.55" opacity="0.55"
-        strokeDasharray="60"  strokeDashoffset="60"  style={{ animation: "draw 0.4s ease forwards 1.9s", opacity: 0 }}/>
-      <line x1="75"  y1="118" x2="185" y2="118" stroke="#4a9eff" strokeWidth="0.5"  opacity="0.48"
-        strokeDasharray="110" strokeDashoffset="110" style={{ animation: "draw 0.5s ease forwards 2.0s", opacity: 0 }}/>
-      <line x1="48"  y1="152" x2="212" y2="152" stroke="#4a9eff" strokeWidth="0.45" opacity="0.4"
-        strokeDasharray="164" strokeDashoffset="164" style={{ animation: "draw 0.6s ease forwards 2.1s", opacity: 0 }}/>
-      <line x1="18"  y1="188" x2="242" y2="188" stroke="#4a9eff" strokeWidth="0.4"  opacity="0.32"
-        strokeDasharray="224" strokeDashoffset="224" style={{ animation: "draw 0.7s ease forwards 2.2s", opacity: 0 }}/>
-      {/* Diamond finial at top */}
-      <polygon points="130,12 123,22 130,32 137,22"
-        fill="#e8b840" opacity="0.95" style={{ animation: "dot-appear 0.5s ease forwards 2.5s", opacity: 0 }}/>
-      {/* Diamond ornaments at each chevron apex */}
-      <polygon points="130,28 125,35 130,42 135,35"
-        fill="none" stroke="#e8b840" strokeWidth="0.7" opacity="0.8" style={{ animation: "dot-appear 0.4s ease forwards 2.7s", opacity: 0 }}/>
-      <polygon points="130,43 125,50 130,57 135,50"
-        fill="none" stroke="#e8b840" strokeWidth="0.6" opacity="0.65" style={{ animation: "dot-appear 0.4s ease forwards 2.9s", opacity: 0 }}/>
-      <polygon points="130,60 125,67 130,74 135,67"
-        fill="none" stroke="#e8b840" strokeWidth="0.5" opacity="0.5" style={{ animation: "dot-appear 0.4s ease forwards 3.1s", opacity: 0 }}/>
-      {/* Blue dot accents at chevron arm ends */}
-      <g fill="#4a9eff" opacity="0.75">
-        <circle cx="100" cy="88"  r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.2s", opacity: 0 }}/>
-        <circle cx="160" cy="88"  r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.2s", opacity: 0 }}/>
-        <circle cx="75"  cy="118" r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.3s", opacity: 0 }}/>
-        <circle cx="185" cy="118" r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.3s", opacity: 0 }}/>
-        <circle cx="48"  cy="152" r="1.8" style={{ animation: "dot-appear 0.3s ease forwards 3.4s", opacity: 0 }}/>
-        <circle cx="212" cy="152" r="1.8" style={{ animation: "dot-appear 0.3s ease forwards 3.4s", opacity: 0 }}/>
-        <circle cx="18"  cy="188" r="1.6" style={{ animation: "dot-appear 0.3s ease forwards 3.5s", opacity: 0 }}/>
-        <circle cx="242" cy="188" r="1.6" style={{ animation: "dot-appear 0.3s ease forwards 3.5s", opacity: 0 }}/>
-      </g>
+
+      {/* Stars */}
+      {stars.map((s, i) => (
+        <circle key={`st${i}`} cx={s.cx} cy={s.cy} r="0.9" fill="#c0d0e0" opacity="0.5"
+          style={{ animation: `dot-appear 0.3s ease forwards ${0.05 + i * 0.07}s`, opacity: 0 }}/>
+      ))}
+
+      {/* Moon */}
+      <circle cx="235" cy="20" r="7.5" fill="none" stroke="#c0d0e0" strokeWidth="0.5" opacity="0.22"
+        style={{ animation: 'dot-appear 0.5s ease forwards 0.2s', opacity: 0 }}/>
+
+      {/* Building fills + outlines */}
+      {blds.map((b, i) => (
+        <rect key={`bl${i}`} x={b.x} y={b.top} width={b.w} height={gnd - b.top}
+          fill="rgba(5,10,22,0.82)" stroke="#1c3050" strokeWidth="0.45" opacity="0.9"
+          style={{ animation: `dot-appear 0.35s ease forwards ${0.2 + i * 0.04}s`, opacity: 0 }}/>
+      ))}
+
+      {/* Window dots — amber / white / blue */}
+      {dots.map((d, i) => {
+        const v   = (d.bi * 13 + i * 7) % 26
+        const col = v < 17 ? '#e8a840' : v < 22 ? '#f8e8a0' : '#4a9eff'
+        const op  = v < 17 ? 0.70 : v < 22 ? 0.95 : 0.88
+        return (
+          <circle key={`d${i}`} cx={d.cx} cy={d.cy} r="1.1" fill={col} opacity={op}
+            style={{ animation: `dot-appear 0.2s ease forwards ${0.5 + (i * 7 % 180) * 0.011}s`, opacity: 0 }}/>
+        )
+      })}
+
+      {/* Chrysler spire (bld 4: center x≈72, top=128) */}
+      <path d="M 68 128 L 66 115 L 62 107 L 72 98 L 82 107 L 78 115 L 76 128"
+        fill="none" stroke="#9ab0c8" strokeWidth="0.65" opacity="0.68"
+        strokeDasharray="82" strokeDashoffset="82"
+        style={{ animation: 'draw 0.5s ease forwards 0.44s', opacity: 0 }}/>
+      <line x1="72" y1="98" x2="72" y2="86"
+        stroke="#9ab0c8" strokeWidth="0.5" opacity="0.58"
+        strokeDasharray="14" strokeDashoffset="14"
+        style={{ animation: 'draw 0.25s ease forwards 0.88s', opacity: 0 }}/>
+
+      {/* Empire State spire (bld 5: center x≈99, top=84) */}
+      <line x1="99" y1="84" x2="99" y2="60"
+        stroke="#dde4ee" strokeWidth="0.95" opacity="0.82"
+        strokeDasharray="26" strokeDashoffset="26"
+        style={{ animation: 'draw 0.4s ease forwards 0.5s', opacity: 0 }}/>
+      <line x1="99" y1="60" x2="99" y2="44"
+        stroke="#dde4ee" strokeWidth="0.55" opacity="0.62"
+        strokeDasharray="18" strokeDashoffset="18"
+        style={{ animation: 'draw 0.3s ease forwards 0.85s', opacity: 0 }}/>
+      <circle cx="99" cy="44" r="2.2" fill="#f8e8a0" opacity="0.9"
+        style={{ animation: 'dot-appear 0.3s ease forwards 1.12s', opacity: 0 }}/>
+
+      {/* One WTC antenna (bld 7: center x≈141, top=98) */}
+      <line x1="141" y1="98" x2="141" y2="68"
+        stroke="#dde4ee" strokeWidth="0.75" opacity="0.75"
+        strokeDasharray="32" strokeDashoffset="32"
+        style={{ animation: 'draw 0.4s ease forwards 0.5s', opacity: 0 }}/>
+      <circle cx="141" cy="68" r="1.8" fill="#ff3838" opacity="0.92"
+        style={{ animation: 'dot-appear 0.3s ease forwards 0.88s', opacity: 0 }}/>
+
+      {/* Waterline */}
+      <line x1="0" y1={gnd} x2="260" y2={gnd}
+        stroke="#2a4a6a" strokeWidth="0.65" opacity="0.58"
+        strokeDasharray="260" strokeDashoffset="260"
+        style={{ animation: 'draw 1.2s ease forwards 0.15s', opacity: 0 }}/>
+
+      {/* Water ripples */}
+      {[5, 12, 20].map((dy, i) => (
+        <path key={`rp${i}`}
+          d={`M 0 ${gnd + dy} Q 65 ${gnd + dy - 2} 130 ${gnd + dy} Q 195 ${gnd + dy + 2} 260 ${gnd + dy}`}
+          fill="none" stroke="#4a9eff" strokeWidth="0.45" opacity={0.18 - i * 0.05}
+          strokeDasharray="280" strokeDashoffset="280"
+          style={{ animation: `draw 1.5s ease forwards ${0.9 + i * 0.15}s`, opacity: 0 }}/>
+      ))}
     </svg>
   )
 }
