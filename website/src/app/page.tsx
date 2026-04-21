@@ -38,6 +38,59 @@ const skillIcons: Record<string, string> = {
   'PostgreSQL': 'postgresql',
 }
 
+// ── CITY THEMES ────────────────────────────────────────────
+type City = 'hyd' | 'nyc' | 'sfo'
+
+const cityLabels: Record<City, string> = { hyd: 'hyd', nyc: 'nyc', sfo: 'sfo' }
+
+const cityVars: Record<City, Record<string, string>> = {
+  hyd: {
+    '--bg': '#f2e4c8',        '--body': '#2a1208',      '--cream': '#1a0a02',
+    '--cream-dim': '#5a2c0e', '--sand': '#d4b888',      '--gold': '#b87808',
+    '--gold-light': '#d49818','--gold-dim': '#8a5808',  '--kumkum': '#b83820',
+    '--kumkum-light': '#d45838','--kumkum-dim': '#882010','--terra-mid': '#8a4010',
+    '--terra-light': '#c05828','--muted': '#7a5030',    '--saffron-strong': '#d49818',
+  },
+  nyc: {
+    '--bg': '#08101a', '--body': '#b8c4d0', '--cream': '#dde4ee',
+    '--cream-dim': '#7a8fa0', '--sand': '#1e2e42', '--gold': '#e8b840',
+    '--gold-light': '#ffe066', '--gold-dim': '#b08830', '--kumkum': '#4a9eff',
+    '--kumkum-light': '#80c4ff', '--kumkum-dim': '#2060cc', '--terra-mid': '#5588aa',
+    '--terra-light': '#88aacc', '--muted': '#5a7088', '--saffron-strong': '#ffe066',
+  },
+  sfo: {
+    '--bg': '#fdf4e8', '--body': '#2a3020', '--cream': '#181e10',
+    '--cream-dim': '#4a5838', '--sand': '#e4d0b4', '--gold': '#f5a623',
+    '--gold-light': '#ffc844', '--gold-dim': '#c07820', '--kumkum': '#e05c2a',
+    '--kumkum-light': '#f09060', '--kumkum-dim': '#a83a10', '--terra-mid': '#5ba8d0',
+    '--terra-light': '#80c4e8', '--muted': '#7a9060', '--saffron-strong': '#f5a623',
+  },
+}
+
+const cityColors: Record<City, {
+  cardBg: string; cardHover: string; infoBg: string; infoHover: string;
+  navBg: string; heroBlobBg: string;
+}> = {
+  hyd: {
+    cardBg: 'rgba(232,212,178,0.55)', cardHover: 'rgba(218,195,155,0.82)',
+    infoBg: 'rgba(232,212,178,0.45)', infoHover: 'rgba(218,195,155,0.75)',
+    navBg:  'rgba(242,228,200,0.97)',
+    heroBlobBg: 'radial-gradient(ellipse, rgba(184,120,8,0.18) 0%, rgba(184,56,32,0.07) 45%, transparent 70%)',
+  },
+  nyc: {
+    cardBg: 'rgba(15,22,38,0.72)',  cardHover: 'rgba(25,38,60,0.9)',
+    infoBg: 'rgba(10,16,28,0.6)',   infoHover: 'rgba(20,32,52,0.8)',
+    navBg:  'rgba(8,16,26,0.97)',
+    heroBlobBg: 'radial-gradient(ellipse, rgba(74,158,255,0.13) 0%, rgba(232,184,64,0.07) 45%, transparent 70%)',
+  },
+  sfo: {
+    cardBg: 'rgba(255,255,255,0.82)',  cardHover: 'rgba(255,246,228,1)',
+    infoBg: 'rgba(255,255,255,0.75)', infoHover: 'rgba(255,244,220,1)',
+    navBg:  'rgba(253,244,232,0.97)',
+    heroBlobBg: 'radial-gradient(ellipse, rgba(245,166,35,0.2) 0%, rgba(91,168,208,0.1) 45%, transparent 70%)',
+  },
+}
+
 function useReveal() {
   const ref = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
@@ -82,56 +135,361 @@ function Divider({ ornament = '❧' }: { ornament?: string }) {
   )
 }
 
+// ── HYD NAV GARLAND · Marigold torana drawing ─────────────
+function NavGarland() {
+  const n   = 6           // number of swags
+  const W   = 1440        // viewBox width
+  const sw  = W / n       // swag width = 240
+  const cY  = 64          // bezier control-point y  (midpoint droops to cY/2 = 32)
+  const mY  = cY / 2      // actual lowest y of each swag = 32
+
+  // Garland path — starts/ends at y=2 (small offset from edge)
+  const d = `M 0 2 ${Array.from({ length: n }, (_, i) =>
+    `Q ${(i + 0.5) * sw} ${cY} ${(i + 1) * sw} 2`
+  ).join(' ')}`
+
+  // Flower dots at t = 0.2, 0.4, 0.5, 0.6, 0.8 per swag
+  const flowers = Array.from({ length: n }, (_, i) => {
+    const x0 = i * sw, cx = x0 + sw / 2, x1 = (i + 1) * sw
+    return [0.2, 0.4, 0.5, 0.6, 0.8].map(t => ({
+      cx: (1 - t) * (1 - t) * x0 + 2 * t * (1 - t) * cx + t * t * x1,
+      cy: 2 + 2 * t * (1 - t) * cY,
+    }))
+  }).flat()
+
+  const pendantX = Array.from({ length: n }, (_, i) => i * sw + sw / 2)
+
+  return (
+    <svg width="100%" height="82" viewBox="0 0 1440 82"
+      preserveAspectRatio="none" style={{ display: 'block' }}>
+
+      {/* Soft shadow behind the line for depth */}
+      <path d={d} fill="none" stroke="#c8a060" strokeWidth="3.5" opacity="0.18"/>
+
+      {/* Main garland stroke — draws itself */}
+      <path d={d} fill="none" stroke="#8a4010" strokeWidth="1.3" opacity="0.6"
+        strokeDasharray="1560" strokeDashoffset="1560"
+        style={{ animation: "draw 2.8s ease forwards 0.1s", opacity: 0 }}/>
+
+      {/* Attachment knots at top */}
+      {Array.from({ length: n + 1 }, (_, i) => (
+        <circle key={`k${i}`} cx={i * sw} cy="2" r="4" fill="#8a4010" opacity="0.5"
+          style={{ animation: `dot-appear 0.3s ease forwards ${0.1 + i * 0.06}s`, opacity: 0 }}/>
+      ))}
+
+      {/* Marigold flowers — concentric stroke circles */}
+      {flowers.map((f, i) => (
+        <g key={`fl${i}`}
+          style={{ animation: `dot-appear 0.3s ease forwards ${0.4 + i * 0.06}s`, opacity: 0 }}>
+          <circle cx={f.cx} cy={f.cy} r="5.5" fill="none" stroke="#8a4010" strokeWidth="0.85" opacity="0.38"/>
+          <circle cx={f.cx} cy={f.cy} r="2.8" fill="none" stroke="#b83820" strokeWidth="0.7"  opacity="0.45"/>
+          <circle cx={f.cx} cy={f.cy} r="1.2" fill="#8a4010" opacity="0.5"/>
+        </g>
+      ))}
+
+      {/* Hanging pendants (string + beads + jhumka bell) */}
+      {pendantX.map((x, i) => (
+        <g key={`pend${i}`}
+          style={{ animation: `dot-appear 0.5s ease forwards ${0.6 + i * 0.12}s`, opacity: 0 }}>
+          {/* String */}
+          <line x1={x} y1={mY} x2={x} y2="65"
+            stroke="#8a4010" strokeWidth="0.8" opacity="0.4"/>
+          {/* Beads along string */}
+          <circle cx={x} cy={mY + 9}  r="3.2" fill="#b83820" opacity="0.55"/>
+          <circle cx={x} cy={mY + 18} r="2.5" fill="#b87808" opacity="0.6"/>
+          <circle cx={x} cy={mY + 26} r="2"   fill="#b83820" opacity="0.5"/>
+          {/* Jhumka bell outline */}
+          <circle cx={x} cy="65" r="7" fill="none" stroke="#8a4010" strokeWidth="1.1" opacity="0.5"/>
+          {/* Bell inner detail */}
+          <circle cx={x} cy="65" r="3.5" fill="none" stroke="#b87808" strokeWidth="0.6" opacity="0.5"/>
+          <circle cx={x} cy="65" r="1.5" fill="#8a4010" opacity="0.45"/>
+          {/* Bell clapper dot */}
+          <circle cx={x} cy="73" r="1.2" fill="#b83820" opacity="0.5"/>
+        </g>
+      ))}
+    </svg>
+  )
+}
+
+// ── HYD ORNAMENT · Mughal Arch (Golkonda / Charminar inspired) ─
+function HydOrnament() {
+  // Arch geometry: springs at (48,158) and (212,158), apex at (130,20)
+  // Bezier left:  M 48 158 C 48 78 122 20 130 20
+  // Bezier right: C 138 20 212 78 212 158
+  // Dot positions computed from bezier at t=0.25, 0.5, 0.75
+  const leftDots  = [{ cx: 60, cy: 103 }, { cx: 86, cy: 59 }, { cx: 114, cy: 30 }]
+  const rightDots = [{ cx: 200, cy: 103 }, { cx: 174, cy: 59 }, { cx: 146, cy: 30 }]
+  const legDots   = [185, 210, 237]
+  // 8 medallion petals at r=16 from (130,20)
+  const petals = Array.from({ length: 8 }, (_, i) => {
+    const a = (i * 45 - 90) * Math.PI / 180
+    return { cx: 130 + 16 * Math.cos(a), cy: 20 + 16 * Math.sin(a) }
+  })
+  return (
+    <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+
+      {/* PERSPECTIVE LINES — receding courtyard floor, very faint */}
+      <g stroke="#8a3810" strokeWidth="0.3" opacity="0.1">
+        {[80, 96, 112, 130, 148, 164, 180].map((x, i) => (
+          <line key={i} x1={x} y1="258" x2="130" y2="20"
+            strokeDasharray="250" strokeDashoffset="250"
+            style={{ animation: `draw 1.2s ease forwards ${1.9 + i * 0.04}s`, opacity: 0 }}/>
+        ))}
+      </g>
+
+      {/* PLINTH — triple base lines, widest at bottom */}
+      <line x1="18" y1="258" x2="242" y2="258" stroke="#8a4010" strokeWidth="0.9"
+        strokeDasharray="224" strokeDashoffset="224" style={{ animation: "draw 0.9s ease forwards 0.2s", opacity: 0 }}/>
+      <line x1="30" y1="252" x2="230" y2="252" stroke="#8a4010" strokeWidth="0.6"
+        strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 0.7s ease forwards 0.3s", opacity: 0 }}/>
+      <line x1="42" y1="246" x2="218" y2="246" stroke="#c8a060" strokeWidth="0.4"
+        strokeDasharray="176" strokeDashoffset="176" style={{ animation: "draw 0.6s ease forwards 0.4s", opacity: 0 }}/>
+
+      {/* OUTER ARCH — primary dark terracotta frame */}
+      <path d="M 48 258 L 48 158 C 48 78 122 20 130 20 C 138 20 212 78 212 158 L 212 258"
+        fill="none" stroke="#8a4010" strokeWidth="1.35" opacity="0.88"
+        strokeDasharray="610" strokeDashoffset="610"
+        style={{ animation: "draw 2.0s ease forwards 0.5s", opacity: 0 }}/>
+
+      {/* MIDDLE ARCH — gold second layer */}
+      <path d="M 68 258 L 68 166 C 68 88 122 46 130 46 C 138 46 192 88 192 166 L 192 258"
+        fill="none" stroke="#b87808" strokeWidth="0.85" opacity="0.75"
+        strokeDasharray="515" strokeDashoffset="515"
+        style={{ animation: "draw 1.7s ease forwards 0.8s", opacity: 0 }}/>
+
+      {/* INNER ARCH — terracotta kumkum accent */}
+      <path d="M 90 258 L 90 183 C 90 125 122 98 130 98 C 138 98 170 125 170 183 L 170 258"
+        fill="none" stroke="#b83820" strokeWidth="0.7" opacity="0.8"
+        strokeDasharray="385" strokeDashoffset="385"
+        style={{ animation: "draw 1.4s ease forwards 1.1s", opacity: 0 }}/>
+
+      {/* INNERMOST ARCH — delicate filigree hint */}
+      <path d="M 106 258 L 106 198 C 106 160 122 144 130 144 C 138 144 154 160 154 198 L 154 258"
+        fill="none" stroke="#8a4010" strokeWidth="0.45" opacity="0.45"
+        strokeDasharray="230" strokeDashoffset="230"
+        style={{ animation: "draw 1.0s ease forwards 1.4s", opacity: 0 }}/>
+
+      {/* PILLAR CAPITALS at arch springs */}
+      <g fill="none" stroke="#8a4010" strokeWidth="0.85">
+        <line x1="26" y1="158" x2="70" y2="158" strokeDasharray="44" strokeDashoffset="44"
+          style={{ animation: "draw 0.4s ease forwards 1.8s", opacity: 0 }}/>
+        <circle cx="48" cy="150" r="5.5" strokeDasharray="35" strokeDashoffset="35"
+          style={{ animation: "draw 0.5s ease forwards 2.0s", opacity: 0 }}/>
+        <circle cx="48" cy="150" r="2.5" fill="#8a4010" opacity="0.7"
+          style={{ animation: "dot-appear 0.3s ease forwards 2.3s", opacity: 0 }}/>
+        <line x1="190" y1="158" x2="234" y2="158" strokeDasharray="44" strokeDashoffset="44"
+          style={{ animation: "draw 0.4s ease forwards 1.8s", opacity: 0 }}/>
+        <circle cx="212" cy="150" r="5.5" strokeDasharray="35" strokeDashoffset="35"
+          style={{ animation: "draw 0.5s ease forwards 2.0s", opacity: 0 }}/>
+        <circle cx="212" cy="150" r="2.5" fill="#8a4010" opacity="0.7"
+          style={{ animation: "dot-appear 0.3s ease forwards 2.3s", opacity: 0 }}/>
+      </g>
+
+      {/* TERRACOTTA DOT ACCENTS — left leg */}
+      <g fill="#b83820" opacity="0.7">
+        {legDots.map((y, i) => (
+          <circle key={`ll${i}`} cx="48" cy={y} r="1.8"
+            style={{ animation: `dot-appear 0.25s ease forwards ${2.4 + i * 0.1}s`, opacity: 0 }}/>
+        ))}
+        {leftDots.map((p, i) => (
+          <circle key={`la${i}`} cx={p.cx} cy={p.cy} r="1.5"
+            style={{ animation: `dot-appear 0.25s ease forwards ${2.7 + i * 0.1}s`, opacity: 0 }}/>
+        ))}
+        {/* right leg */}
+        {legDots.map((y, i) => (
+          <circle key={`rl${i}`} cx="212" cy={y} r="1.8"
+            style={{ animation: `dot-appear 0.25s ease forwards ${2.4 + i * 0.1}s`, opacity: 0 }}/>
+        ))}
+        {rightDots.map((p, i) => (
+          <circle key={`ra${i}`} cx={p.cx} cy={p.cy} r="1.5"
+            style={{ animation: `dot-appear 0.25s ease forwards ${2.7 + i * 0.1}s`, opacity: 0 }}/>
+        ))}
+      </g>
+
+      {/* GOLD MARKERS at middle-arch spring points */}
+      <g fill="#b87808" opacity="0.6">
+        <circle cx="68" cy="166" r="1.5" style={{ animation: "dot-appear 0.3s ease forwards 3.1s", opacity: 0 }}/>
+        <circle cx="192" cy="166" r="1.5" style={{ animation: "dot-appear 0.3s ease forwards 3.1s", opacity: 0 }}/>
+        <circle cx="90" cy="183" r="1.5" style={{ animation: "dot-appear 0.3s ease forwards 3.2s", opacity: 0 }}/>
+        <circle cx="170" cy="183" r="1.5" style={{ animation: "dot-appear 0.3s ease forwards 3.2s", opacity: 0 }}/>
+      </g>
+
+      {/* APEX MEDALLION — nested circles + 8 lotus petals */}
+      <circle cx="130" cy="20" r="14" fill="none" stroke="#8a4010" strokeWidth="0.85"
+        strokeDasharray="88" strokeDashoffset="88"
+        style={{ animation: "draw 0.7s ease forwards 2.5s", opacity: 0 }}/>
+      <circle cx="130" cy="20" r="9" fill="none" stroke="#b87808" strokeWidth="0.65"
+        strokeDasharray="57" strokeDashoffset="57"
+        style={{ animation: "draw 0.6s ease forwards 2.7s", opacity: 0 }}/>
+      <circle cx="130" cy="20" r="5" fill="none" stroke="#b83820" strokeWidth="0.55"
+        strokeDasharray="31" strokeDashoffset="31"
+        style={{ animation: "draw 0.5s ease forwards 2.9s", opacity: 0 }}/>
+      <circle cx="130" cy="20" r="2.5" fill="#8a4010" opacity="0.9"
+        style={{ animation: "dot-appear 0.3s ease forwards 3.1s", opacity: 0 }}/>
+      <g fill="#b87808" opacity="0.7">
+        {petals.map((p, i) => (
+          <circle key={i} cx={p.cx} cy={p.cy} r="1.5"
+            style={{ animation: `dot-appear 0.2s ease forwards ${3.3 + i * 0.08}s`, opacity: 0 }}/>
+        ))}
+      </g>
+
+      {/* HORIZONTAL LINTEL at medallion level */}
+      <line x1="15" y1="20" x2="48" y2="20" stroke="#8a4010" strokeWidth="0.5" opacity="0.4"
+        strokeDasharray="33" strokeDashoffset="33"
+        style={{ animation: "draw 0.4s ease forwards 2.6s", opacity: 0 }}/>
+      <line x1="212" y1="20" x2="245" y2="20" stroke="#8a4010" strokeWidth="0.5" opacity="0.4"
+        strokeDasharray="33" strokeDashoffset="33"
+        style={{ animation: "draw 0.4s ease forwards 2.6s", opacity: 0 }}/>
+
+      {/* SPANDREL MEDALLIONS — ornamental circles in arch corners */}
+      <g fill="none" stroke="#8a4010" strokeWidth="0.5" opacity="0.35">
+        <circle cx="26" cy="65" r="11" style={{ animation: "dot-appear 0.4s ease forwards 3.5s", opacity: 0 }}/>
+        <circle cx="26" cy="65" r="6"  style={{ animation: "dot-appear 0.3s ease forwards 3.6s", opacity: 0 }}/>
+        <circle cx="26" cy="65" r="2.5" fill="#8a4010" style={{ animation: "dot-appear 0.3s ease forwards 3.7s", opacity: 0 }}/>
+        <circle cx="234" cy="65" r="11" style={{ animation: "dot-appear 0.4s ease forwards 3.5s", opacity: 0 }}/>
+        <circle cx="234" cy="65" r="6"  style={{ animation: "dot-appear 0.3s ease forwards 3.6s", opacity: 0 }}/>
+        <circle cx="234" cy="65" r="2.5" fill="#8a4010" style={{ animation: "dot-appear 0.3s ease forwards 3.7s", opacity: 0 }}/>
+      </g>
+
+      {/* CARVED BAND — repeating arch motifs along outer arch inner face */}
+      <g fill="none" stroke="#b83820" strokeWidth="0.45" opacity="0.32">
+        <path d="M 52 170 C 52 158 60 152 60 152 C 60 152 68 158 68 170"
+          style={{ animation: "dot-appear 0.4s ease forwards 3.8s", opacity: 0 }}/>
+        <path d="M 57 128 C 57 116 65 110 66 108 C 67 110 76 116 75 128"
+          style={{ animation: "dot-appear 0.4s ease forwards 3.9s", opacity: 0 }}/>
+        <path d="M 192 170 C 192 158 200 152 200 152 C 200 152 208 158 208 170"
+          style={{ animation: "dot-appear 0.4s ease forwards 3.8s", opacity: 0 }}/>
+        <path d="M 184 128 C 184 116 193 110 194 108 C 195 110 203 116 203 128"
+          style={{ animation: "dot-appear 0.4s ease forwards 3.9s", opacity: 0 }}/>
+      </g>
+    </svg>
+  )
+}
+
+// ── NYC ORNAMENT · Art Deco Chevron Crown ──────────────────
+function NycOrnament() {
+  return (
+    <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+      {/* Central vertical axis */}
+      <line x1="130" y1="10" x2="130" y2="252" stroke="#e8b840" strokeWidth="0.7" opacity="0.5"
+        strokeDasharray="242" strokeDashoffset="242" style={{ animation: "draw 1.6s ease forwards 0.3s", opacity: 0 }}/>
+      {/* Subtle column lines */}
+      <g stroke="#e8b840" strokeWidth="0.35" opacity="0.25">
+        <line x1="115" y1="32" x2="115" y2="252" strokeDasharray="220" strokeDashoffset="220" style={{ animation: "draw 1.2s ease forwards 0.5s", opacity: 0 }}/>
+        <line x1="145" y1="32" x2="145" y2="252" strokeDasharray="220" strokeDashoffset="220" style={{ animation: "draw 1.2s ease forwards 0.6s", opacity: 0 }}/>
+        <line x1="95"  y1="55" x2="95"  y2="252" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 1.1s ease forwards 0.7s", opacity: 0 }}/>
+        <line x1="165" y1="55" x2="165" y2="252" strokeDasharray="200" strokeDashoffset="200" style={{ animation: "draw 1.1s ease forwards 0.8s", opacity: 0 }}/>
+        <line x1="70"  y1="90" x2="70"  y2="252" strokeDasharray="165" strokeDashoffset="165" style={{ animation: "draw 1.0s ease forwards 0.9s", opacity: 0 }}/>
+        <line x1="190" y1="90" x2="190" y2="252" strokeDasharray="165" strokeDashoffset="165" style={{ animation: "draw 1.0s ease forwards 1.0s", opacity: 0 }}/>
+        <line x1="42"  y1="132" x2="42"  y2="252" strokeDasharray="120" strokeDashoffset="120" style={{ animation: "draw 0.9s ease forwards 1.1s", opacity: 0 }}/>
+        <line x1="218" y1="132" x2="218" y2="252" strokeDasharray="120" strokeDashoffset="120" style={{ animation: "draw 0.9s ease forwards 1.2s", opacity: 0 }}/>
+      </g>
+      {/* Chevrons — nested upward-pointing crown */}
+      <polyline points="100,88 130,32 160,88" fill="none" stroke="#e8b840" strokeWidth="1.0" opacity="0.9"
+        strokeDasharray="120" strokeDashoffset="120" style={{ animation: "draw 0.6s ease forwards 0.9s", opacity: 0 }}/>
+      <polyline points="75,118 130,48 185,118" fill="none" stroke="#e8b840" strokeWidth="0.85" opacity="0.78"
+        strokeDasharray="172" strokeDashoffset="172" style={{ animation: "draw 0.7s ease forwards 1.1s", opacity: 0 }}/>
+      <polyline points="48,152 130,65 212,152" fill="none" stroke="#e8b840" strokeWidth="0.7" opacity="0.65"
+        strokeDasharray="236" strokeDashoffset="236" style={{ animation: "draw 0.8s ease forwards 1.3s", opacity: 0 }}/>
+      <polyline points="18,188 130,82 242,188" fill="none" stroke="#e8b840" strokeWidth="0.55" opacity="0.5"
+        strokeDasharray="305" strokeDashoffset="305" style={{ animation: "draw 0.9s ease forwards 1.6s", opacity: 0 }}/>
+      {/* Horizontal accent bars in electric blue */}
+      <line x1="100" y1="88"  x2="160" y2="88"  stroke="#4a9eff" strokeWidth="0.55" opacity="0.55"
+        strokeDasharray="60"  strokeDashoffset="60"  style={{ animation: "draw 0.4s ease forwards 1.9s", opacity: 0 }}/>
+      <line x1="75"  y1="118" x2="185" y2="118" stroke="#4a9eff" strokeWidth="0.5"  opacity="0.48"
+        strokeDasharray="110" strokeDashoffset="110" style={{ animation: "draw 0.5s ease forwards 2.0s", opacity: 0 }}/>
+      <line x1="48"  y1="152" x2="212" y2="152" stroke="#4a9eff" strokeWidth="0.45" opacity="0.4"
+        strokeDasharray="164" strokeDashoffset="164" style={{ animation: "draw 0.6s ease forwards 2.1s", opacity: 0 }}/>
+      <line x1="18"  y1="188" x2="242" y2="188" stroke="#4a9eff" strokeWidth="0.4"  opacity="0.32"
+        strokeDasharray="224" strokeDashoffset="224" style={{ animation: "draw 0.7s ease forwards 2.2s", opacity: 0 }}/>
+      {/* Diamond finial at top */}
+      <polygon points="130,12 123,22 130,32 137,22"
+        fill="#e8b840" opacity="0.95" style={{ animation: "dot-appear 0.5s ease forwards 2.5s", opacity: 0 }}/>
+      {/* Diamond ornaments at each chevron apex */}
+      <polygon points="130,28 125,35 130,42 135,35"
+        fill="none" stroke="#e8b840" strokeWidth="0.7" opacity="0.8" style={{ animation: "dot-appear 0.4s ease forwards 2.7s", opacity: 0 }}/>
+      <polygon points="130,43 125,50 130,57 135,50"
+        fill="none" stroke="#e8b840" strokeWidth="0.6" opacity="0.65" style={{ animation: "dot-appear 0.4s ease forwards 2.9s", opacity: 0 }}/>
+      <polygon points="130,60 125,67 130,74 135,67"
+        fill="none" stroke="#e8b840" strokeWidth="0.5" opacity="0.5" style={{ animation: "dot-appear 0.4s ease forwards 3.1s", opacity: 0 }}/>
+      {/* Blue dot accents at chevron arm ends */}
+      <g fill="#4a9eff" opacity="0.75">
+        <circle cx="100" cy="88"  r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.2s", opacity: 0 }}/>
+        <circle cx="160" cy="88"  r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.2s", opacity: 0 }}/>
+        <circle cx="75"  cy="118" r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.3s", opacity: 0 }}/>
+        <circle cx="185" cy="118" r="2.0" style={{ animation: "dot-appear 0.3s ease forwards 3.3s", opacity: 0 }}/>
+        <circle cx="48"  cy="152" r="1.8" style={{ animation: "dot-appear 0.3s ease forwards 3.4s", opacity: 0 }}/>
+        <circle cx="212" cy="152" r="1.8" style={{ animation: "dot-appear 0.3s ease forwards 3.4s", opacity: 0 }}/>
+        <circle cx="18"  cy="188" r="1.6" style={{ animation: "dot-appear 0.3s ease forwards 3.5s", opacity: 0 }}/>
+        <circle cx="242" cy="188" r="1.6" style={{ animation: "dot-appear 0.3s ease forwards 3.5s", opacity: 0 }}/>
+      </g>
+    </svg>
+  )
+}
+
+// ── SFO ORNAMENT · Golden Hour Sunburst ────────────────────
+function SfoOrnament() {
+  const cx = 130, cy = 130
+  const longR = 100, shortR = 62
+  const longRays  = Array.from({ length: 12 }, (_, i) => {
+    const a = (i * 30 - 90) * Math.PI / 180
+    return { x2: cx + longR  * Math.cos(a), y2: cy + longR  * Math.sin(a) }
+  })
+  const shortRays = Array.from({ length: 12 }, (_, i) => {
+    const a = (i * 30 + 15 - 90) * Math.PI / 180
+    return { x2: cx + shortR * Math.cos(a), y2: cy + shortR * Math.sin(a) }
+  })
+  return (
+    <svg width="520" height="520" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+      {/* Short rays */}
+      {shortRays.map((r, i) => (
+        <line key={`s${i}`} x1={cx} y1={cy} x2={r.x2} y2={r.y2}
+          stroke="#f5a623" strokeWidth="0.6" opacity="0.38"
+          strokeDasharray="62" strokeDashoffset="62"
+          style={{ animation: `draw 0.35s ease forwards ${0.4 + i * 0.04}s`, opacity: 0 }}/>
+      ))}
+      {/* Long rays */}
+      {longRays.map((r, i) => (
+        <line key={`l${i}`} x1={cx} y1={cy} x2={r.x2} y2={r.y2}
+          stroke="#f5a623" strokeWidth="0.85" opacity="0.7"
+          strokeDasharray="100" strokeDashoffset="100"
+          style={{ animation: `draw 0.5s ease forwards ${0.5 + i * 0.05}s`, opacity: 0 }}/>
+      ))}
+      {/* Concentric circles */}
+      <circle cx={cx} cy={cy} r="28"  fill="none" stroke="#e05c2a" strokeWidth="0.85" opacity="0.5"
+        strokeDasharray="176" strokeDashoffset="176" style={{ animation: "draw 0.8s ease forwards 1.4s", opacity: 0 }}/>
+      <circle cx={cx} cy={cy} r="62"  fill="none" stroke="#e05c2a" strokeWidth="0.6"  opacity="0.32"
+        strokeDasharray="390" strokeDashoffset="390" style={{ animation: "draw 1.0s ease forwards 1.7s", opacity: 0 }}/>
+      <circle cx={cx} cy={cy} r="100" fill="none" stroke="#f5a623" strokeWidth="0.45" opacity="0.2"
+        strokeDasharray="628" strokeDashoffset="628" style={{ animation: "draw 1.2s ease forwards 2.0s", opacity: 0 }}/>
+      {/* Dot accents at long ray tips */}
+      {longRays.map((r, i) => (
+        <circle key={`d${i}`} cx={r.x2} cy={r.y2} r="2.2"
+          fill="#e05c2a" opacity="0.75"
+          style={{ animation: `dot-appear 0.3s ease forwards ${2.2 + i * 0.05}s`, opacity: 0 }}/>
+      ))}
+      {/* Centre */}
+      <circle cx={cx} cy={cy} r="5"   fill="#f5a623" opacity="0.9"  style={{ animation: "dot-appear 0.4s ease forwards 2.9s", opacity: 0 }}/>
+      <circle cx={cx} cy={cy} r="2.5" fill="#e05c2a"                style={{ animation: "dot-appear 0.3s ease forwards 3.1s", opacity: 0 }}/>
+    </svg>
+  )
+}
+
 export default function Home() {
   const [loading, setLoading] = useState(true)
   const [loadingFade, setLoadingFade] = useState(false)
   const [kolamsVisible, setKolamsVisible] = useState(false)
   const [kolamsSettled, setKolamsSettled] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
+  const [city, setCity] = useState<City>('hyd')
   const [menuOpen, setMenuOpen] = useState(false)
   const [nameIdx, setNameIdx] = useState(0)
   const [nameVis, setNameVis] = useState(true)
 
   useEffect(() => {
     const root = document.documentElement
-    root.setAttribute('data-theme', darkMode ? 'dark' : 'light')
-    const vars = darkMode
-      ? {
-          '--bg': '#2b1304',
-          '--body': '#e0c090',
-          '--cream': '#f5ead0',
-          '--cream-dim': '#c8a870',
-          '--sand': '#4a2810',
-          '--gold': '#d4920a',
-          '--gold-light': '#f0b832',
-          '--gold-dim': '#9a6a10',
-          '--kumkum': '#d4537e',
-          '--kumkum-light': '#ed93b1',
-          '--kumkum-dim': '#993556',
-          '--terra-mid': '#8a3810',
-          '--terra-light': '#e07040',
-          '--muted': '#9a7040',
-          '--saffron-strong': '#f0b832',
-        }
-      : {
-          '--bg': '#f0e6d0',
-          '--body': '#3d2510',
-          '--cream': '#1e0e04',
-          '--cream-dim': '#5a3010',
-          '--sand': '#cdb896',
-          '--gold': '#c97b00',
-          '--gold-light': '#e8950a',
-          '--gold-dim': '#9a5e00',
-          '--kumkum': '#c43f5e',
-          '--kumkum-light': '#e07090',
-          '--kumkum-dim': '#8f2a42',
-          '--terra-mid': '#b85020',
-          '--terra-light': '#d97840',
-          '--muted': '#8a6242',
-          '--saffron-strong': '#c97b00',
-        }
-    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v))
-  }, [darkMode])
+    root.setAttribute('data-city', city)
+    Object.entries(cityVars[city]).forEach(([k, v]) => root.style.setProperty(k, v))
+  }, [city])
 
   useEffect(() => {
     const fadeTimer   = setTimeout(() => setLoadingFade(true),  2600)
