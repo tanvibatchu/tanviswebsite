@@ -211,6 +211,150 @@ function NavGarland() {
   )
 }
 
+// ── NYC NAV GARLAND · Manhattan skyline hanging from nav ─────
+function NycGarland() {
+  const gnd = 62   // used only for height math (same building heights as before)
+
+  // Building segments [x, width, originalTopY] — spanning 1440px
+  const segs: [number, number, number][] = [
+    [0,28,54],[30,22,50],[54,18,44],[74,32,53],[108,20,48],[130,28,40],
+    [160,18,52],[180,24,46],[206,20,54],[228,25,48],
+    // Empire State at x≈255
+    [255,22,12],[279,18,43],[299,28,52],[329,22,46],[353,24,38],[379,18,52],
+    [399,28,44],[429,22,50],[453,20,42],[475,28,52],[505,22,46],[529,24,38],
+    [555,18,52],[575,28,44],[605,22,50],[629,24,40],
+    [655,20,54],[677,25,48],
+    // One WTC at x≈703
+    [703,22,10],[727,18,45],[748,26,52],[776,22,44],[800,24,50],[826,20,40],
+    [848,28,52],[878,22,44],[902,24,50],[928,20,40],[950,28,52],
+    [980,22,46],[1004,24,38],[1030,18,52],[1050,28,44],[1080,22,50],
+    [1104,24,40],[1130,18,54],[1150,28,48],[1180,22,42],[1204,24,50],
+    [1230,20,46],[1252,28,38],[1282,22,52],[1306,24,46],[1332,20,40],
+    [1354,28,52],[1384,22,48],[1408,20,44],[1430,10,54],
+  ]
+
+  // Flipped: buildings hang DOWN from y=0 (flat top along nav bar)
+  // h = gnd - originalTop = how many px each building extends downward
+  const skyD = `M 0 0 ${segs.map(([x, w, top]) => {
+    const h = gnd - top
+    return `L ${x} 0 L ${x} ${h} L ${x + w} ${h} L ${x + w} 0`
+  }).join(' ')} L 1440 0`
+
+  // Window dots inside the hanging buildings
+  const wins: { cx: number; cy: number }[] = []
+  segs.forEach(([x, w, top]) => {
+    const h = gnd - top
+    if (h < 8) return
+    for (let dx = 4; dx < w - 3; dx += 7)
+      for (let dy = 4; dy < h - 3; dy += 7)
+        wins.push({ cx: x + dx, cy: dy })
+  })
+
+  // Empire State: originalTop=12 → h=50, hangs to y=50; spire points further down
+  const espireBot = gnd - 12 + 10   // y=60
+  // One WTC: originalTop=10 → h=52, hangs to y=52; antenna points further down
+  const wtcBot = gnd - 10 + 9       // y=61
+
+  return (
+    <svg width="100%" height="82" viewBox="0 0 1440 82"
+      preserveAspectRatio="none" style={{ display: 'block' }}>
+      {/* Faint fill of hanging silhouette */}
+      <path d={`${skyD} Z`} fill="#e8a840" opacity="0.05"/>
+      {/* Skyline outline — draws from nav bar downward */}
+      <path d={skyD} fill="none" stroke="#e8a840" strokeWidth="0.85" opacity="0.55"
+        strokeDasharray="3600" strokeDashoffset="3600"
+        style={{ animation: 'draw 3s ease forwards 0.1s', opacity: 0 }}/>
+      {/* Window dots */}
+      {wins.slice(0, 100).map((w, i) => (
+        <circle key={i} cx={w.cx} cy={w.cy} r="1.2" fill="#e8a840" opacity="0.52"
+          style={{ animation: `dot-appear 0.2s ease forwards ${0.5 + (i * 7 % 200) * 0.012}s`, opacity: 0 }}/>
+      ))}
+      {/* Empire State spire — tip points down */}
+      <line x1="266" y1={gnd - 12} x2="266" y2={espireBot}
+        stroke="#f8e8a0" strokeWidth="0.9" opacity="0.88"
+        strokeDasharray="10" strokeDashoffset="10"
+        style={{ animation: 'draw 0.4s ease forwards 1.5s', opacity: 0 }}/>
+      <circle cx="266" cy={espireBot} r="1.5" fill="#f8e8a0" opacity="0.92"
+        style={{ animation: 'dot-appear 0.3s ease forwards 1.9s', opacity: 0 }}/>
+      {/* One WTC antenna + red beacon — tip points down */}
+      <line x1="714" y1={gnd - 10} x2="714" y2={wtcBot}
+        stroke="#dde4ee" strokeWidth="0.8" opacity="0.82"
+        strokeDasharray="9" strokeDashoffset="9"
+        style={{ animation: 'draw 0.35s ease forwards 1.6s', opacity: 0 }}/>
+      <circle cx="714" cy={wtcBot} r="1.5" fill="#ff3838" opacity="0.92"
+        style={{ animation: 'dot-appear 0.3s ease forwards 1.95s', opacity: 0 }}/>
+    </svg>
+  )
+}
+
+// ── SFO NAV GARLAND · Golden Gate hanging from nav ───────────
+function SfoGarland() {
+  const t1x      = 480   // left tower center x
+  const t2x      = 960   // right tower center x
+  const tw       = 7     // tower width
+  const towerBotY = 50   // towers hang DOWN to y=50 (from y=0 at nav)
+  const spanMidY  = 66   // main span cable sags to y=66 at midpoint
+
+  // Main span cable y at x, quadratic bezier between tower bottoms
+  const spanY = (x: number) => {
+    const t = (x - t1x) / (t2x - t1x)
+    return (1 - t) * (1 - t) * towerBotY + 2 * t * (1 - t) * spanMidY + t * t * towerBotY
+  }
+
+  const suspX = [516, 552, 588, 624, 660, 720, 780, 816, 852, 888, 924]
+  const braceYs = [14, 28, 42]
+
+  return (
+    <svg width="100%" height="82" viewBox="0 0 1440 82"
+      preserveAspectRatio="none" style={{ display: 'block' }}>
+      {/* Left tower body — hangs down from y=0 */}
+      <rect x={t1x - tw / 2} y={0} width={tw} height={towerBotY}
+        fill="#c85830" opacity="0.82"
+        style={{ animation: 'dot-appear 0.3s ease forwards 0.4s', opacity: 0 }}/>
+      {/* Right tower body */}
+      <rect x={t2x - tw / 2} y={0} width={tw} height={towerBotY}
+        fill="#c85830" opacity="0.82"
+        style={{ animation: 'dot-appear 0.3s ease forwards 0.42s', opacity: 0 }}/>
+      {/* Tower cross-braces */}
+      {braceYs.flatMap((y, i) => [
+        <line key={`lb${i}`} x1={t1x - tw / 2 - 2} y1={y} x2={t1x + tw / 2 + 2} y2={y}
+          stroke="#c85830" strokeWidth="1.0" opacity="0.85"
+          strokeDasharray="12" strokeDashoffset="12"
+          style={{ animation: `draw 0.25s ease forwards ${0.5 + i * 0.06}s`, opacity: 0 }}/>,
+        <line key={`rb${i}`} x1={t2x - tw / 2 - 2} y1={y} x2={t2x + tw / 2 + 2} y2={y}
+          stroke="#c85830" strokeWidth="1.0" opacity="0.85"
+          strokeDasharray="12" strokeDashoffset="12"
+          style={{ animation: `draw 0.25s ease forwards ${0.52 + i * 0.06}s`, opacity: 0 }}/>,
+      ])}
+      {/* Left backstay cable — from nav edge (0,0) curving down to left tower bottom */}
+      <path d={`M 0 0 Q ${t1x / 2} ${towerBotY / 2 + 8} ${t1x} ${towerBotY}`}
+        fill="none" stroke="#c85830" strokeWidth="0.85" opacity="0.65"
+        strokeDasharray="530" strokeDashoffset="530"
+        style={{ animation: 'draw 1.0s ease forwards 0.5s', opacity: 0 }}/>
+      {/* Right backstay cable — from nav edge (1440,0) curving down to right tower bottom */}
+      <path d={`M 1440 0 Q ${(t2x + 1440) / 2} ${towerBotY / 2 + 8} ${t2x} ${towerBotY}`}
+        fill="none" stroke="#c85830" strokeWidth="0.85" opacity="0.65"
+        strokeDasharray="530" strokeDashoffset="530"
+        style={{ animation: 'draw 1.0s ease forwards 0.52s', opacity: 0 }}/>
+      {/* Main span cable — hangs below tower bottoms in a gentle sag */}
+      <path d={`M ${t1x} ${towerBotY} Q ${(t1x + t2x) / 2} ${spanMidY} ${t2x} ${towerBotY}`}
+        fill="none" stroke="#c85830" strokeWidth="0.9" opacity="0.72"
+        strokeDasharray="520" strokeDashoffset="520"
+        style={{ animation: 'draw 1.2s ease forwards 0.55s', opacity: 0 }}/>
+      {/* Vertical suspenders — from cable UP to y=0 (the nav bar) */}
+      {suspX.map((x, i) => {
+        const cy = spanY(x)
+        return (
+          <line key={i} x1={x} y1={cy} x2={x} y2={0}
+            stroke="#c85830" strokeWidth="0.42" opacity="0.52"
+            strokeDasharray={cy} strokeDashoffset={cy}
+            style={{ animation: `draw 0.4s ease forwards ${0.9 + i * 0.07}s`, opacity: 0 }}/>
+        )
+      })}
+    </svg>
+  )
+}
+
 // ── HYD ORNAMENT · Mughal Arch (Golkonda / Charminar inspired) ─
 function HydOrnament() {
   // Arch geometry: springs at (48,158) and (212,158), apex at (130,20)
@@ -748,12 +892,10 @@ export default function Home() {
         </button>
       </nav>
 
-      {/* HYD NAV GARLAND */}
-      {city === 'hyd' && (
-        <div className="nav-garland">
-          <NavGarland />
-        </div>
-      )}
+      {/* CITY NAV GARLANDS */}
+      {city === 'hyd' && <div className="nav-garland"><NavGarland /></div>}
+      {city === 'nyc' && <div className="nav-garland"><NycGarland /></div>}
+      {city === 'sfo' && <div className="nav-garland"><SfoGarland /></div>}
 
       {/* MOBILE MENU */}
       {menuOpen && (
@@ -778,7 +920,6 @@ export default function Home() {
       {/* HERO */}
       <div className="hero-pad" style={{ position: 'relative', zIndex: 10, minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <div style={{ position: 'absolute', width: '720px', height: '720px', top: '50%', left: '35%', transform: 'translate(-50%,-50%)', background: heroBlobBg, pointerEvents: 'none', transition: 'background 0.45s ease' }} />
-        <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, height: '2px', background: 'linear-gradient(to right, transparent 5%, var(--terra-mid) 20%, var(--gold-light) 50%, var(--terra-mid) 80%, transparent 95%)' }} />
 
         {/* KOLAM */}
 
