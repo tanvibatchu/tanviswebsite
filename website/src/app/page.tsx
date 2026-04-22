@@ -811,13 +811,13 @@ export default function Home() {
     Object.entries(cityVars[city]).forEach(([k, v]) => root.style.setProperty(k, v))
   }, [city])
 
-  useEffect(() => {
-    const fadeTimer   = setTimeout(() => setLoadingFade(true),  2600)
-    const kolamsTimer = setTimeout(() => setKolamsVisible(true), 2600)
-    const settleTimer = setTimeout(() => setKolamsSettled(true), 2750)
-    const hideTimer   = setTimeout(() => setLoading(false),      3200)
-    return () => { clearTimeout(fadeTimer); clearTimeout(kolamsTimer); clearTimeout(settleTimer); clearTimeout(hideTimer) }
-  }, [])
+  function pickCity(c: City) {
+    setCity(c)
+    setLoadingFade(true)
+    setTimeout(() => setKolamsVisible(true),  500)
+    setTimeout(() => setKolamsSettled(true),  650)
+    setTimeout(() => setLoading(false),       1100)
+  }
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -833,7 +833,7 @@ export default function Home() {
 
   return (
     <main>
-      {/* LOADING SCREEN */}
+      {/* LOADING / WELCOME SCREEN */}
       {loading && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 999,
@@ -841,21 +841,87 @@ export default function Home() {
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           padding: '2rem',
           opacity: loadingFade ? 0 : 1,
-          transition: 'opacity 0.6s ease',
+          transition: 'opacity 0.7s ease',
           pointerEvents: loadingFade ? 'none' : 'all',
         }}>
-          <p style={{
-            fontFamily: serif, fontStyle: 'italic',
-            fontSize: 'clamp(1.1rem, 3vw, 1.6rem)',
-            color: 'var(--cream)', fontWeight: 300,
-            textAlign: 'center', maxWidth: '600px', lineHeight: 1.8,
-            marginBottom: '1.5rem',
+
+          {/* ── Centre: greeting + city picker ── */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2.8rem', animation: 'fadeUp 0.9s 0.15s forwards', opacity: 0 }}>
+
+            {/* Greeting */}
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontFamily: serif, fontWeight: 300, fontSize: 'clamp(1.6rem, 4.5vw, 2.6rem)', color: 'var(--cream)', letterSpacing: '0.02em', marginBottom: '0.4rem' }}>
+                Hi, I&rsquo;m Tanvi.
+              </p>
+              <p style={{ fontFamily: serif, fontStyle: 'italic', fontWeight: 300, fontSize: 'clamp(1rem, 2.8vw, 1.4rem)', color: 'var(--gold-dim)', letterSpacing: '0.04em' }}>
+                Welcome to my website.
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '100%', maxWidth: '480px' }}>
+              <div style={{ flex: 1, height: '0.5px', background: 'var(--sand)' }}/>
+              <span style={{ fontSize: '0.55rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'var(--muted)', whiteSpace: 'nowrap' }}>
+                Pick your destination
+              </span>
+              <div style={{ flex: 1, height: '0.5px', background: 'var(--sand)' }}/>
+            </div>
+
+            {/* City destination cards */}
+            <div style={{ display: 'flex', gap: '1.2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {([
+                { c: 'hyd' as City, label: 'Hyderabad', sub: 'India', accent: '#b87808' },
+                { c: 'nyc' as City, label: 'New York',  sub: 'USA',   accent: '#4a9eff' },
+                { c: 'sfo' as City, label: 'San Francisco', sub: 'USA', accent: '#e8881a' },
+              ]).map(({ c, label, sub, accent }) => (
+                <button key={c} onClick={() => pickCity(c)}
+                  style={{
+                    fontFamily: serif,
+                    background: 'transparent',
+                    border: '0.5px solid var(--sand)',
+                    borderRadius: '3px',
+                    padding: '1rem 1.8rem',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    minWidth: '130px',
+                    transition: 'border-color 0.2s, background 0.2s, transform 0.15s',
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget
+                    el.style.borderColor = accent
+                    el.style.background  = `${accent}12`
+                    el.style.transform   = 'translateY(-2px)'
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget
+                    el.style.borderColor = 'var(--sand)'
+                    el.style.background  = 'transparent'
+                    el.style.transform   = 'translateY(0)'
+                  }}>
+                  <div style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', fontWeight: 400, color: 'var(--cream)', letterSpacing: '0.04em', marginBottom: '0.2rem' }}>
+                    {label}
+                  </div>
+                  <div style={{ fontSize: '0.55rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--muted)' }}>
+                    {sub}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Bottom: Bhagavad Gita quote ── */}
+          <div style={{
+            position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
+            width: '90%', maxWidth: '560px', textAlign: 'center',
+            animation: 'fadeUp 0.9s 0.45s forwards', opacity: 0,
           }}>
-            &ldquo;You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.&rdquo;
-          </p>
-          <p style={{ fontSize: '0.6rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--muted)' }}>
-            
-          </p>
+            <p style={{ fontFamily: serif, fontStyle: 'italic', fontWeight: 300, fontSize: 'clamp(0.72rem, 1.8vw, 0.9rem)', color: 'var(--muted)', lineHeight: 1.9 }}>
+              &ldquo;You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.&rdquo;
+            </p>
+            <p style={{ marginTop: '0.6rem', fontSize: '0.48rem', letterSpacing: '0.35em', textTransform: 'uppercase', color: 'var(--muted)', opacity: 0.6 }}>
+              Bhagavad Gita · 2.47
+            </p>
+          </div>
         </div>
       )}
 
